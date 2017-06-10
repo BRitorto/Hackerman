@@ -1,6 +1,10 @@
-package com.poo.hackerman.controller;
+package controller;
 
-import com.poo.hackerman.model.Managers.GameModel;
+import model.Managers.EntityManager;
+import model.Managers.GameModel;
+import model.entity.dynamicEntity.character.GameCharacter;
+import view.HackerGame;
+import view.UIManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,16 +15,22 @@ import java.util.TimerTask;
 public class ModelManager implements Runnable{
 
     private GameModel gameModel;
+    private EntityManager entityManager;
     private Manager manager;
     private Thread thread;
+    private HackerGame game;
 
     public ModelManager(Manager manager) {
-        this.manager = manager;
+
+        entityManager = gameModel.getMap().getEntityManager();
+        manager = manager;
         gameModel = new GameModel();
+
     }
 
-    public void initialize(){
+    public void initialize() {
         thread = new Thread(this, "Model manager thread");
+
         thread.start();
     }
 
@@ -33,20 +43,22 @@ public class ModelManager implements Runnable{
                     manager.gameOver();
                 }
                 if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
-                    gameModel.setPaused();
-                    manager.passedLevel();                              //screen de next level
+                    manager.passedLevel();                              //screen de next kevel
                 }
-                if (gameModel.passedLevel() && !gameModel.hasNextLevel()) {
-                    gameModel.setPaused();
+                else {
                     manager.gameWon();
                 }
             }
         };
-        timer.schedule(task, 0, 50);
+        timer.schedule(task, 0, 5);
     }
 
     public GameModel getGameModel() {
         return gameModel;
     }
+
+    public Manager getManager() {return manager;}
+
+    public EntityManager getEntityManager() {return entityManager;}
 
 }

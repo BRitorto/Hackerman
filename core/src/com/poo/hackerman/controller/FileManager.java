@@ -1,4 +1,4 @@
-package com.poo.hackerman.controller;
+package controller;
 
 /**
  * Created by franciscosanguineti on 31/5/17.
