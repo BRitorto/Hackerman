@@ -28,7 +28,7 @@ public class GameModel {
         levels.add(new Level("src/com/poo/hackerman/model/gameWorld/levels/level2.txt"));
         levels.add(new Level("src/com/poo/hackerman/model/gameWorld/levels/level3.txt"));
         lives = MAX_LIVES;
-        setPaused();
+        setPause();
         currentLevel = -1;                     //model no inicializado
 
     }
@@ -40,7 +40,7 @@ public class GameModel {
         resume();
     }
 
-    public void setPaused() {
+    public void setPause() {
         this.paused = true;
     }
 
@@ -55,7 +55,7 @@ public class GameModel {
             if(playerCaught()) {
                 lives--;
                 if(gameOver()) {
-                    setPaused();
+                    setPause();
                 }
                 else {
                     retryLevel();
