@@ -59,13 +59,13 @@ public class ModelManager implements Runnable{
             public void run() {
                 gameModel.tick();
                 if(gameModel.gameOver()) {
-                    manager.gameOver();
+                    manager.stateManager(Manager.STATE.GAME_OVER);
                 }
-                if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
-                    manager.passedLevel();                              //screen de next kevel
+                else if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
+                    gameModel.nextLevel();
                 }
-                else {
-                    manager.gameWon();
+                else if (gameModel.passedLevel() && !gameModel.hasNextLevel()){
+                    manager.stateManager(Manager.STATE.WON);
                 }
             }
         };
