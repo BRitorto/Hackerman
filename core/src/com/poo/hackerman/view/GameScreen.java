@@ -28,8 +28,8 @@ public class GameScreen extends ScreenAdapter {
     private Sprite door;
     private UIEntity[] enemies;
     private Sprite[] computers, obstacles;
-
-    private Texture doorT, computersT, wallT, deskT, fakeCompT;
+    private List<Computer> computersO;
+    private Texture doorT, computersT, computersHackedT, wallT, deskT, fakeCompT;
     private Texture hackerT, guardT;
     private Texture background;
     private HackerGame game;
@@ -50,14 +50,15 @@ public class GameScreen extends ScreenAdapter {
         PlayerCharacter player = entityManager.getPlayer();
         Door doorO = entityManager.getDoor();
         List<EnemyCharacter> enemiesO = entityManager.getEnemies();
-        List<Computer> computersO = entityManager.getComputers();
+        computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
         hackerT = new Texture("core/assets/hacker.png");
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/computerSheet.png");
-        fakeCompT = new Texture("core/assets/fakecomp.png");
+        computersT = new Texture("core/assets/computersT.png");
+        computersHackedT = new Texture("core/assets/computersHackedT.png");
+        fakeCompT = new Texture("core/assets/fakeCompT.png");
         deskT = new Texture("core/assets/floor.png");
         wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
@@ -159,8 +160,11 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawComputers() {
-        for(Sprite s : computers) {
-            s.draw(batch);
+        for(int i = 0; i< computers.length; i++) {
+            if(computersO.get(i).isHacked()){
+                computers[i].setTexture(computerHackedT);
+            }
+            computers[i].draw(batch);
         }
     }
 
