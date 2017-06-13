@@ -60,6 +60,8 @@ public class HackerGame extends Game {
 
     public UIManager getUIManager() {return this.UIManager;}
 
+    public ModelManager getModelManager() {return this.modelManager;}
+
 
 
 
