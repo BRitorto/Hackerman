@@ -17,7 +17,6 @@ public class ModelManager implements Runnable{
     private EntityManager entityManager;
     private Manager manager;
     private Thread thread;
-    private HackerGame game;
 
     public ModelManager(Manager manager) {
 

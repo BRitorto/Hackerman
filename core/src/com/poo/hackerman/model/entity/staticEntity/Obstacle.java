@@ -17,6 +17,10 @@ public class Obstacle extends StaticEntity {
         this.type = type.ordinal();
     }
 
+    public int getObstacleType() {
+        return type;
+    }
+
     public boolean isPassable() {
         return !PASSABLE;
     }
