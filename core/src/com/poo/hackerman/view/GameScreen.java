@@ -56,7 +56,7 @@ public class GameScreen extends ScreenAdapter {
         hackerT = new Texture("core/assets/hacker.png");
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/ball.png");
+        computersT = new Texture("core/assets/computerSheet.png");
         deskT = new Texture("core/assets/floor.png");
         wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
