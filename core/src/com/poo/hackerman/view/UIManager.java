@@ -1,8 +1,9 @@
-package view;
+package com.poo.hackerman.view;
 
-import controller.Manager;
-import controller.ModelManager;
-import model.Managers.EntityManager;
+
+import com.poo.hackerman.controller.Manager;
+import com.poo.hackerman.controller.ModelManager;
+import com.poo.hackerman.model.Managers.EntityManager;
 
 /**
  * Created by Bianca on 07/06/2017.

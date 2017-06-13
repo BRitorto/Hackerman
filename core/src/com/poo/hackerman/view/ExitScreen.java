@@ -1,11 +1,10 @@
-package view;
+package com.poo.hackerman.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
