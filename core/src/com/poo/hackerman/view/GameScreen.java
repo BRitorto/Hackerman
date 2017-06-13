@@ -29,7 +29,7 @@ public class GameScreen extends ScreenAdapter {
     private UIEntity[] enemies;
     private Sprite[] computers, obstacles;
 
-    private Texture doorT, computersT, wallT, deskT;
+    private Texture doorT, computersT, wallT, deskT, fakeCompT;
     private Texture hackerT, guardT;
     private Texture background;
     private HackerGame game;
@@ -57,6 +57,7 @@ public class GameScreen extends ScreenAdapter {
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
         computersT = new Texture("core/assets/computerSheet.png");
+        fakeCompT = new Texture("core/assets/fakecomp.png");
         deskT = new Texture("core/assets/floor.png");
         wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
@@ -90,8 +91,11 @@ public class GameScreen extends ScreenAdapter {
             if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.DESK) {
                 obstacles[i] = new Sprite(deskT);
             }
-            else {
+            else if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.WALL) {
                 obstacles[i] = new Sprite(wallT);
+            }
+            else {
+                obstacles[i] = new Sprite(fakeCompT);
             }
             (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
             (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
