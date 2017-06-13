@@ -1,10 +1,10 @@
 package com.poo.hackerman.model.Managers;
 
 import com.poo.hackerman.model.gameWorld.GameMap;
+import com.poo.hackerman.model.gameWorld.Level;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Created by franciscosanguineti on 4/6/17.
@@ -35,7 +35,7 @@ public class GameModel {
 
     public void nextLevel() {
         currentLevel++;
-        gameMap = new GameMap(levels.get(currentLevel).createEntityManager());
+        gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();
     }
