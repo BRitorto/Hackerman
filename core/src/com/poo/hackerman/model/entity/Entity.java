@@ -3,7 +3,7 @@ package com.poo.hackerman.model.entity;
 import java.io.Serializable;
 
 /**
- * Represent an object in the game that occupies a space.
+ * Class that represents an object in the game that occupies a space.
  */
 public abstract class Entity implements Serializable {
 
