@@ -20,6 +20,13 @@ public class Light {
 
     //Devuelve true si hay colision de la luz con el hacker
 
+    /**
+     *
+     * @param guardPosition
+     * @param guardDirection
+     * @param grid The entities game matrix
+     * @return True if detects the player
+     */
     public boolean collision(Position guardPosition, Direction guardDirection, Grid grid) {
 
         int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia

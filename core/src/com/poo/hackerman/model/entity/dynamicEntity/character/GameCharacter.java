@@ -26,6 +26,10 @@ public abstract class GameCharacter extends DynamicEntity {
         return timer;
     }
 
+    /**
+     *
+     * @param direction Direction to move. Tries to move the character in that direction.
+     */
     public void tryToMove(Direction direction) {
         if (state != IDLE || direction == null) {
             return;
@@ -41,7 +45,6 @@ public abstract class GameCharacter extends DynamicEntity {
 
         // Check destination is within the borders of the map, and its a valid
         // destination.
-
         if (!destination.withinBoundaries() || !grid.isPossibleAdd(destination)) {
             return;
         }
@@ -53,6 +56,9 @@ public abstract class GameCharacter extends DynamicEntity {
         grid.add(this, destination);
     }
 
+    /**
+     * Moves the game character a cell unit
+     */
     protected void move() {
         if (movesRemaining == 0) {
             updateStatus();
