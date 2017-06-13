@@ -2,8 +2,12 @@ package com.poo.hackerman.controller;
 
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.Managers.GameModel;
+import com.poo.hackerman.model.entity.Direction;
+import com.poo.hackerman.model.entity.Entity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +34,23 @@ public class ModelManager implements Runnable{
         thread = new Thread(this, "Model manager thread");
 
         thread.start();
+    }
+
+    public void queryInput() {
+        boolean lPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
+        boolean rPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
+        boolean uPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
+        boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
+        Direction dir = null;
+        if(lPressed) dir = new Direction(Direction.LEFT);
+        if(rPressed) dir = new Direction(Direction.RIGHT);
+        if(uPressed) dir = new Direction(Direction.UP);
+        if(dPressed) dir = new Direction(Direction.DOWN);
+
+        if (lPressed || rPressed || uPressed || dPressed) {
+            entityManager.getPlayer().tryToMove(dir);
+        }
+
     }
 
     public void run() {
