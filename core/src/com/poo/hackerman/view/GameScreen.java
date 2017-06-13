@@ -29,7 +29,7 @@ public class GameScreen extends ScreenAdapter {
     private UIEntity[] enemies;
     private Sprite[] computers, obstacles;
     private List<Computer> computersO;
-    private Texture doorT, computersT, computersHackedT, wallT, deskT, fakeCompT;
+    private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT;
     private Texture hackerT, guardT;
     private Texture background;
     private HackerGame game;
@@ -57,7 +57,7 @@ public class GameScreen extends ScreenAdapter {
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
         computersT = new Texture("core/assets/computersT.png");
-        computersHackedT = new Texture("core/assets/computersHackedT.png");
+        computerHackedT = new Texture("core/assets/computerHackedT.png");
         fakeCompT = new Texture("core/assets/fakeCompT.png");
         deskT = new Texture("core/assets/floor.png");
         wallT = new Texture("core/assets/floor.png");

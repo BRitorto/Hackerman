@@ -64,7 +64,4 @@ public class HackerGame extends Game {
     public ModelManager getModelManager() {return this.modelManager;}
 
 
-    public Screen getWonScreen() {
-        return wonScreen;
-    }
 }
