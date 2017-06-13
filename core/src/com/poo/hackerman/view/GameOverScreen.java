@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.poo.hackerman.controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -56,7 +57,7 @@ public class GameOverScreen implements Screen {
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
             game.batch.draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
-                game.gameScreen.setState(GameScreen.STATE.EXIT_YES);
+                game.getUIManager().setState(Manager.STATE.EXIT_YES);
                 game.setScreen((Screen)game.getGameScreen());
             }
         } else {

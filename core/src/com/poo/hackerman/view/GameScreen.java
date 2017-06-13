@@ -21,7 +21,6 @@ public class GameScreen extends ScreenAdapter {
     private static final float WORLD_HEIGHT = 480;
     private Viewport viewport;
     private Camera camera;
-    private BitmapFont bitmapFont;
     private EntityManager entityManager;
     private SpriteBatch batch;
 
@@ -29,11 +28,17 @@ public class GameScreen extends ScreenAdapter {
     private Sprite door;
     private UIEntity[] enemies;
     private Sprite[] computers, obstacles;
-
-    private Texture doorT, computersT, obstaclesT;
+    private List<Computer> computersO;
+    private Texture doorT, computersT, computersHackedT, wallT, deskT, fakeCompT;
     private Texture hackerT, guardT;
     private Texture background;
+    private HackerGame game;
 
+    public GameScreen(HackerGame game) {
+        this.game = game;
+        batch = game.batch;
+        entityManager = game.getUIManager().getEntityManager();
+    }
     @Override
     public void show() {
         super.show();
@@ -45,15 +50,17 @@ public class GameScreen extends ScreenAdapter {
         PlayerCharacter player = entityManager.getPlayer();
         Door doorO = entityManager.getDoor();
         List<EnemyCharacter> enemiesO = entityManager.getEnemies();
-        List<Computer> computersO = entityManager.getComputers();
+        computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        batch = new SpriteBatch();
         hackerT = new Texture("core/assets/hacker.png");
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/ball.png");
-        obstaclesT = new Texture("core/assets/floor.png");
+        computersT = new Texture("core/assets/computersT.png");
+        computersHackedT = new Texture("core/assets/computersHackedT.png");
+        fakeCompT = new Texture("core/assets/fakeCompT.png");
+        deskT = new Texture("core/assets/floor.png");
+        wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
 
 
@@ -82,7 +89,15 @@ public class GameScreen extends ScreenAdapter {
 
 
         for(int i = 0; i < obstaclesO.size() ; i++) {
-            obstacles[i] = new Sprite(obstaclesT);
+            if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.DESK) {
+                obstacles[i] = new Sprite(deskT);
+            }
+            else if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.WALL) {
+                obstacles[i] = new Sprite(wallT);
+            }
+            else {
+                obstacles[i] = new Sprite(fakeCompT);
+            }
             (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
             (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
         }
@@ -145,8 +160,11 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawComputers() {
-        for(Sprite s : computers) {
-            s.draw(batch);
+        for(int i = 0; i< computers.length; i++) {
+            if(computersO.get(i).isHacked()){
+                computers[i].setTexture(computerHackedT);
+            }
+            computers[i].draw(batch);
         }
     }
 

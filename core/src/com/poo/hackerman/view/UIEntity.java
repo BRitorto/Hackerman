@@ -16,11 +16,9 @@ public class UIEntity {
 
     private static final int TILE_WIDTH = 64;
     private static final int TILE_HEIGHT = 64;
-    private static final int FRAME_ROWS = 4;
-    private static final int FRAME_COLS = 9;
     private float x,y;
 
-    private final Animation<TextureRegion> animation;
+    private final Animation animation;
     private static final float FRAME_DURATION = 0.25F;
     private float animationTimer = 0;
     private DynamicEntity dynamicEntity;
@@ -38,19 +36,19 @@ public class UIEntity {
         this.dynamicEntity = dynamicEntity;
         switch (orientation) {
             case Direction.UP:
-                animation = new Animation<TextureRegion>(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+                animation = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
                 break;
             case Direction.DOWN:
-                animation = new Animation<TextureRegion>(FRAME_DURATION,playerTextures[2][0], playerTextures[2][1], playerTextures[2][2],playerTextures[2][3],playerTextures[2][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+                animation = new Animation(FRAME_DURATION,playerTextures[2][0], playerTextures[2][1], playerTextures[2][2],playerTextures[2][3],playerTextures[2][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
                 break;
             case Direction.LEFT:
-                animation = new Animation<TextureRegion>(FRAME_DURATION,playerTextures[1][0], playerTextures[1][1], playerTextures[1][2],playerTextures[1][3],playerTextures[1][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+                animation = new Animation(FRAME_DURATION,playerTextures[1][0], playerTextures[1][1], playerTextures[1][2],playerTextures[1][3],playerTextures[1][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
                 break;
             case Direction.RIGHT:
-                animation = new Animation<TextureRegion>(FRAME_DURATION,playerTextures[3][0], playerTextures[3][1], playerTextures[3][2],playerTextures[3][3],playerTextures[3][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+                animation = new Animation(FRAME_DURATION,playerTextures[3][0], playerTextures[3][1], playerTextures[3][2],playerTextures[3][3],playerTextures[3][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
                 break;
             default:
-                animation = new Animation<TextureRegion>(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+                animation = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
         }
         animation.setPlayMode(Animation.PlayMode.LOOP);
     }
