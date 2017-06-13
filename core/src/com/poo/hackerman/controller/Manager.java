@@ -1,9 +1,9 @@
 package com.poo.hackerman.controller;
 
+import com.badlogic.gdx.Screen;
 import com.poo.hackerman.view.UIManager;
-
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.view.UIManager;
+
 
 /**
  * Created by franciscosanguineti on 31/5/17.
