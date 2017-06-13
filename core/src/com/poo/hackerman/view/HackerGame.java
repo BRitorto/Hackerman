@@ -2,6 +2,7 @@ package com.poo.hackerman.view;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.poo.hackerman.controller.ModelManager;
 import com.poo.hackerman.model.Managers.EntityManager;
@@ -63,6 +64,7 @@ public class HackerGame extends Game {
     public ModelManager getModelManager() {return this.modelManager;}
 
 
-
-
+    public Screen getWonScreen() {
+        return wonScreen;
+    }
 }
