@@ -27,9 +27,9 @@ public class GameScreen extends ScreenAdapter {
     private UIEntity hacker;
     private Sprite door;
     private UIEntity[] enemies;
-    private Sprite[] computers, obstacles;
+    private Sprite[] computers, obstacles, hearts;
     private List<Computer> computersO;
-    private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT;
+    private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
     private Texture hackerT, guardT;
     private Texture background;
     private HackerGame game;
@@ -62,7 +62,7 @@ public class GameScreen extends ScreenAdapter {
         deskT = new Texture("core/assets/floor.png");
         wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
-
+        heartT = new Texture("core/assets/heart.png");
 
         hacker = new UIEntity(hackerT, player);
         hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
@@ -76,12 +76,18 @@ public class GameScreen extends ScreenAdapter {
         door = new Sprite(doorT);
         computers = new Sprite[computersO.size()];
         obstacles = new Sprite[obstaclesO.size()];
+        hearts = new Sprite[3];
 
         door.setX(doorO.getPosition().getX());
         door.setY(doorO.getPosition().getY());
 
+        for(int i = 0; i < 3; i++) {
+            hearts[i] = new Sprite(heartT);
+            hearts[i].setX(i+10);
+            hearts[i].setY(10);
+        }
 
-        for(int i = 0; i < computersO.size() ; i++) {
+        for(int i = 0; i < computersO.size(); i++) {
             computers[i] = new Sprite(computersT);
             (computers[i]).setX(computersO.get(i).getPosition().getX());
             (computers[i]).setY(computersO.get(i).getPosition().getY());
@@ -176,7 +182,9 @@ public class GameScreen extends ScreenAdapter {
 
 
     private void drawLives() {
-
+        for(int i =0; i < game.getModelManager().getGameModel().getLives(); i++) {
+            hearts[i].draw(batch);
+        }
     }
 
 
