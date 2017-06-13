@@ -10,14 +10,14 @@ public class Obstacle extends StaticEntity {
 
     public enum obstacleType {DESK, WALL};
 
-    private int type;
+    private obstacleType type;
 
     public Obstacle(Position position, Direction direction, obstacleType type) {
         super(position,direction);
-        this.type = type.ordinal();
+        this.type = type;
     }
 
-    public int getObstacleType() {
+    public obstacleType getObstacleType() {
         return type;
     }
 
