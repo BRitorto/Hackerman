@@ -8,7 +8,7 @@ import static com.poo.hackerman.model.entity.Direction.directionBetween;
 
 
 /**
- * Created by franciscosanguineti on 29/5/17.
+ *
  */
 public class Position implements Serializable {
 

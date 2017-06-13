@@ -5,7 +5,7 @@ import com.poo.hackerman.model.gameWorld.GameMap;
 import java.io.Serializable;
 
 /**
- * Created by franciscosanguineti on 30/5/17.
+ *
  */
 public class Direction implements Serializable {
 
@@ -46,8 +46,12 @@ public class Direction implements Serializable {
         return (code % 2) == 1;
     }
 
-    //retorna la direccion a tomar para llegar de la posicion p1 a la p2
-    //esto es PI
+    /**
+     *
+     * @param p1 The first position
+     * @param p2 The second position
+     * @return Direction to take to get to p2 from p1
+     */
     public static Direction directionBetween(Position p1, Position p2) {
         double[] dist = new double[8];
         for (int i = 0; i < dist.length; i++) {
@@ -59,8 +63,11 @@ public class Direction implements Serializable {
         return new Direction(minDist);
     }
 
-    //retorna cual es el indice del minimo double en la lista
-    //esto es PI
+    /**
+     *
+     * @param list
+     * @return The lowest double in List
+     */
     private static int minDouble(double[] list) {
         int minIndex = 0;
         double min = list[0];
