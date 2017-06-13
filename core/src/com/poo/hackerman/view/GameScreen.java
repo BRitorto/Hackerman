@@ -20,7 +20,6 @@ public class GameScreen extends ScreenAdapter {
     private static final float WORLD_HEIGHT = 480;
     private Viewport viewport;
     private Camera camera;
-    private BitmapFont bitmapFont;
     private EntityManager entityManager;
     private SpriteBatch batch;
 
@@ -29,10 +28,16 @@ public class GameScreen extends ScreenAdapter {
     private UIEntity[] enemies;
     private Sprite[] computers, obstacles;
 
-    private Texture doorT, computersT, obstaclesT;
+    private Texture doorT, computersT, wallT, deskT;
     private Texture hackerT, guardT;
     private Texture background;
+    private HackerGame game;
 
+    public GameScreen(HackerGame game) {
+        this.game = game;
+        batch = game.batch;
+        entityManager = game.getUIManager().getEntityManager();
+    }
     @Override
     public void show() {
         super.show();
@@ -47,12 +52,12 @@ public class GameScreen extends ScreenAdapter {
         List<Computer> computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        batch = new SpriteBatch();
         hackerT = new Texture("core/assets/hacker.png");
         guardT = new Texture("core/assets/guard.png");
         doorT = new Texture("core/assets/heart.png");
         computersT = new Texture("core/assets/ball.png");
-        obstaclesT = new Texture("core/assets/floor.png");
+        deskT = new Texture("core/assets/floor.png");
+        wallT = new Texture("core/assets/floor.png");
         background = new Texture("core/assets/floor2.png");
 
 
@@ -81,7 +86,12 @@ public class GameScreen extends ScreenAdapter {
 
 
         for(int i = 0; i < obstaclesO.size() ; i++) {
-            obstacles[i] = new Sprite(obstaclesT);
+            if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.DESK) {
+                obstacles[i] = new Sprite(deskT);
+            }
+            else {
+                obstacles[i] = new Sprite(wallT);
+            }
             (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
             (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
         }

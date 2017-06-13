@@ -32,7 +32,7 @@ public class Manager {
             } break;
 
             case EXIT: {
-                viewManager.getGame().setScreen(viewManager.getGame().getExitScreen());
+                uiManager.getGame().setScreen(uiManager.getGame().getExitScreen());
             } break;
 
             case EXIT_YES: {
@@ -41,21 +41,21 @@ public class Manager {
 
             case PAUSE: {
                 modelManager.getGameModel().setPause();
-                viewManager.getGame().setScreen(viewManager.getGame().getPausedScreen());
+                uiManager.getGame().setScreen(uiManager.getGame().getPausedScreen());
             }break;
 
             case RESUME: {
                 modelManager.getGameModel().resume();
-                viewManager.getGame().setScreen(viewManager.getGame().getGameScreen());
+                uiManager.getGame().setScreen(uiManager.getGame().getGameScreen());
             }
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();
-                viewManager.getGame().setScreen(viewManager.getGame().getGameOverScreen());
+                uiManager.getGame().setScreen(uiManager.getGame().getGameOverScreen());
             } break;
 
             case WON: {
-                viewManager.getGame().setScreen(viewManager.getGame().getWonScreen());
+                uiManager.getGame().setScreen(uiManager.getGame().getWonScreen());
                 Gdx.app.exit();
             }
         }
