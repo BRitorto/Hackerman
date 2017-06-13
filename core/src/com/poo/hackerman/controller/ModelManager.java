@@ -1,10 +1,9 @@
-package controller;
+package com.poo.hackerman.controller;
 
-import model.Managers.EntityManager;
-import model.Managers.GameModel;
-import model.entity.dynamicEntity.character.GameCharacter;
-import view.HackerGame;
-import view.UIManager;
+
+
+import com.poo.hackerman.model.Managers.EntityManager;
+import com.poo.hackerman.model.Managers.GameModel;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,6 +1,6 @@
-package controller;
+package com.poo.hackerman.controller;
 
-import view.UIManager;
+import com.poo.hackerman.view.UIManager;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.view.UIManager;

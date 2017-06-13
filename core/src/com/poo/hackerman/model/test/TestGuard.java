@@ -1,6 +1,6 @@
 package com.poo.hackerman.model.test;
 
-import controller.ModelManager;
+import com.poo.hackerman.controller.ModelManager;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
