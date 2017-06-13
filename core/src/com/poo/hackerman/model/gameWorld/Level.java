@@ -24,22 +24,10 @@ import java.util.LinkedList;
  */
 public class Level {
 
-    private LinkedList<LinkedList<Entity>> grid;
     private EntityManager entityManager;
 
     public Level(String filename){
         this.entityManager = setEntityManager(filename);
-    }
-
-    private String readFile(String filename) {
-        File f = new File(filename);
-        try {
-            byte[] bytes = Files.readAllBytes(f.toPath());
-            return new String(bytes,"UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     private EntityManager setEntityManager(String filename) { //el ultimo elemento de cada array es basura para ese elemento
@@ -62,9 +50,6 @@ public class Level {
         int guardIndex = 0, cameraIndex = 0, computerIndex = 0, doorIndex = 0, deskIndex = 0;
         int rowNumber = 0;
         for (String row : mapRows) {
-            LinkedList<Entity> aRow = new LinkedList<>();
-            grid.add(rowNumber, aRow);
-            System.out.println(rowNumber + ": " + row);
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
@@ -135,6 +120,21 @@ public class Level {
         return new EntityManager(hacker,door,enemyList,computerList,obstacleList);
     }
 
+    private String readFile(String filename) {
+        File f = new File(filename);
+        try {
+            byte[] bytes = Files.readAllBytes(f.toPath());
+            return new String(bytes,"UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
     /*
     private EntityManager setEntityManager(LinkedList<LinkedList<Entity>> level) {
 
@@ -162,9 +162,5 @@ public class Level {
 
     public LinkedList<LinkedList<Entity>> getGrid() { return grid; }
     */
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
 
 }
