@@ -20,7 +20,7 @@ public class ModelManager implements Runnable{
 
     public ModelManager(Manager manager) {
 
-        entityManager = gameModel.getMap().getEntityManager();
+        entityManager = gameModel.getGameMap().getEntityManager();
         manager = manager;
         gameModel = new GameModel();
 
