@@ -24,9 +24,9 @@ public class GameModel {
 
     public GameModel() {
         levels = new ArrayList<Level>();
-        //levels.add(new Level1());           //path con el level que quiero levantar
-        //levels.add(new Level2());
-        //levels.add(new Level3());
+        levels.add(new Level("src/com/poo/hackerman/model/gameWorld/levels/level1.txt"));           //path con el level que quiero levantar
+        levels.add(new Level("src/com/poo/hackerman/model/gameWorld/levels/level2.txt"));
+        levels.add(new Level("src/com/poo/hackerman/model/gameWorld/levels/level3.txt"));
         lives = MAX_LIVES;
         setPaused();
         currentLevel = -1;                     //model no inicializado
