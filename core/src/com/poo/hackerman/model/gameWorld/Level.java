@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 
 /**
- * Created by Mac on 7/6/17.
+ * Created by Sebastian on 7/6/17.
  */
 public class Level {
 
@@ -28,8 +28,7 @@ public class Level {
     private EntityManager entityManager;
 
     public Level(String filename){
-        this.grid = setGrid(filename);
-        this.entityManager = setEntityManager(grid);
+        this.entityManager = setEntityManager(filename);
     }
 
     private String readFile(String filename) {
@@ -43,7 +42,7 @@ public class Level {
         return "";
     }
 
-    private LinkedList<LinkedList<Entity>> setGrid(String filename) { //el ultimo elemento de cada array es basura para ese elemento
+    private EntityManager setEntityManager(String filename) { //el ultimo elemento de cada array es basura para ese elemento
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
         String[] guards = s.split(" GUARDS\n");
@@ -55,7 +54,11 @@ public class Level {
         String[] maps = hackers[hackers.length - 1].split(" MAP");
         String map = maps[0];
         String[] mapRows = map.split("/\n");
-        LinkedList<LinkedList<Entity>> grid = new LinkedList<>();
+        LinkedList<Obstacle> obstacleList = new LinkedList<>();
+        LinkedList<Computer> computerList = new LinkedList<>();
+        LinkedList<EnemyCharacter> enemyList = new LinkedList<>();
+        PlayerCharacter hacker = null;
+        Door door = null;
         int guardIndex = 0, cameraIndex = 0, computerIndex = 0, doorIndex = 0, deskIndex = 0;
         int rowNumber = 0;
         for (String row : mapRows) {
@@ -69,12 +72,12 @@ public class Level {
                 switch (cell){
                     case "WALL":
                         Direction direction = new Direction(0);
-                        grid.get(rowNumber).add(cellNumber, new Obstacle(position, direction, Obstacle.obstacleType.WALL));
+                        obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
                         break;
                     case "DOOR":
                         String[] properties = doors[doorIndex++].split(",");
                         direction = new Direction(Integer.valueOf(properties[0]));
-                        grid.get(rowNumber).add(cellNumber, new Door(position, direction));
+                        door = new Door(position, direction);
                         break;
                     case "GUARD":
                         properties = guards[guardIndex++].split(",");
@@ -86,10 +89,10 @@ public class Level {
                             for(int i=3;i<properties.length;i+=2){
                                 instructions.add(new Position(i,i+1));
                             }
-                            grid.get(rowNumber).add(cellNumber, new Guard(position, direction, velocity, range,instructions));
+                            enemyList.add(new Guard(position, direction, velocity, range,instructions));
                         }
                         else {
-                            grid.get(rowNumber).add(cellNumber, new Guard(position, direction, velocity, range));
+                            enemyList.add(new Guard(position, direction, velocity, range));
                         }
                         break;
                     case "CAMERAGUARD":
@@ -101,38 +104,40 @@ public class Level {
                             for(int i=2;i<properties.length;i++){
                                 instructions.add(new Direction(i));
                             }
-                            grid.get(rowNumber).add(cellNumber, new CameraGuard(position, direction, range,instructions));
+                            enemyList.add(new CameraGuard(position, direction, range,instructions));
                         }
                         else {
-                            grid.get(rowNumber).add(cellNumber, new CameraGuard(position, direction, range));
+                            enemyList.add(new CameraGuard(position, direction, range));
                         }
                         break;
                     case "HACKER":
                         properties = hackers[0].split(",");
                         direction = new Direction(Integer.valueOf(properties[0]));
                         velocity = Integer.valueOf(properties[1]);
-                        grid.get(rowNumber).add(cellNumber, new PlayerCharacter(position, direction, velocity));
+                        hacker = new PlayerCharacter(position, direction, velocity);
                         break;
                     case "COMPUTER":
                         properties = computers[computerIndex].split(",");
                         direction = new Direction(Integer.valueOf(properties[0]));
                         int consecutiveHacks = Integer.valueOf(properties[1]);
-                        grid.get(rowNumber).add(cellNumber, new Computer(position, direction, consecutiveHacks));
+                        computerList.add(new Computer(position, direction, consecutiveHacks));
                         break;
                     case "DESK":
                         properties = desks[deskIndex].split(",");
                         direction = new Direction(Integer.valueOf(properties[0]));
-                        grid.get(rowNumber).add(cellNumber, new Obstacle(position, direction, Obstacle.obstacleType.DESK));
+                        obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                         break;
                 }
                 cellNumber++;
             }
             rowNumber++;
         }
-        return grid;
+        return new EntityManager(hacker,door,enemyList,computerList,obstacleList);
     }
 
+    /*
     private EntityManager setEntityManager(LinkedList<LinkedList<Entity>> level) {
+
         LinkedList<Obstacle> obstacles = new LinkedList<>();
         LinkedList<Computer> computers = new LinkedList<>();
         LinkedList<EnemyCharacter> enemies = new LinkedList<>();
@@ -155,11 +160,11 @@ public class Level {
         return new EntityManager(hacker,door,enemies,computers,obstacles);
     }
 
+    public LinkedList<LinkedList<Entity>> getGrid() { return grid; }
+    */
+
     public EntityManager getEntityManager() {
         return entityManager;
     }
 
-    public LinkedList<LinkedList<Entity>> getGrid() {
-        return grid;
-    }
 }

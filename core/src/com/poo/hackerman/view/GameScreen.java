@@ -162,7 +162,7 @@ public class GameScreen extends ScreenAdapter {
     private void drawComputers() {
         for(int i = 0; i< computers.length; i++) {
             if(computersO.get(i).isHacked()){
-                computers[i].setTexture(computerHackedT);
+                computers[i].setTexture(computersHackedT);
             }
             computers[i].draw(batch);
         }
