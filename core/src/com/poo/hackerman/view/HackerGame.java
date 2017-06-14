@@ -22,6 +22,7 @@ public class HackerGame extends Game {
     private PausedScreen pausedScreen;
     private GameOverScreen gameOverScreen;
     private GameScreen gameScreen;
+    private WonScreen wonScreen;
 
 
     public HackerGame (UIManager UIManager, ModelManager modelManager) {
@@ -32,6 +33,7 @@ public class HackerGame extends Game {
         exitScreen = new ExitScreen(this);
         pausedScreen = new PausedScreen(this);
         gameOverScreen = new GameOverScreen(this);
+        wonScreen = new WonScreen(this);
     }
 
     @Override
@@ -63,8 +65,5 @@ public class HackerGame extends Game {
 
     public ModelManager getModelManager() {return this.modelManager;}
 
-
-    public Screen getWonScreen() {
-        return null;//wonScreen;
-    }
+    public Screen getWonScreen() {return wonScreen;}
 }
