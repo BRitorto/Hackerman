@@ -13,14 +13,14 @@ public class Grid {
     private int rows, cols;
 
     public Grid() {
-        this.rows = GameMap.HEIGHT / GameMap.CELL_SIZE;
-        this.cols = GameMap.WIDTH / GameMap.CELL_SIZE;
+        this.rows = 17;//GameMap.HEIGHT / GameMap.CELL_SIZE;
+        this.cols = 23;//GameMap.WIDTH / GameMap.CELL_SIZE;
         matrix = new Cell[rows][cols];
         inicializeMatrix();
     }
 
     public void add(Entity entity, Position destinatinon) throws OccupiedCellException {
-        int i = destinatinon.getX() ;// GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
+        int i = destinatinon.getX(); // GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
         int j = destinatinon.getY(); // GameMap.CELL_SIZE;
         matrix[i][j].add(entity);               //puede tirar exception
     }
@@ -28,8 +28,6 @@ public class Grid {
     public void add(Entity entity) throws OccupiedCellException {
         int i = entity.getPosition().getX(); // GameMap.CELL_SIZE;
         int j = entity.getPosition().getY(); // GameMap.CELL_SIZE;
-        System.out.println("Chacking "+entity.getClass()+" in ("+entity.getPosition().getX()+","+entity.getPosition().getY()+")");
-        System.out.println(entity.getClass()+": ("+i+";"+j+")");
         matrix[i][j].add(entity);               //puede tirar exception
     }
 

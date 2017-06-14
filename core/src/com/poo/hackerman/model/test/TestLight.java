@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TestLight {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         PlayerCharacter player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
         Guard guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);
 
@@ -40,5 +40,5 @@ public class TestLight {
         GameMap gameMap = new GameMap(entityManager);
 
         System.out.println(guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
-    }
+    }*/
 }

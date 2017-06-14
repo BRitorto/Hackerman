@@ -89,7 +89,9 @@ public class EntityManager {
 
     public List<Entity> getEntities() {
         List<Entity> entities = new ArrayList<Entity>();
-        entities.add(player);
+        if(player!=null) {
+            entities.add(player);
+        }
         if(door != null) {
             entities.add(door);
         }

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class TestGuard {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         PlayerCharacter player = new PlayerCharacter(new Position(80,16), new Direction(Direction.UP), 10);
         Guard guard = new Guard(new Position(80,300), new Direction(Direction.DOWN_RIGHT), 10, 4);
 
@@ -39,7 +39,7 @@ public class TestGuard {
 
         modelManager.getGameModel().nextLevel(entityManager);
 
-        modelManager.initialize();*/
-    }
+        modelManager.initialize();
+    }*/
 }
 
