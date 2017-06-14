@@ -66,6 +66,7 @@ public class Level {
                     String[] properties = doors[doorIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     door = new Door(position, direction);
+                    System.out.println("Putting "+door.getClass()+" in ("+door.getPosition().getX()+","+door.getPosition().getY()+")");
                 }
                 if(cell.equals("GUARD")) {
                     String[] properties = guards[guardIndex++].split(",");
@@ -101,6 +102,7 @@ public class Level {
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
                     hacker = new PlayerCharacter(position, direction, velocity);
+                    System.out.println("Putting "+hacker.getClass()+" in ("+hacker.getPosition().getX()+","+hacker.getPosition().getY()+")");
                 }
                 if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");

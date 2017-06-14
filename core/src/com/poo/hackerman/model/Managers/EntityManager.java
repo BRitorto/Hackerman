@@ -48,8 +48,8 @@ public class EntityManager {
 
     public void setGrid(Grid grid) {
         if(enemies != null) {
-            for (EnemyCharacter enemie : enemies) {
-                enemie.setGrid(grid);
+            for (EnemyCharacter enemy : enemies) {
+                enemy.setGrid(grid);
             }
         }
         player.setGrid(grid);
