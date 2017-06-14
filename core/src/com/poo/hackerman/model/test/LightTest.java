@@ -10,7 +10,7 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Gua
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class LightTest {
     EntityManager entityManager;
     GameMap gameMap;
 
-    @Before
+    //@Before
     public void createEntities() {
         player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
         guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);

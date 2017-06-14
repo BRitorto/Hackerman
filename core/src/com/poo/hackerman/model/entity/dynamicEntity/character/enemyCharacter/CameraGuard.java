@@ -29,7 +29,7 @@ public class CameraGuard extends EnemyCharacter {
 
 
     public CameraGuard(Position position, Direction direction, int range) {
-        super(position, direction, 0, range);
+        super(position, direction, 1, range);
         instructions = new ArrayList<Direction>();
         instructions.add(new Direction(direction.getCode()));
         currentDirection = 0;
@@ -37,7 +37,7 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
-        super(position, direction, 0, range);
+        super(position, direction, 1, range);
         this. instructions = instructions;
         currentDirection = 0;
         playerDetected = false;

@@ -84,7 +84,7 @@ public class UIEntity {
     }
 
     public void draw(SpriteBatch batch) {
-        TextureRegion currentFrame = animation.getKeyFrame(animationTimer);
+        TextureRegion currentFrame = (TextureRegion) animation.getKeyFrame(animationTimer);
         batch.draw(currentFrame,dynamicEntity.getPosition().getX(),dynamicEntity.getPosition().getY() );
     }
 }

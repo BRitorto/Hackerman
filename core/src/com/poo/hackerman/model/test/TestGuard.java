@@ -35,11 +35,11 @@ public class TestGuard {
 
 
         EntityManager entityManager = new EntityManager(player, door, enemies, computers, null);
-        ModelManager modelManager = new ModelManager();
+        /*ModelManager modelManager = new ModelManager();
 
         modelManager.getGameModel().nextLevel(entityManager);
 
-        modelManager.initialize();
+        modelManager.initialize();*/
     }
 }
 
