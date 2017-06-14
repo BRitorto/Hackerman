@@ -23,11 +23,9 @@ public class ModelManager implements Runnable{
     private Thread thread;
 
     public ModelManager(Manager manager) {
-        /*gameModel=new GameModel();              //no le falta instanciar un GameModel y llamar a nextLevel()? (Sebas)
-        gameModel.nextLevel();*/
+        gameModel=new GameModel();              //no le falta instanciar un GameModel y llamar a nextLevel()? (Sebas)
         entityManager = gameModel.getGameMap().getEntityManager();
         this.manager = manager;
-        gameModel = new GameModel();
 
     }
 

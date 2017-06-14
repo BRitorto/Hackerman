@@ -84,7 +84,7 @@ public class GameModel {
     }
 
     public boolean hasNextLevel() {
-        return currentLevel < 3;        //cambiar por levels.size
+        return levels.size() < 3;        //cambiar por levels.size
     }
 
     public GameMap getGameMap() {

@@ -10,13 +10,13 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Gua
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
+
 
 //import static org.junit.Assert.*;
 //import static org.junit.Assert.assertTrue;
@@ -51,7 +51,7 @@ public class LightTest {
 
     @Test
     public void shouldCollision() throws Exception {
-        assertTrue(guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()), "There was a collision");
+        assertTrue("There was a collision", guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
     }
 
 }

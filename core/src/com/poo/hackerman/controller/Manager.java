@@ -54,7 +54,7 @@ public class Manager {
             } break;
 
             case WON: {
-                uiManager.getGame().setScreen(uiManager.getGame().getWonScreen());
+                //uiManager.getGame().setScreen(uiManager.getGame().getWonScreen());
                 Gdx.app.exit();
             }
         }

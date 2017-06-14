@@ -24,7 +24,6 @@ public class GameMap {
     }
 
     public EntityManager getEntityManager() {
-        System.out.println("getEntityManager");
         return entityManager;
     }
 

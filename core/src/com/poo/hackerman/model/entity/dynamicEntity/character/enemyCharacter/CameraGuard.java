@@ -72,6 +72,12 @@ public class CameraGuard extends EnemyCharacter {
         updateStatus();
     }
 
+    @Override
+    protected void updateStatus() {
+        if (state == ROTATING && timeRotateRemaining <= 0)
+            state = IDLE;
+    }
+
     private Direction nextDirection() {
         if(!isCycle()) {
             updateOrientation();
@@ -92,12 +98,6 @@ public class CameraGuard extends EnemyCharacter {
         else if(getDirection().equals(instructions.get(instructions.size() - 1))) {          //si estoy en la ultima posision
             orientation = INVERSE_ORIENTATION;
         }
-    }
-
-    @Override
-    protected void updateStatus() {
-        if (state == ROTATING && timeRotateRemaining <= 0)
-            state = IDLE;
     }
 
     private boolean isCycle() {
