@@ -10,12 +10,12 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Gua
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
-import org.junit.Test;
+//import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 
 
 //import static org.junit.Assert.*;

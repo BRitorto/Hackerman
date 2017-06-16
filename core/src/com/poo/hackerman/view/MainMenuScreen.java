@@ -38,7 +38,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(HackerGame game) {
 
         this.game = game;
-        playButtonInactive = new Texture("core/assets/playinactive.png");
+        playButtonInactive = new Texture(Gdx.files.internal("/core/assets/playinactive.png"));
         playButtonActive = new Texture("core/assets/playactive.png");
         //loadGameButtonActive = new Texture("core/assets/loadgameactive.png");
         //loadGameButtonInactive = new Texture("core/assets/loadgameinactive.png");

@@ -2,9 +2,9 @@ package com.poo.hackerman.model.test;
 
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
-import org.junit.Test;
+//import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 /**
  * Created by brothers on 08/06/2017.
