@@ -11,7 +11,6 @@ import com.poo.hackerman.view.UIManager;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		ModelManager modelManager=new ModelManager(new Manager());
-		new LwjglApplication(new HackerGame(new UIManager(modelManager),modelManager), config);
+		new LwjglApplication(new Manager(), config);
 	}
 }

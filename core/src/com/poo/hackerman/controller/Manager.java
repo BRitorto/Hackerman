@@ -1,5 +1,6 @@
 package com.poo.hackerman.controller;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 import com.poo.hackerman.view.UIManager;
 import com.badlogic.gdx.Gdx;
@@ -7,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 /**
  * Created by Hackerman
  */
-public class Manager {
+public class Manager extends ApplicationAdapter {
 
     // Managers to control
     private ModelManager modelManager;
@@ -77,8 +78,8 @@ public class Manager {
          * Start the game flow
          * @param args default params
          */
-        public static void main(String[] args) {
+        /*public static void main(String[] args) {
             new Manager();
-        }
+        }*/
 
 }
