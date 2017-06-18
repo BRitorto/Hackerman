@@ -38,7 +38,6 @@ public class Level {
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
         String[] guards = s.split(" GUARDS\n");
-        System.out.println(guards.length);
         String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
         String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
         String[] doors = computers[computers.length - 1].split(" DOORS\n");
@@ -186,11 +185,13 @@ public class Level {
             byte[] bytes = Files.readAllBytes(Paths.get(filename));
             return new String(bytes,"UTF-8");
 
+            //OPCION 2
             /*String content = new Scanner(new File(filename)).useDelimiter("\\Z").next();
-            System.out.println(content);*/ //OPCION 2
+            System.out.println(content);*/
 
+            //OPCION 3
             /*FileInputStream fisTargetFile = new FileInputStream(new File("test.txt"));
-            String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");*/ //OPCION 3
+            String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");*/
         } catch (IOException e) {
             e.printStackTrace();
         }

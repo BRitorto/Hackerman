@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
 import com.poo.hackerman.view.UIManager;
 import com.badlogic.gdx.Gdx;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 /**
  * Created by Hackerman
@@ -27,12 +28,12 @@ public class Manager extends ApplicationAdapter {
         switch (state) {
             case INITIALIZE: {
                 modelManager.initialize();
-                uiManager.getGame().createGameScreen(uiManager.getGame());
-                uiManager.getGame().setScreen((Screen)uiManager.getGame().getGameScreen());
+                System.out.println("creo la MenuScreen");
+                uiManager.getGame().setMainMenuScreen(uiManager.getGame());
             } break;
 
             case EXIT: {
-                uiManager.getGame().setScreen(uiManager.getGame().getExitScreen());
+                uiManager.getGame().setExitScreen(uiManager.getGame());
             } break;
 
             case EXIT_YES: {
@@ -41,21 +42,21 @@ public class Manager extends ApplicationAdapter {
 
             case PAUSE: {
                 modelManager.getGameModel().setPause();
-                uiManager.getGame().setScreen(uiManager.getGame().getPausedScreen());
+                uiManager.getGame().setPausedScreen(uiManager.getGame());
             }break;
 
-            case RESUME: {
+            case RESUME: { //QUE PONGO ACA?
                 modelManager.getGameModel().resume();
                 uiManager.getGame().setScreen(uiManager.getGame().getGameScreen());
             }
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();
-                uiManager.getGame().setScreen(uiManager.getGame().getGameOverScreen());
+                uiManager.getGame().setGameOverScreen(uiManager.getGame());
             } break;
 
             case WON: {
-                uiManager.getGame().setScreen(uiManager.getGame().getWonScreen());
+                uiManager.getGame().setWonScreen(uiManager.getGame());
                 Gdx.app.exit();
             }
         }

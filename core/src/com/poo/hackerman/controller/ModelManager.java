@@ -25,14 +25,14 @@ public class ModelManager implements Runnable{
     public ModelManager(Manager manager) {
         //no le falta llamar a nextLevel()? (Sebas)
         gameModel = new GameModel();
-        //entityManager = gameModel.getGameMap().getEntityManager();
+        gameModel.nextLevel();
+        entityManager = gameModel.getGameMap().getEntityManager();
         this.manager = manager;
-
     }
 
     public void initialize() {
         thread = new Thread(this, "Model manager thread");
-
+        System.out.println("initialize - ModelManager");
         thread.start();
     }
 

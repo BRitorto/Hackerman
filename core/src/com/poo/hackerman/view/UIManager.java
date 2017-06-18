@@ -14,15 +14,10 @@ public class UIManager {
     private EntityManager entityManager;
     private HackerGame game;
 
-    public UIManager (ModelManager model) {
-        modelManager = model;
+    public UIManager (ModelManager modelManager) {
+        this.modelManager = modelManager;
         entityManager = modelManager.getEntityManager();
         game = new HackerGame(this, modelManager);
-        initialize();
-    }
-
-    public void initialize() {
-        game.setScreen(new MainMenuScreen(this.game));
     }
 
     public EntityManager getEntityManager() {

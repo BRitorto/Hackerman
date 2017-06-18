@@ -29,20 +29,38 @@ public class HackerGame extends Game {
         this.UIManager = UIManager;
         this.modelManager = modelManager;
         this.entityManager = modelManager.getEntityManager();
-        mainMenuScreen = new MainMenuScreen(this);
-        exitScreen = new ExitScreen(this);
-        pausedScreen = new PausedScreen(this);
-        gameOverScreen = new GameOverScreen(this);
-        wonScreen = new WonScreen(this);
     }
 
     @Override
     public void create() {
+        System.out.println("create - HackerGame");
         batch = new SpriteBatch();
     }
 
-    public void createGameScreen(HackerGame game) {
-        gameScreen = new GameScreen(this);
+    public void setMainMenuScreen(HackerGame game) {
+        System.out.println("main");
+        mainMenuScreen = new MainMenuScreen(this);
+        setScreen(mainMenuScreen);
+    }
+    public void setExitScreen(HackerGame game) {
+        System.out.println("exit");
+        exitScreen = new ExitScreen(this);
+        setScreen(exitScreen);
+    }
+    public void setPausedScreen(HackerGame game) {
+        System.out.println("paused");
+        pausedScreen = new PausedScreen(this);
+        setScreen(pausedScreen);
+    }
+    public void setGameOverScreen(HackerGame game) {
+        System.out.println("gameover");
+        gameOverScreen = new GameOverScreen(this);
+        setScreen(gameOverScreen);
+    }
+    public void setWonScreen(HackerGame game) {
+        System.out.println("won");
+        wonScreen = new WonScreen(this);
+        setScreen(wonScreen);
     }
 
     public GameScreen getGameScreen() {

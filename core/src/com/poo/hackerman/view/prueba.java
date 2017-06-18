@@ -43,6 +43,7 @@ public class prueba extends ScreenAdapter {
 
     public prueba(Application application) {
         this.application = application;
+        System.out.println("constructor - prueba");
     }
     @Override
     public void show() {
