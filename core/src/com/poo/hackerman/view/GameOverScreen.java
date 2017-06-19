@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.poo.hackerman.controller.Manager;
+import com.poo.hackerman.controller.HackerGame;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -30,9 +30,9 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(HackerGame game) {
         this.game = game;
-        gameOver = new Texture(Gdx.files.internal("core/assets/gameover.png"));
-        exitButtonActive = new Texture(Gdx.files.internal("core/assets/exitactive.png"));
-        exitButtonInactive = new Texture(Gdx.files.internal("core/assets/exitinactive.png"));
+        gameOver = new Texture(Gdx.files.internal("gameover.png"));
+        exitButtonActive = new Texture(Gdx.files.internal("exitactive.png"));
+        exitButtonInactive = new Texture(Gdx.files.internal("exitinactive.png"));
     }
 
     @Override
@@ -40,9 +40,9 @@ public class GameOverScreen implements Screen {
         this.pause();
         clearScreen();
 
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -52,16 +52,16 @@ public class GameOverScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(gameOver, 231, 450, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
+        game.getBatch().draw(gameOver, 231, 450, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.batch.draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
-                game.getUIManager().setState(Manager.STATE.EXIT_YES);
+                game.setState(HackerGame.STATE.EXIT_YES);
                 game.setScreen((Screen)game.getGameScreen());
             }
         } else {
-            game.batch.draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

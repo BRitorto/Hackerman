@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.poo.hackerman.controller.ModelManager;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -36,11 +36,12 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(HackerGame game) {
         this.game = game;
-        batch = game.batch;
-        entityManager = game.getUIManager().getEntityManager();
+        batch = game.getBatch();
     }
     @Override
     public void show() {
+        entityManager = game.getModelManager().getEntityManager();
+        System.out.println(entityManager);
         super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -53,16 +54,16 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        hackerT = new Texture("core/assets/hacker.png");
-        guardT = new Texture("core/assets/guard.png");
-        doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/computersT.png");
-        computerHackedT = new Texture("core/assets/computerHackedT.png");
-        fakeCompT = new Texture("core/assets/fakeCompT.png");
-        deskT = new Texture("core/assets/floor.png");
-        wallT = new Texture("core/assets/floor.png");
-        background = new Texture("core/assets/floor2.png");
-        heartT = new Texture("core/assets/heart.png");
+        hackerT = new Texture("hacker.png");
+        guardT = new Texture("guard.png");
+        doorT = new Texture("door.png");
+        computersT = new Texture("door.png");
+        computerHackedT = new Texture("door.png");
+        fakeCompT = new Texture("door.png");
+        deskT = new Texture("floor2.png");
+        wallT = new Texture("floor2.png");
+        background = new Texture("floor2.png");
+        heartT = new Texture("door.png");
 
         hacker = new UIEntity(hackerT, player);
         hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
@@ -136,8 +137,8 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
        super.render(delta);
        game.getModelManager().queryInput();
-        clearScreen();
-        draw();
+       clearScreen();
+       draw();
 //        drawDebug();
     }
 

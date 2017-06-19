@@ -58,7 +58,7 @@ public class Level {
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
-                Position position = new Position(rowNumber, cellNumber);
+                Position position = new Position(rowNumber * GameMap.CELL_SIZE, cellNumber * GameMap.CELL_SIZE);
                 if(cell.equals("WALL")) {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));

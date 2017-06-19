@@ -57,7 +57,6 @@ public class Direction implements Serializable {
         for (int i = 0; i < dist.length; i++) {
             Position posAux = new Position(p1.getX() + dir[i][0] * GameMap.CELL_SIZE, p1.getY() + dir[i][1] * GameMap.CELL_SIZE);
             dist[i] = posAux.distanceOf(p2);
-            System.out.println("dist " + dist[i] + "code " + i);
         }
         int minDist = minDouble(dist);
         return new Direction(minDist);
