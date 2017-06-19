@@ -4,6 +4,7 @@ package com.poo.hackerman.view;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.poo.hackerman.controller.Manager;
 import com.poo.hackerman.controller.ModelManager;
 import com.poo.hackerman.model.Managers.EntityManager;
 
@@ -13,9 +14,10 @@ import com.poo.hackerman.model.Managers.EntityManager;
 public class HackerGame extends Game {
 
     SpriteBatch batch;
-    private UIManager UIManager;
+    
     private ModelManager modelManager;
     private EntityManager entityManager;
+    private Manager manager;
 
     private MainMenuScreen mainMenuScreen;
     private ExitScreen exitScreen;
@@ -25,20 +27,25 @@ public class HackerGame extends Game {
     private WonScreen wonScreen;
 
 
-    public HackerGame (UIManager UIManager, ModelManager modelManager) {
-        this.UIManager = UIManager;
-        this.modelManager = modelManager;
+    public HackerGame () {
+        this.manager = new Manager(this);
+        this.modelManager = manager.getModelManager();
         this.entityManager = modelManager.getEntityManager();
+    }
+
+    @Override
+    public void create() {
+
+        batch = new SpriteBatch();
         mainMenuScreen = new MainMenuScreen(this);
         exitScreen = new ExitScreen(this);
         pausedScreen = new PausedScreen(this);
         gameOverScreen = new GameOverScreen(this);
         wonScreen = new WonScreen(this);
-    }
 
-    @Override
-    public void create() {
-        batch = new SpriteBatch();
+        setScreen(mainMenuScreen);
+        modelManager.initialize();
+
     }
 
     public void createGameScreen(HackerGame game) {
@@ -61,9 +68,14 @@ public class HackerGame extends Game {
         return this.pausedScreen;
     }
 
-    public UIManager getUIManager() {return this.UIManager;}
-
     public ModelManager getModelManager() {return this.modelManager;}
 
     public Screen getWonScreen() {return wonScreen;}
+
+    public void setState (Manager.STATE state) {
+        modelManager.getManager().stateManager(state);
+    }
+
+    public EntityManager getEntityManager() { return this.entityManager; }
+
 }

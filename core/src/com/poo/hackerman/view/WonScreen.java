@@ -31,9 +31,9 @@ public class WonScreen implements Screen {
 
     public WonScreen (HackerGame game) {
         this.game = game;
-        won = new Texture(Gdx.files.internal("core/assets/won.png"));
-        exitButtonActive = new Texture(Gdx.files.internal("core/assets/exitactive.png"));
-        exitButtonInactive = new Texture(Gdx.files.internal("core/assets/exitinactive.png"));
+        won = new Texture(Gdx.files.internal("gameover.png"));
+        exitButtonActive = new Texture(Gdx.files.internal("exitactive.png"));
+        exitButtonInactive = new Texture(Gdx.files.internal("exitinactive.png"));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class WonScreen implements Screen {
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
             game.batch.draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
-                game.getUIManager().setState(Manager.STATE.EXIT_YES);
+                game.setState(Manager.STATE.EXIT_YES);
                 game.setScreen((Screen)game.getGameScreen());
             }
         } else {

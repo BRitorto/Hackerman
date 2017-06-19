@@ -7,8 +7,8 @@ import java.util.List;
 
 public class GameMap {
 
-    public static final int HEIGHT = 640;
-    public static final int WIDTH = (HEIGHT * 3) / 4;
+    public static final int WIDTH = 736;
+    public static final int HEIGHT = (WIDTH * 3) / 4;
     public static int CELL_SIZE = 32;
 
     private Grid grid;

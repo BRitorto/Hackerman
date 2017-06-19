@@ -2,37 +2,44 @@ package com.poo.hackerman.controller;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Screen;
-import com.poo.hackerman.view.UIManager;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.poo.hackerman.view.HackerGame;
 import com.badlogic.gdx.Gdx;
 
 /**
  * Created by Hackerman
  */
-public class Manager extends ApplicationAdapter {
+public class Manager {
 
     // Managers to control
     private ModelManager modelManager;
-    private UIManager uiManager;
+    private HackerGame game;
 
-    public enum STATE {INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, GAME_OVER, WON}
-    private STATE state = STATE.INITIALIZE;
+    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, GAME_OVER, WON}
+    private STATE state = STATE.CREATED;
 
 
-    public Manager() {
+    public Manager(HackerGame game) {
         modelManager = new ModelManager(this);
-        uiManager = new UIManager(modelManager);
+        this.game = game;
+        //stateManager(state);
     }
 
     public void stateManager (STATE state) {
         switch (state) {
+            case CREATED: {
+
+            } break;
+
             case INITIALIZE: {
+                System.out.print(state);
                 modelManager.initialize();
-                uiManager.getGame().createGameScreen(uiManager.getGame());
-                uiManager.getGame().setScreen((Screen)uiManager.getGame().getGameScreen());
+                game.createGameScreen(game);
+                game.setScreen(game.getGameScreen());
             } break;
 
             case EXIT: {
-                uiManager.getGame().setScreen(uiManager.getGame().getExitScreen());
+                game.setScreen(game.getExitScreen());
             } break;
 
             case EXIT_YES: {
@@ -41,21 +48,21 @@ public class Manager extends ApplicationAdapter {
 
             case PAUSE: {
                 modelManager.getGameModel().setPause();
-                uiManager.getGame().setScreen(uiManager.getGame().getPausedScreen());
+                game.setScreen(game.getPausedScreen());
             }break;
 
             case RESUME: {
                 modelManager.getGameModel().resume();
-                uiManager.getGame().setScreen(uiManager.getGame().getGameScreen());
+                game.setScreen(game.getGameScreen());
             }
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();
-                uiManager.getGame().setScreen(uiManager.getGame().getGameOverScreen());
+                game.setScreen(game.getGameOverScreen());
             } break;
 
             case WON: {
-                uiManager.getGame().setScreen(uiManager.getGame().getWonScreen());
+                game.setScreen(game.getWonScreen());
                 Gdx.app.exit();
             }
         }
@@ -66,6 +73,8 @@ public class Manager extends ApplicationAdapter {
             stateManager(STATE.GAME_OVER);
         }
     }
+
+    public ModelManager getModelManager() { return this.modelManager; }
 
         /**
          * Sets the current entityManager to the one specified. This method should be

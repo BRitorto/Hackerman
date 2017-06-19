@@ -35,11 +35,11 @@ public class ExitScreen implements Screen {
 
     public ExitScreen(HackerGame game) {
         this.game = game;
-        resumeButtonActive = new Texture(Gdx.files.internal("core/assets/resumeactive.png"));
-        resumeButtonInactive = new Texture(Gdx.files.internal("core/assets/resumeinactive.png"));
-        exitButtonActive = new Texture(Gdx.files.internal("core/assets/exitactive.png"));
-        exitButtonInactive = new Texture(Gdx.files.internal("core/assets/exitinactive.png"));
-        exitGame = new Texture(Gdx.files.internal("core/assets/exitgame.png"));
+        resumeButtonActive = new Texture(Gdx.files.internal("resumeactive.png"));
+        resumeButtonInactive = new Texture(Gdx.files.internal("resumeinactive.png"));
+        exitButtonActive = new Texture(Gdx.files.internal("exitactive.png"));
+        exitButtonInactive = new Texture(Gdx.files.internal("exitinactive.png"));
+        exitGame = new Texture(Gdx.files.internal("exitgame.png"));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ExitScreen implements Screen {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.getUIManager().setState(Manager.STATE.RESUME);
+                game.setState(Manager.STATE.RESUME);
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -76,7 +76,7 @@ public class ExitScreen implements Screen {
             game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.getUIManager().setState(Manager.STATE.EXIT_YES);
+                game.setState(Manager.STATE.EXIT_YES);
             }
         } else {
             game.batch.draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);

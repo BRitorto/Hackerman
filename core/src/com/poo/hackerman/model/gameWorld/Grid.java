@@ -13,21 +13,22 @@ public class Grid {
     private int rows, cols;
 
     public Grid() {
-        this.rows = 17;//GameMap.HEIGHT / GameMap.CELL_SIZE;
-        this.cols = 23;//GameMap.WIDTH / GameMap.CELL_SIZE;
+        this.rows = GameMap.HEIGHT / GameMap.CELL_SIZE;
+        this.cols = GameMap.WIDTH / GameMap.CELL_SIZE;
         matrix = new Cell[rows][cols];
-        inicializeMatrix();
+        initializeMatrix();
     }
 
     public void add(Entity entity, Position destinatinon) throws OccupiedCellException {
-        int i = destinatinon.getX(); // GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
-        int j = destinatinon.getY(); // GameMap.CELL_SIZE;
+        int i = destinatinon.getX() / GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
+        int j = destinatinon.getY() / GameMap.CELL_SIZE;
         matrix[i][j].add(entity);               //puede tirar exception
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-        int i = entity.getPosition().getX(); // GameMap.CELL_SIZE;
-        int j = entity.getPosition().getY(); // GameMap.CELL_SIZE;
+        System.out.println("Adding: " + entity.getClass() + " in: " + entity.getPosition().getX()/ GameMap.CELL_SIZE+ " " + entity.getPosition().getY()/ GameMap.CELL_SIZE);
+        int i = entity.getPosition().getX() / GameMap.CELL_SIZE;
+        int j = entity.getPosition().getY() / GameMap.CELL_SIZE;
         matrix[i][j].add(entity);               //puede tirar exception
     }
 
@@ -64,7 +65,7 @@ public class Grid {
         return matrix[x][y].isEmpty();
     }
 
-    private void inicializeMatrix() {
+    private void initializeMatrix() {
         for(int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = new Cell();

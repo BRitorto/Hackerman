@@ -6,11 +6,12 @@ import com.poo.hackerman.controller.Manager;
 import com.poo.hackerman.controller.ModelManager;
 import com.poo.hackerman.view.Application;
 import com.poo.hackerman.view.HackerGame;
-import com.poo.hackerman.view.UIManager;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new Manager(), config);
+		config.width = 855;
+		config.height = 675;
+		new LwjglApplication(new HackerGame(), config);
 	}
 }

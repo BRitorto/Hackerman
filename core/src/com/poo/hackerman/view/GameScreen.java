@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(HackerGame game) {
         this.game = game;
         batch = game.batch;
-        entityManager = game.getUIManager().getEntityManager();
+        entityManager = game.getEntityManager();
     }
     @Override
     public void show() {
@@ -53,16 +53,16 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        hackerT = new Texture("core/assets/hacker.png");
-        guardT = new Texture("core/assets/guard.png");
-        doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/computersT.png");
-        computerHackedT = new Texture("core/assets/computerHackedT.png");
-        fakeCompT = new Texture("core/assets/fakeCompT.png");
-        deskT = new Texture("core/assets/floor.png");
-        wallT = new Texture("core/assets/floor.png");
-        background = new Texture("core/assets/floor2.png");
-        heartT = new Texture("core/assets/heart.png");
+        hackerT = new Texture("hacker.png");
+        guardT = new Texture("guard.png");
+        doorT = new Texture("heart.png");
+        computersT = new Texture("computersT.png");
+        computerHackedT = new Texture("computerHackedT.png");
+        fakeCompT = new Texture("fakeCompT.png");
+        deskT = new Texture("floor.png");
+        wallT = new Texture("floor.png");
+        background = new Texture("floor2.png");
+        heartT = new Texture("heart.png");
 
         hacker = new UIEntity(hackerT, player);
         hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());

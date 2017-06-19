@@ -32,9 +32,9 @@ public class PausedScreen implements Screen {
     public PausedScreen(HackerGame game){
 
         this.game = game;
-        resumeButtonInactive = new Texture(Gdx.files.internal("core/assets/resumeinactive.png"));
-        resumeButtonActive = new Texture(Gdx.files.internal("core/assets/resumeactive.png"));
-        gamePaused = new Texture(Gdx.files.internal("core/assets/gamepaused.png"));
+        resumeButtonInactive = new Texture(Gdx.files.internal("resumeinactive.png"));
+        resumeButtonActive = new Texture(Gdx.files.internal("resumeactive.png"));
+        gamePaused = new Texture(Gdx.files.internal("gamepaused.png"));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PausedScreen implements Screen {
             game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 dispose();
-                game.getUIManager().setState(Manager.STATE.RESUME);
+                game.setState(Manager.STATE.RESUME);
             }
         } else {
             game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
