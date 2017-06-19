@@ -44,6 +44,7 @@ public class GameModel {
 
     public void nextLevel() {
         currentLevel++;
+
         gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();

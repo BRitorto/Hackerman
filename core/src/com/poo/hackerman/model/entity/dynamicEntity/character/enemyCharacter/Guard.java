@@ -2,6 +2,7 @@ package com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter;
 
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class Guard extends EnemyCharacter {
         if(getState() == IDLE) {
             updateCurrentPosition();
             Direction direction = nextDirection();
+            System.out.println("Guard is IDLE nextDir: " + direction);
             tryToMove(direction);
         }
         move();

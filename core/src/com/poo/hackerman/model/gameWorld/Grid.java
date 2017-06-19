@@ -15,7 +15,7 @@ public class Grid {
     public Grid() {
         this.rows = GameMap.HEIGHT / GameMap.CELL_SIZE;
         this.cols = GameMap.WIDTH / GameMap.CELL_SIZE;
-        matrix = new Cell[rows][cols];
+        matrix = new Cell[cols][rows];
         initializeMatrix();
     }
 
@@ -66,8 +66,8 @@ public class Grid {
     }
 
     private void initializeMatrix() {
-        for(int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for(int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
                 matrix[i][j] = new Cell();
             }
         }

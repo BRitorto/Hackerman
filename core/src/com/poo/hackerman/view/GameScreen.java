@@ -17,8 +17,8 @@ import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
 
-    private static final float WORLD_WIDTH = 736;
-    private static final float WORLD_HEIGHT = (736*3)/4;
+    private static final float WORLD_WIDTH = 736*2;
+    private static final float WORLD_HEIGHT = (736*2*3)/4;
     private Viewport viewport;
     private Camera camera;
     private EntityManager entityManager;
@@ -133,10 +133,11 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-       super.render(delta);
-       game.getModelManager().queryInput();
-       clearScreen();
-       draw();
+        entityManager = game.getModelManager().getEntityManager();
+        super.render(delta);
+        game.getModelManager().queryInput();
+        clearScreen();
+        draw();
 //        drawDebug();
     }
 

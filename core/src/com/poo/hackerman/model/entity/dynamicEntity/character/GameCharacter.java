@@ -31,6 +31,7 @@ public abstract class GameCharacter extends DynamicEntity {
      * @param direction Direction to move. Tries to move the character in that direction.
      */
     public void tryToMove(Direction direction) {
+        System.out.println("Moving from " + getPosition());           //borrar
         if (state != IDLE || direction == null) {
             return;
         }
@@ -38,16 +39,17 @@ public abstract class GameCharacter extends DynamicEntity {
             rotate(direction);
             return;
         }
-
         int[] dir = direction.getDir();
 
         Position destination = new Position(getPosition().getX() + dir[0] * GameMap.CELL_SIZE, getPosition().getY() + dir[1] * GameMap.CELL_SIZE);
-
+        System.out.println("destination: "+ destination);
         // Check destination is within the borders of the map, and its a valid
         // destination.
-        if (!destination.withinBoundaries() || !grid.isPossibleAdd(destination)) {
+        if (destination.withinBoundaries() || !grid.isPossibleAdd(destination)) {
             return;
         }
+
+        System.out.println("To " + destination);        //borrar
         state = MOVING;
         movesRemaining = GameMap.CELL_SIZE;
         timer.updateLastMoveTime(System.currentTimeMillis(), direction);

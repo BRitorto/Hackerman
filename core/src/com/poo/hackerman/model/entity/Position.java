@@ -69,8 +69,11 @@ public class Position implements Serializable {
         return aux.getX() == this.x && aux.getY() == this.y;
     }
 
-
     public boolean sameGridIndex(Position position) {
         return this.toGridIndexes().equals(position.toGridIndexes());
+    }
+
+    public String toString() {
+        return getX() + " " + getY();
     }
 }

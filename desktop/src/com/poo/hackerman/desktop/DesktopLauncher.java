@@ -7,8 +7,8 @@ import com.poo.hackerman.controller.HackerGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 855;
-		config.height = 675;
+		config.width = 864;
+		config.height = 648;
 		new LwjglApplication(new HackerGame(), config);
 	}
 }

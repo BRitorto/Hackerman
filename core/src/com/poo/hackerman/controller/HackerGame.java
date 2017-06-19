@@ -45,7 +45,6 @@ public class HackerGame extends Game {
         wonScreen = new WonScreen(this);
 
         setScreen(mainMenuScreen);
-
     }
 
     public void setState (STATE state) {
