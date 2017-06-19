@@ -37,6 +37,10 @@ public class EntityManager {
         }
     }
 
+    /**
+     *
+     * @return True if the player was caught by an enemy
+     */
     public boolean playerCaught() {
         for(EnemyCharacter enemy: enemies) {
             if(enemy.hackerDetected()) {
@@ -46,6 +50,10 @@ public class EntityManager {
         return false;
     }
 
+    /**
+     *
+     * @param grid The grid that is set to each of the entities
+     */
     public void setGrid(Grid grid) {
         if(enemies != null) {
             for (EnemyCharacter enemy : enemies) {
@@ -87,6 +95,10 @@ public class EntityManager {
         obstacles.add(obstacle);
     }
 
+    /**
+     *
+     * @return A list that contains all the entities
+     */
     public List<Entity> getEntities() {
         List<Entity> entities = new ArrayList<Entity>();
         if(player!=null) {
