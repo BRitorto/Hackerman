@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.controller.Manager;
 
 /**
@@ -51,9 +52,9 @@ public class MainMenuScreen implements Screen {
     public void render(float delta) {
         clearScreen();
 
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -63,32 +64,32 @@ public class MainMenuScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(hackermanTitle, 76, 450, TITLE_WIDTH, TITLE_HEIGHT);
+        game.getBatch().draw(hackermanTitle, 76, 450, TITLE_WIDTH, TITLE_HEIGHT);
 
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > playY && Gdx.input.getY() < PLAY_Y) {
-            game.batch.draw(playButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(playButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 game.setState(Manager.STATE.INITIALIZE);
             }
         } else {
-            game.batch.draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         /*if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > loadY && Gdx.input.getY() < LOAD_Y) {
-            game.batch.draw(loadGameButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(loadGameButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         } else {
-            game.batch.draw(loadGameButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(loadGameButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         }*/
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y) {
-            game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(Manager.STATE.EXIT_YES);
             }
         } else {
-            game.batch.draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

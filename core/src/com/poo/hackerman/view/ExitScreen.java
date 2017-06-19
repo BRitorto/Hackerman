@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.controller.Manager;
 
 /**
@@ -46,9 +47,9 @@ public class ExitScreen implements Screen {
     public void render(float delta) {
         this.pause();
         clearScreen();
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -58,28 +59,28 @@ public class ExitScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(exitGame, 231, 450, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
+        game.getBatch().draw(exitGame, 231, 450, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
         //resume button
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(Manager.STATE.RESUME);
             }
         } else {
-            game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         //exit button
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > bottomY && Gdx.input.getY() < BOTTOM_Y) {
-            game.batch.draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(Manager.STATE.EXIT_YES);
             }
         } else {
-            game.batch.draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

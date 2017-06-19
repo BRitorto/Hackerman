@@ -1,9 +1,5 @@
 package com.poo.hackerman.controller;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.poo.hackerman.view.HackerGame;
 import com.badlogic.gdx.Gdx;
 
 /**

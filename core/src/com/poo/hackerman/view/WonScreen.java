@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.controller.Manager;
 
 /**
@@ -41,9 +42,9 @@ public class WonScreen implements Screen {
         this.pause();
         clearScreen();
 
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -53,16 +54,16 @@ public class WonScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(won, 231, 450, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
+        game.getBatch().draw(won, 231, 450, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.batch.draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 game.setState(Manager.STATE.EXIT_YES);
                 game.setScreen((Screen)game.getGameScreen());
             }
         } else {
-            game.batch.draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

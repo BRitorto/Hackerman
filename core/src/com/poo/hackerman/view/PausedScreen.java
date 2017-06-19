@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.controller.Manager;
 
 /**
@@ -42,9 +43,9 @@ public class PausedScreen implements Screen {
         this.pause();
         clearScreen();
 
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -54,16 +55,16 @@ public class PausedScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(gamePaused, 212, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
+        game.getBatch().draw(gamePaused, 212, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 dispose();
                 game.setState(Manager.STATE.RESUME);
             }
         } else {
-            game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.poo.hackerman.controller.ModelManager;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -36,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(HackerGame game) {
         this.game = game;
-        batch = game.batch;
+        batch = game.getBatch();
         entityManager = game.getEntityManager();
     }
     @Override
