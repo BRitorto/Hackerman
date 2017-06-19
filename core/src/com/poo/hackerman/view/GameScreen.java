@@ -137,8 +137,8 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
        super.render(delta);
        game.getModelManager().queryInput();
-        clearScreen();
-        draw();
+       clearScreen();
+       draw();
 //        drawDebug();
     }
 
