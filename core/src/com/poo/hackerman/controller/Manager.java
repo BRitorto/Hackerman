@@ -32,8 +32,8 @@ public class Manager {
             } break;
 
             case INITIALIZE: {
-                System.out.print(state);
                 modelManager.initialize();
+                System.out.println(modelManager.getEntityManager());
                 game.createGameScreen(game);
                 game.setScreen(game.getGameScreen());
             } break;
