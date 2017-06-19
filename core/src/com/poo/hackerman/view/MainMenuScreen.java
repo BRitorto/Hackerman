@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.poo.hackerman.controller.HackerGame;
-import com.poo.hackerman.controller.Manager;
 
 /**
  * Created by Bianca on 28/05/2017.
@@ -70,7 +69,7 @@ public class MainMenuScreen implements Screen {
                 && Gdx.input.getY() > playY && Gdx.input.getY() < PLAY_Y) {
             game.getBatch().draw(playButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
-                game.setState(Manager.STATE.INITIALIZE);
+                game.setState(HackerGame.STATE.INITIALIZE);
             }
         } else {
             game.getBatch().draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -86,7 +85,7 @@ public class MainMenuScreen implements Screen {
             game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setState(Manager.STATE.EXIT_YES);
+                game.setState(HackerGame.STATE.EXIT_YES);
             }
         } else {
             game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);

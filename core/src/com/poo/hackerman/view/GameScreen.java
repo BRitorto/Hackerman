@@ -37,10 +37,11 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(HackerGame game) {
         this.game = game;
         batch = game.getBatch();
-        entityManager = game.getEntityManager();
     }
     @Override
     public void show() {
+        entityManager = game.getModelManager().getEntityManager();
+        System.out.println(entityManager);
         super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -55,14 +56,14 @@ public class GameScreen extends ScreenAdapter {
 
         hackerT = new Texture("hacker.png");
         guardT = new Texture("guard.png");
-        doorT = new Texture("heart.png");
-        computersT = new Texture("computersT.png");
-        computerHackedT = new Texture("computerHackedT.png");
-        fakeCompT = new Texture("fakeCompT.png");
-        deskT = new Texture("floor.png");
-        wallT = new Texture("floor.png");
+        doorT = new Texture("door.png");
+        computersT = new Texture("door.png");
+        computerHackedT = new Texture("door.png");
+        fakeCompT = new Texture("door.png");
+        deskT = new Texture("floor2.png");
+        wallT = new Texture("floor2.png");
         background = new Texture("floor2.png");
-        heartT = new Texture("heart.png");
+        heartT = new Texture("door.png");
 
         hacker = new UIEntity(hackerT, player);
         hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());

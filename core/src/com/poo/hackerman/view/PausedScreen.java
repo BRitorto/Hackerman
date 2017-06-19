@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.poo.hackerman.controller.HackerGame;
-import com.poo.hackerman.controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -61,7 +60,7 @@ public class PausedScreen implements Screen {
             game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 dispose();
-                game.setState(Manager.STATE.RESUME);
+                game.setState(HackerGame.STATE.RESUME);
             }
         } else {
             game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);

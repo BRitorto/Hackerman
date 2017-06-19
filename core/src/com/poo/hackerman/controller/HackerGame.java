@@ -2,6 +2,7 @@ package com.poo.hackerman.controller;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.poo.hackerman.model.Managers.EntityManager;
@@ -13,10 +14,12 @@ import com.poo.hackerman.view.*;
 public class HackerGame extends Game {
 
     private SpriteBatch batch;
-    
+
+    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, GAME_OVER, WON}
+    private STATE state = STATE.CREATED;
+
     private ModelManager modelManager;
     private EntityManager entityManager;
-    private Manager manager;
 
     private MainMenuScreen mainMenuScreen;
     private ExitScreen exitScreen;
@@ -27,8 +30,7 @@ public class HackerGame extends Game {
 
 
     public HackerGame () {
-        this.manager = new Manager(this);
-        this.modelManager = manager.getModelManager();
+        this.modelManager = new ModelManager(this);
         this.entityManager = modelManager.getEntityManager();
     }
 
@@ -45,6 +47,46 @@ public class HackerGame extends Game {
         setScreen(mainMenuScreen);
         modelManager.initialize();
 
+    }
+
+    public void setState (STATE state) {
+        switch (state) {
+
+            case INITIALIZE: {
+                modelManager.initialize();
+                System.out.println(modelManager.getEntityManager().getPlayer());
+                createGameScreen(this);
+                setScreen(gameScreen);
+            } break;
+
+            case EXIT: {
+                setScreen(getExitScreen());
+            } break;
+
+            case EXIT_YES: {
+                Gdx.app.exit();
+            }
+
+            case PAUSE: {
+                modelManager.getGameModel().setPause();
+                setScreen(getPausedScreen());
+            }break;
+
+            case RESUME: {
+                modelManager.getGameModel().resume();
+                setScreen(getGameScreen());
+            }
+
+            case GAME_OVER: {
+                modelManager.getGameModel().setPause();
+                setScreen(getGameOverScreen());
+            } break;
+
+            case WON: {
+                setScreen(getWonScreen());
+                Gdx.app.exit();
+            }
+        }
     }
 
     public void createGameScreen(HackerGame game) {
@@ -70,10 +112,6 @@ public class HackerGame extends Game {
     public ModelManager getModelManager() {return this.modelManager;}
 
     public Screen getWonScreen() {return wonScreen;}
-
-    public void setState (Manager.STATE state) {
-        modelManager.getManager().stateManager(state);
-    }
 
     public EntityManager getEntityManager() { return this.entityManager; }
 

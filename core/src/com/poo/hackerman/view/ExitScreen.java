@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.poo.hackerman.controller.HackerGame;
-import com.poo.hackerman.controller.Manager;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -66,7 +65,7 @@ public class ExitScreen implements Screen {
             game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setState(Manager.STATE.RESUME);
+                game.setState(HackerGame.STATE.RESUME);
             }
         } else {
             game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -77,7 +76,7 @@ public class ExitScreen implements Screen {
             game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 this.dispose();
-                game.setState(Manager.STATE.EXIT_YES);
+                game.setState(HackerGame.STATE.EXIT_YES);
             }
         } else {
             game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);

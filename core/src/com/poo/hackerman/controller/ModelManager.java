@@ -19,13 +19,13 @@ public class ModelManager implements Runnable{
 
     private GameModel gameModel;
     private EntityManager entityManager;
-    private Manager manager;
+    private HackerGame game;
     private Thread thread;
 
-    public ModelManager(Manager manager) {
+    public ModelManager(HackerGame game) {
         //no le falta llamar a nextLevel()? (Sebas)
         gameModel = new GameModel();
-        this.manager = manager;
+        this.game = game;
 
     }
 
@@ -59,13 +59,13 @@ public class ModelManager implements Runnable{
             public void run() {
                 gameModel.tick();
                 if(gameModel.gameOver()) {
-                    manager.stateManager(Manager.STATE.GAME_OVER);
+                    game.setState(HackerGame.STATE.GAME_OVER);
                 }
                 else if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
                     gameModel.nextLevel();
                 }
                 else if (gameModel.passedLevel() && !gameModel.hasNextLevel()){
-                    manager.stateManager(Manager.STATE.WON);
+                    game.setState(HackerGame.STATE.WON);
                 }
             }
         };
@@ -76,7 +76,7 @@ public class ModelManager implements Runnable{
         return gameModel;
     }
 
-    public Manager getManager() {return manager;}
+    public HackerGame getGame() {return game;}
 
     public EntityManager getEntityManager() {return entityManager;}
 
