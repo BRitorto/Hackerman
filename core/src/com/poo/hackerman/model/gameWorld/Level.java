@@ -37,13 +37,13 @@ public class Level {
     private EntityManager setEntityManager(String filename) { //el ultimo elemento de cada array es basura para ese elemento
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
-        String[] guards = s.split(" GUARDS\n");
+        String[] guards = s.split(" GUARDS\r\n");
         System.out.println(guards.length);
-        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
-        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
-        String[] doors = computers[computers.length - 1].split(" DOORS\n");
-        String[] desks = doors[doors.length - 1].split(" DESKS\n");
-        String[] hackers = desks[desks.length - 1].split(" HACKER\n");
+        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\r\n");
+        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\r\n");
+        String[] doors = computers[computers.length - 1].split(" DOORS\r\n");
+        String[] desks = doors[doors.length - 1].split(" DESKS\r\n");
+        String[] hackers = desks[desks.length - 1].split(" HACKER\r\n");
         String[] maps = hackers[hackers.length - 1].split(" MAP");
         String map = maps[0];
         String[] mapRows = map.split("/\n");
@@ -58,7 +58,7 @@ public class Level {
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
-                Position position = new Position(rowNumber * GameMap.CELL_SIZE, cellNumber * GameMap.CELL_SIZE);
+                Position position = new Position(rowNumber, cellNumber);
                 if(cell.equals("WALL")) {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));

@@ -57,13 +57,13 @@ public class GameScreen extends ScreenAdapter {
         hackerT = new Texture("hacker.png");
         guardT = new Texture("guard.png");
         doorT = new Texture("door.png");
-        computersT = new Texture("door.png");
-        computerHackedT = new Texture("door.png");
-        fakeCompT = new Texture("door.png");
-        deskT = new Texture("floor2.png");
-        wallT = new Texture("floor2.png");
+        computersT = new Texture("computersT.png");
+        computerHackedT = new Texture("computersHacked.png");
+        fakeCompT = new Texture("fakeCompT.png");
+        deskT = new Texture("desk.png");
+        wallT = new Texture("wall.png");
         background = new Texture("floor2.png");
-        heartT = new Texture("door.png");
+        heartT = new Texture("heart.jpg");
 
         hacker = new UIEntity(hackerT, player);
         hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
