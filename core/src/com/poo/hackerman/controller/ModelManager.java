@@ -23,7 +23,6 @@ public class ModelManager implements Runnable{
     private Thread thread;
 
     public ModelManager(HackerGame game) {
-        //no le falta llamar a nextLevel()? (Sebas)
         gameModel = new GameModel();
         this.game = game;
 
