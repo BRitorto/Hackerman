@@ -19,7 +19,7 @@ public class PausedScreen implements Screen {
     private Texture resumeButtonInactive;
     private Texture gamePaused;
     //texts
-    private static final int PAUSED_TEXT_WIDTH = 431;
+    private static final int PAUSED_TEXT_WIDTH = 352;
     private static final int PAUSED_TEXT_HEIGHT = 43;
     //buttons
     private static final int BUTTON_WIDTH = 219;
@@ -54,7 +54,8 @@ public class PausedScreen implements Screen {
     }
 
     public void draw() {
-        game.getBatch().draw(gamePaused, 212, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
+        game.getBatch().draw(gamePaused, 76, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
+
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
             game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );

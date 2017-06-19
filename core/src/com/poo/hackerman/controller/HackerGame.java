@@ -65,27 +65,27 @@ public class HackerGame extends Game {
 
             case EXIT_YES: {
                 Gdx.app.exit();
-            }
+            } break;
 
             case PAUSE: {
                 modelManager.getGameModel().setPause();
-                setScreen(getPausedScreen());
-            }break;
+                setScreen(pausedScreen);
+            } break;
 
             case RESUME: {
                 modelManager.getGameModel().resume();
-                setScreen(getGameScreen());
-            }
+                setScreen(gameScreen);
+            } break;
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();
-                setScreen(getGameOverScreen());
+                setScreen(gameOverScreen);
             } break;
 
             case WON: {
-                setScreen(getWonScreen());
+                setScreen(wonScreen);
                 Gdx.app.exit();
-            }
+            } break;
         }
     }
 
@@ -118,5 +118,7 @@ public class HackerGame extends Game {
     public SpriteBatch getBatch() {
         return batch;
     }
+
+    //no lo pushe
 
 }

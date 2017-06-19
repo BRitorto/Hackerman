@@ -40,11 +40,21 @@ public class ModelManager implements Runnable{
         boolean rPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
         boolean uPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
         boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
+        boolean pPressed = Gdx.input.isKeyPressed(Input.Keys.P);
+        boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.E);
+
         Direction dir = null;
+
         if(lPressed) dir = new Direction(Direction.LEFT);
         if(rPressed) dir = new Direction(Direction.RIGHT);
         if(uPressed) dir = new Direction(Direction.UP);
         if(dPressed) dir = new Direction(Direction.DOWN);
+
+        if (pPressed)
+            game.setState(HackerGame.STATE.PAUSE);
+
+        if (ePressed)
+            game.setState(HackerGame.STATE.EXIT);
 
         if (lPressed || rPressed || uPressed || dPressed) {
             entityManager.getPlayer().tryToMove(dir);
