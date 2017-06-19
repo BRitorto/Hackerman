@@ -46,6 +46,7 @@ public class GameModel {
 
     public void resume() {
         this.paused = false;
+        tick();
     }
 
     public void tick() {
