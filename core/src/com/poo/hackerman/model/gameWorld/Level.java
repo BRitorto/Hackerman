@@ -38,7 +38,6 @@ public class Level {
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
         String[] guards = s.split(" GUARDS\r\n");
-        System.out.println(guards.length);
         String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\r\n");
         String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\r\n");
         String[] doors = computers[computers.length - 1].split(" DOORS\r\n");

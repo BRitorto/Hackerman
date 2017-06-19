@@ -56,7 +56,7 @@ public class UIEntity {
      * @param delta
      */
     public void update(float delta) {
-        animationTimer+=delta;
+        animationTimer += delta;
     }
 
 

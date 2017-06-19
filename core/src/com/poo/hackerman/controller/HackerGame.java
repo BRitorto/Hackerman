@@ -53,7 +53,6 @@ public class HackerGame extends Game {
 
             case INITIALIZE: {
                 modelManager.initialize();
-                System.out.println(modelManager.getEntityManager().getPlayer());
                 createGameScreen(this);
                 setScreen(gameScreen);
             } break;
