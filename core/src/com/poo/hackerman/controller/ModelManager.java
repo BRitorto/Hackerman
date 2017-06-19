@@ -87,6 +87,6 @@ public class ModelManager implements Runnable{
 
     public HackerGame getGame() {return game;}
 
-    public EntityManager getEntityManager() {return entityManager;}
+    public EntityManager getEntityManager() {return gameModel.getGameMap().getEntityManager();}
 
 }

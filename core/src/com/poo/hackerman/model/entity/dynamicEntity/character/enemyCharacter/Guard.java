@@ -2,7 +2,6 @@ package com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter;
 
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 
 import java.util.ArrayList;
 import java.util.List;

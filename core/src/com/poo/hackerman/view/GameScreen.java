@@ -18,7 +18,7 @@ import java.util.List;
 public class GameScreen extends ScreenAdapter {
 
     private static final float WORLD_WIDTH = 736*2;
-    private static final float WORLD_HEIGHT = (736*2*3)/4;
+    private static final float WORLD_HEIGHT = (736*6)/4;
     private Viewport viewport;
     private Camera camera;
     private EntityManager entityManager;
@@ -106,11 +106,7 @@ public class GameScreen extends ScreenAdapter {
             (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
             (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
         }
-
-
     }
-
-
 
     public void resume() {
 
@@ -133,11 +129,13 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        entityManager = game.getModelManager().getEntityManager();
-        super.render(delta);
-        game.getModelManager().queryInput();
-        clearScreen();
-        draw();
+       super.render(delta);
+       entityManager = game.getModelManager().getEntityManager();
+        System.out.println(game.getModelManager().getEntityManager());
+       System.out.println(entityManager);
+       game.getModelManager().queryInput();
+       clearScreen();
+       draw();
 //        drawDebug();
     }
 
@@ -147,10 +145,12 @@ public class GameScreen extends ScreenAdapter {
         batch.setTransformMatrix(camera.view);
         batch.begin();
         batch.draw(background, 0, 0);
+
         drawObstacles();
         drawEnemies();
         drawComputers();
         hacker.draw(batch);
+
         //drawScore();
         drawLives();
         batch.end();

@@ -31,7 +31,6 @@ public class HackerGame extends Game {
 
     public HackerGame () {
         this.modelManager = new ModelManager(this);
-        this.entityManager = modelManager.getEntityManager();
     }
 
     @Override
