@@ -67,7 +67,6 @@ public class ModelManager implements Runnable{
         TimerTask task = new TimerTask() {
             public void run() {
                 gameModel.tick();
-                System.out.println("Terrible hola");
                 if(gameModel.gameOver()) {
                     game.setState(HackerGame.STATE.GAME_OVER);
                 }

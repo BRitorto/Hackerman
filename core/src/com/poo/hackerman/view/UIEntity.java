@@ -16,7 +16,6 @@ public class UIEntity {
 
     private static final int TILE_WIDTH = 64;
     private static final int TILE_HEIGHT = 64;
-    private float x,y;
 
     private final Animation animation;
     private static final float FRAME_DURATION = 0.25F;
@@ -26,7 +25,6 @@ public class UIEntity {
     /**
      * Creates a player and assigns a texture to it.
      * Creates an animation by splitting the given sprite sheet into an array of TILE_WIDTHxTILE_HEIGHT dimension.
-     * ERROR should be 9x4 but ends up being 4x2
      * @param playerTexture
      * @param dynamicEntity
      */
@@ -56,31 +54,18 @@ public class UIEntity {
     /**
      * Only call if player moved, receives the character
      * @param delta
-     * @param entity
      */
-    public void update(float delta, DynamicEntity entity) {
+    public void update(float delta) {
         animationTimer+=delta;
-        setPosition(entity.getPosition().getX(),entity.getPosition().getY());
     }
 
-    /**
-     * Sets player/guard position
-     * @param x
-     * @param y
-     */
-    public void setPosition(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-    public void update(float delta) {
-        animationTimer += delta;
-    }
+
     public float getX() {
-        return x;
+        return dynamicEntity.getPosition().getX();
     }
 
     public float getY() {
-        return y;
+        return dynamicEntity.getPosition().getY();
     }
 
     public void draw(SpriteBatch batch) {

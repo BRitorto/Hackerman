@@ -17,8 +17,8 @@ import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
 
-    private static final float WORLD_WIDTH = 640;
-    private static final float WORLD_HEIGHT = 480;
+    private static final float WORLD_WIDTH = 736;
+    private static final float WORLD_HEIGHT = (736*3)/4;
     private Viewport viewport;
     private Camera camera;
     private EntityManager entityManager;
@@ -41,7 +41,6 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void show() {
         entityManager = game.getModelManager().getEntityManager();
-        System.out.println(entityManager);
         super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -66,12 +65,11 @@ public class GameScreen extends ScreenAdapter {
         heartT = new Texture("heart.jpg");
 
         hacker = new UIEntity(hackerT, player);
-        hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
+        //hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
 
         enemies = new UIEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
             enemies[i] = new UIEntity(guardT, enemiesO.get(i));
-            (enemies[i]).setPosition(enemiesO.get(i).getPosition().getX(), enemiesO.get(i).getPosition().getY());
         }
 
         door = new Sprite(doorT);
@@ -153,7 +151,7 @@ public class GameScreen extends ScreenAdapter {
         drawComputers();
         hacker.draw(batch);
         //drawScore();
-        // drawLives();
+        drawLives();
         batch.end();
 //        System.out.println(batch.totalRenderCalls);
     }
@@ -180,7 +178,6 @@ public class GameScreen extends ScreenAdapter {
             enemy.draw(batch);
         }
     }
-
 
     private void drawLives() {
         for(int i =0; i < game.getModelManager().getGameModel().getLives(); i++) {
