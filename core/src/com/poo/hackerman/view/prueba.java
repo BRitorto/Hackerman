@@ -84,12 +84,10 @@ public class prueba extends ScreenAdapter {
         background = new Texture("core/assets/bg.png");
 
         hacker = new UIEntity(hackerT, player);
-        hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
 
         enemies = new UIEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
             enemies[i] = new UIEntity(guardT, enemiesO.get(i));
-            (enemies[i]).setPosition(enemiesO.get(i).getPosition().getX(), enemiesO.get(i).getPosition().getY());
         }
 
         door = new Sprite(doorT);

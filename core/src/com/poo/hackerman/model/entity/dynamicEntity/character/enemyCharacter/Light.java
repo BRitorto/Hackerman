@@ -18,8 +18,6 @@ public class Light {
         this.range = range;
     }
 
-    //Devuelve true si hay colision de la luz con el hacker
-
     /**
      *
      * @param guardPosition
@@ -35,11 +33,10 @@ public class Light {
         Direction dirRight = guardDirection.getRight();
         Direction dirLeft = guardDirection.getLeft();
 
-        boolean detected = false;
-
         for(int i = 0; i < range; i++) {
-            detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
+            boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
             if(detected) {
+                System.out.println("detected");
                 return true;
             }
             p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);

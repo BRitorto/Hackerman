@@ -6,7 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.poo.hackerman.controller.Manager;
+import com.poo.hackerman.controller.HackerGame;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -19,7 +19,7 @@ public class PausedScreen implements Screen {
     private Texture resumeButtonInactive;
     private Texture gamePaused;
     //texts
-    private static final int PAUSED_TEXT_WIDTH = 431;
+    private static final int PAUSED_TEXT_WIDTH = 352;
     private static final int PAUSED_TEXT_HEIGHT = 43;
     //buttons
     private static final int BUTTON_WIDTH = 219;
@@ -32,9 +32,9 @@ public class PausedScreen implements Screen {
     public PausedScreen(HackerGame game){
 
         this.game = game;
-        resumeButtonInactive = new Texture(Gdx.files.internal("core/assets/resumeinactive.png"));
-        resumeButtonActive = new Texture(Gdx.files.internal("core/assets/resumeactive.png"));
-        gamePaused = new Texture(Gdx.files.internal("core/assets/gamepaused.png"));
+        resumeButtonInactive = new Texture(Gdx.files.internal("resumeinactive.png"));
+        resumeButtonActive = new Texture(Gdx.files.internal("resumeactive.png"));
+        gamePaused = new Texture(Gdx.files.internal("gamepaused.png"));
     }
 
     @Override
@@ -42,9 +42,9 @@ public class PausedScreen implements Screen {
         this.pause();
         clearScreen();
 
-        game.batch.begin();
+        game.getBatch().begin();
         draw();
-        game.batch.end();
+        game.getBatch().end();
     }
 
     private void clearScreen() {
@@ -54,16 +54,17 @@ public class PausedScreen implements Screen {
     }
 
     public void draw() {
-        game.batch.draw(gamePaused, 212, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
+        game.getBatch().draw(gamePaused, 76, 450, PAUSED_TEXT_WIDTH, PAUSED_TEXT_HEIGHT );
+
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.batch.draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 dispose();
-                game.getUIManager().setState(Manager.STATE.RESUME);
+                game.setState(HackerGame.STATE.RESUME);
             }
         } else {
-            game.batch.draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

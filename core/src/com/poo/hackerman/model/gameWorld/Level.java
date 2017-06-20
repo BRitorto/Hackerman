@@ -28,6 +28,7 @@ import java.util.Scanner;
  */
 public class Level {
 
+    public static String newLine = System.getProperty("line.separator");
     private EntityManager entityManager;
 
     public Level(String filename){
@@ -37,28 +38,33 @@ public class Level {
     private EntityManager setEntityManager(String filename) { //el ultimo elemento de cada array es basura para ese elemento
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
-        String[] guards = s.split(" GUARDS\n");
-        System.out.println(guards.length);
-        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
-        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
-        String[] doors = computers[computers.length - 1].split(" DOORS\n");
-        String[] desks = doors[doors.length - 1].split(" DESKS\n");
-        String[] hackers = desks[desks.length - 1].split(" HACKER\n");
+
+        String[] guards = s.split(" GUARDS" + newLine);
+        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS" + newLine);
+        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS" + newLine);
+        String[] doors = computers[computers.length - 1].split(" DOORS" + newLine);
+        String[] desks = doors[doors.length - 1].split(" DESKS" + newLine);
+        String[] hackers = desks[desks.length - 1].split(" HACKER" + newLine);
         String[] maps = hackers[hackers.length - 1].split(" MAP");
+
         String map = maps[0];
-        String[] mapRows = map.split("/\n");
+        String[] mapRows = map.split("/" + newLine);
+
         LinkedList<Obstacle> obstacleList = new LinkedList<Obstacle>();
         LinkedList<Computer> computerList = new LinkedList<Computer>();
         LinkedList<EnemyCharacter> enemyList = new LinkedList<EnemyCharacter>();
+
         PlayerCharacter hacker = null;
         Door door = null;
+
         int guardIndex = 0, cameraIndex = 0, computerIndex = 0, doorIndex = 0, deskIndex = 0;
         int rowNumber = 0;
+
         for (String row : mapRows) {
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
-                Position position = new Position(rowNumber, cellNumber);
+                Position position = new Position(GameMap.CELL_SIZE/2 + cellNumber * GameMap.CELL_SIZE,  rowNumber * GameMap.CELL_SIZE);
                 if(cell.equals("WALL")) {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
@@ -101,7 +107,7 @@ public class Level {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
-                    hacker = new PlayerCharacter(position, direction, velocity);
+                    hacker = new PlayerCharacter(position, direction, 5);   //cambiar velocidad
                 }
                 if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");
@@ -109,12 +115,15 @@ public class Level {
                     int consecutiveHacks = Integer.valueOf(properties[1]);
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
-                if(cell.equals("WALL")) {
+
+                if(cell.equals("DESK")) {
                     String[] properties = desks[deskIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                 }
-                /*public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
+
+                /*
+                public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
                 switch (cell){
                     case "WALL":
                         Direction direction = new Direction(0);

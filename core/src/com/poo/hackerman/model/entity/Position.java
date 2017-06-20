@@ -53,7 +53,7 @@ public class Position implements Serializable {
     }
 
     public boolean withinBoundaries() {
-        return !(getX() < 0 || getX() >= GameMap.WIDTH * GameMap.CELL_SIZE || getY() < 0 || getY() >= GameMap.HEIGHT * GameMap.CELL_SIZE);
+        return getX() > 0 && getX() < GameMap.WIDTH && getY() > 0 && getY() < GameMap.HEIGHT;
     }
 
     public Position toGridIndexes() {
@@ -69,8 +69,11 @@ public class Position implements Serializable {
         return aux.getX() == this.x && aux.getY() == this.y;
     }
 
-
     public boolean sameGridIndex(Position position) {
         return this.toGridIndexes().equals(position.toGridIndexes());
+    }
+
+    public String toString() {
+        return getX() + " " + getY();
     }
 }

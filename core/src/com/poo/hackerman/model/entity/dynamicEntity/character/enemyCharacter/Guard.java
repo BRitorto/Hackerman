@@ -36,16 +36,25 @@ public class Guard extends EnemyCharacter {
         playerDetected = false;
     }
 
+    /**
+     * @param position Position to add to the instructions
+     */
     public void addInstruction(Position position) {
         instructions.add(position);
     }
 
+    /**
+     *
+     * @param index Index of the position to add
+     * @param position Position to add to the instructions
+     */
     public void addInstruction(int index, Position position) {
         instructions.add(index, position);
     }
 
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
+            System.out.println("Player detected");
             playerDetected = true;
         }
         if(instructions == null) {
@@ -64,6 +73,10 @@ public class Guard extends EnemyCharacter {
         return playerDetected;
     }
 
+    /**
+     *
+     * @return the next direction in which de guard has to move
+     */
     private Direction nextDirection() {
         if(!isCycle()) {
             updateOrientation();
@@ -74,7 +87,7 @@ public class Guard extends EnemyCharacter {
 
     private void updateCurrentPosition() {
         if(getPosition().sameGridIndex(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
-            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());
+            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());        //x+y % size
         }
     }
 
@@ -87,6 +100,10 @@ public class Guard extends EnemyCharacter {
         }
     }
 
+    /**
+     *
+     * @return True if the guard journey shapes a cycle
+     */
     private boolean isCycle() {
         return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
     }

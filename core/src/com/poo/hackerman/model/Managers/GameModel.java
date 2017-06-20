@@ -1,9 +1,18 @@
 package com.poo.hackerman.model.Managers;
 
+import com.poo.hackerman.model.entity.Direction;
+import com.poo.hackerman.model.entity.Position;
+import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Guard;
+import com.poo.hackerman.model.entity.staticEntity.Obstacle;
+import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
+import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 import com.poo.hackerman.model.gameWorld.Level;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,9 +33,10 @@ public class GameModel {
 
     public GameModel() {
         levels = new ArrayList<Level>();
-        levels.add(new Level("assets/levels/level1.txt"));           //path con el level que quiero levantar
-        levels.add(new Level("assets/levels/level2.txt"));
-        levels.add(new Level("assets/levels/level3.txt"));
+        levels.add(new Level("levels/level3.txt"));
+        levels.add(new Level("levels/level1.txt"));           //path con el level que quiero levantar
+        levels.add(new Level("levels/level2.txt"));
+        levels.add(new Level("levels/level3.txt"));
         lives = MAX_LIVES;
         setPause();
         currentLevel = -1;                     //model no inicializado
@@ -46,6 +56,7 @@ public class GameModel {
 
     public void resume() {
         this.paused = false;
+        tick();
     }
 
     public void tick() {

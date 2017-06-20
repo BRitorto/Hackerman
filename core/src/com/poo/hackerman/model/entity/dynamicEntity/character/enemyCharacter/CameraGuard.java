@@ -23,9 +23,7 @@ public class CameraGuard extends EnemyCharacter {
 
     private boolean playerDetected;
 
-    private static final int ROTATING = 2;
-    private static final int TIME_ROTATING = 5000;
-    private int timeRotateRemaining;
+    private static final int CAMERA_TIME_ROTATING = 2000;
 
 
     public CameraGuard(Position position, Direction direction, int range) {
@@ -37,7 +35,7 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
-        super(position, direction, 1, range);
+        super(position, direction, 0, range);
         this. instructions = instructions;
         currentDirection = 0;
         playerDetected = false;
@@ -64,18 +62,11 @@ public class CameraGuard extends EnemyCharacter {
         }
         if(getState() == IDLE) {
             updateCurrentDirection();
-            rotate(nextDirection());
+            getTimer().updateLastRotateTime(System.currentTimeMillis(), CAMERA_TIME_ROTATING);
             state = ROTATING;
-            timeRotateRemaining = TIME_ROTATING;
+            rotate(nextDirection());
         }
-        timeRotateRemaining--;
         updateStatus();
-    }
-
-    @Override
-    protected void updateStatus() {
-        if (state == ROTATING && timeRotateRemaining <= 0)
-            state = IDLE;
     }
 
     private Direction nextDirection() {
@@ -86,7 +77,7 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     private void updateCurrentDirection() {
-        if(getPosition().equals(instructions.get(currentDirection))) {
+        if(getDirection().equals(instructions.get(currentDirection))) {
             currentDirection =  Math.floorMod(currentDirection + orientation, instructions.size());
         }
     }

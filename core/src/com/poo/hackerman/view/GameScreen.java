@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.poo.hackerman.controller.ModelManager;
+import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -17,10 +17,10 @@ import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
 
-    private static final float WORLD_WIDTH = 640;
-    private static final float WORLD_HEIGHT = 480;
+    private static final float WORLD_WIDTH = 23*32*2;
+    private static final float WORLD_HEIGHT = 17*32*2;
     private Viewport viewport;
-    private Camera camera;
+    private OrthographicCamera camera;
     private EntityManager entityManager;
     private SpriteBatch batch;
 
@@ -36,13 +36,14 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(HackerGame game) {
         this.game = game;
-        batch = game.batch;
-        entityManager = game.getUIManager().getEntityManager();
+        batch = game.getBatch();
     }
     @Override
     public void show() {
+        entityManager = game.getModelManager().getEntityManager();
         super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         camera.update();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -53,24 +54,24 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        hackerT = new Texture("core/assets/hacker.png");
-        guardT = new Texture("core/assets/guard.png");
-        doorT = new Texture("core/assets/heart.png");
-        computersT = new Texture("core/assets/computersT.png");
-        computerHackedT = new Texture("core/assets/computerHackedT.png");
-        fakeCompT = new Texture("core/assets/fakeCompT.png");
-        deskT = new Texture("core/assets/floor.png");
-        wallT = new Texture("core/assets/floor.png");
-        background = new Texture("core/assets/floor2.png");
-        heartT = new Texture("core/assets/heart.png");
+        hackerT = new Texture("hacker.png");
+
+        guardT = new Texture("guard.png");
+        doorT = new Texture("door.png");
+        computersT = new Texture("computersT.png");
+        computerHackedT = new Texture("computersHacked.png");
+        fakeCompT = new Texture("fakeCompT.png");
+        deskT = new Texture("desk.png");
+        wallT = new Texture("wall2.png");
+        background = new Texture("wall.png");
+        heartT = new Texture("heart.jpg");
 
         hacker = new UIEntity(hackerT, player);
-        hacker.setPosition(player.getPosition().getX(),player.getPosition().getY());
+
 
         enemies = new UIEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
             enemies[i] = new UIEntity(guardT, enemiesO.get(i));
-            (enemies[i]).setPosition(enemiesO.get(i).getPosition().getX(), enemiesO.get(i).getPosition().getY());
         }
 
         door = new Sprite(doorT);
@@ -107,11 +108,7 @@ public class GameScreen extends ScreenAdapter {
             (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
             (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
         }
-
-
     }
-
-
 
     public void resume() {
 
@@ -134,30 +131,27 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-       super.render(delta);
-       game.getModelManager().queryInput();
+        super.render(delta);
+        entityManager = game.getModelManager().getEntityManager();
+        game.getModelManager().queryInput();
         clearScreen();
         draw();
-//        drawDebug();
     }
 
     private void draw() {
-//        batch.totalRenderCalls = 0;
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
         batch.begin();
         batch.draw(background, 0, 0);
+
         drawObstacles();
         drawEnemies();
         drawComputers();
         hacker.draw(batch);
-        //drawScore();
-        // drawLives();
-        batch.end();
-//        System.out.println(batch.totalRenderCalls);
-    }
 
-    //drawScore?
+        drawLives();
+        batch.end();
+    }
 
     private void drawObstacles() {
         for(Sprite s : obstacles) {
@@ -179,7 +173,6 @@ public class GameScreen extends ScreenAdapter {
             enemy.draw(batch);
         }
     }
-
 
     private void drawLives() {
         for(int i =0; i < game.getModelManager().getGameModel().getLives(); i++) {

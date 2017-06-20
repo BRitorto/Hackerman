@@ -19,21 +19,20 @@ public class ModelManager implements Runnable{
 
     private GameModel gameModel;
     private EntityManager entityManager;
-    private Manager manager;
+    private HackerGame game;
     private Thread thread;
 
-    public ModelManager(Manager manager) {
-        //no le falta llamar a nextLevel()? (Sebas)
+    public ModelManager(HackerGame game) {
         gameModel = new GameModel();
-        //entityManager = gameModel.getGameMap().getEntityManager();
-        this.manager = manager;
+        this.game = game;
 
     }
 
     public void initialize() {
+        gameModel.nextLevel();
         thread = new Thread(this, "Model manager thread");
-
         thread.start();
+        entityManager = gameModel.getGameMap().getEntityManager();
     }
 
     public void queryInput() {
@@ -41,11 +40,21 @@ public class ModelManager implements Runnable{
         boolean rPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
         boolean uPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
         boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
+        boolean pPressed = Gdx.input.isKeyPressed(Input.Keys.P);
+        boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.E);
+
         Direction dir = null;
+
         if(lPressed) dir = new Direction(Direction.LEFT);
         if(rPressed) dir = new Direction(Direction.RIGHT);
-        if(uPressed) dir = new Direction(Direction.UP);
-        if(dPressed) dir = new Direction(Direction.DOWN);
+        if(uPressed) dir = new Direction(Direction.DOWN);
+        if(dPressed) dir = new Direction(Direction.UP);
+
+        if (pPressed)
+            game.setState(HackerGame.STATE.PAUSE);
+
+        if (ePressed)
+            game.setState(HackerGame.STATE.EXIT);
 
         if (lPressed || rPressed || uPressed || dPressed) {
             entityManager.getPlayer().tryToMove(dir);
@@ -59,13 +68,13 @@ public class ModelManager implements Runnable{
             public void run() {
                 gameModel.tick();
                 if(gameModel.gameOver()) {
-                    manager.stateManager(Manager.STATE.GAME_OVER);
+                    game.setState(HackerGame.STATE.GAME_OVER);
                 }
                 else if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
                     gameModel.nextLevel();
                 }
                 else if (gameModel.passedLevel() && !gameModel.hasNextLevel()){
-                    manager.stateManager(Manager.STATE.WON);
+                    game.setState(HackerGame.STATE.WON);
                 }
             }
         };
@@ -76,8 +85,8 @@ public class ModelManager implements Runnable{
         return gameModel;
     }
 
-    public Manager getManager() {return manager;}
+    public HackerGame getGame() {return game;}
 
-    public EntityManager getEntityManager() {return entityManager;}
+    public EntityManager getEntityManager() {return gameModel.getGameMap().getEntityManager();}
 
 }
