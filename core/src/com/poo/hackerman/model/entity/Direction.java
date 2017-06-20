@@ -64,7 +64,7 @@ public class Direction implements Serializable {
 
     /**
      *
-     * @param list
+     * @param list of doubles
      * @return The lowest double in List
      */
     private static int minDouble(double[] list) {

@@ -70,7 +70,6 @@ public class UIEntity {
             update(0.1f);
         }
         int orientation = dynamicEntity.getDirection().getCode();
-        System.out.println(dynamicEntity.getClass() + " " +dynamicEntity.getDirection());
         switch (orientation) {
             case Direction.UP:
                 animation = animationUp;

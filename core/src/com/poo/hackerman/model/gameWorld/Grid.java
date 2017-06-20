@@ -43,26 +43,14 @@ public class Grid {
         return matrix[positionGrid.getX()][positionGrid.getY()];
     }
 
-    public Cell getCell(int x, int y) {
-        return matrix[x][y];
-    }
-
     public void freePosition(Position position) {
         Position positionGrid = position.toGridIndexes();
         matrix[positionGrid.getX()][positionGrid.getY()].free();
     }
 
-    public Cell[][] getMatrix() {
-        return matrix;
-    }
-
     public boolean isPossibleAdd(Position position) {
         Position positionGrid = position.toGridIndexes();
         return matrix[positionGrid.getX()][positionGrid.getY()].isEmpty();
-    }
-
-    public boolean isPossibleAdd(int x, int y) {
-        return matrix[x][y].isEmpty();
     }
 
     private void initializeMatrix() {

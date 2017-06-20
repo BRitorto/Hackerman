@@ -15,6 +15,7 @@ public abstract class DynamicEntity extends Entity {
     // State fields
     public int state = IDLE;
     public static final int MOVING = 1;
+    public static final int ROTATING = 2;
 
     // Movement fields
     protected int velocity;

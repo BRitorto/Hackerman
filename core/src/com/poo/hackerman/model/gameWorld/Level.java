@@ -63,7 +63,7 @@ public class Level {
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
-                Position position = new Position(cellNumber * GameMap.CELL_SIZE, rowNumber * GameMap.CELL_SIZE);
+                Position position = new Position(GameMap.CELL_SIZE/2 + cellNumber * GameMap.CELL_SIZE, GameMap.CELL_SIZE/2 + rowNumber * GameMap.CELL_SIZE);
                 if(cell.equals("WALL")) {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
@@ -106,7 +106,7 @@ public class Level {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
-                    hacker = new PlayerCharacter(position, direction, velocity);
+                    hacker = new PlayerCharacter(position, direction, 5);
                 }
                 if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");

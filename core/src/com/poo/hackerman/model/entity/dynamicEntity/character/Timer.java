@@ -16,6 +16,8 @@ public class Timer implements Serializable {
     // Time attributes for characters
     private long lastMoveTime;
     private long moveCooldown;
+    private long lastRotateTime;
+    private long rotateCooldown;
 
     // State
     private int state;
@@ -25,7 +27,12 @@ public class Timer implements Serializable {
 
     public Timer(int velocity) {
         lastMoveTime = 0;
-        moveCooldown = MOVE_COOLDOWN_BASE / velocity;
+        if (velocity == 0) {
+            moveCooldown = Long.MAX_VALUE;
+        }
+        else {
+            moveCooldown = MOVE_COOLDOWN_BASE / velocity;
+        }
     }
 
     /**
@@ -61,5 +68,24 @@ public class Timer implements Serializable {
      */
     public boolean moveTimePassed(long nowTime) {
         return (nowTime - this.getLastMoveTime() >= moveCooldown + (state * 4 / 10));
+    }
+
+
+    public long getLastRotateTime() {
+        return lastRotateTime;
+    }
+
+    public void updateLastRotateTime(long nowTime, long rotateCooldown) {
+        this.rotateCooldown = rotateCooldown;
+        this.lastRotateTime = nowTime;
+    }
+
+    public void updateLastRotateTime(long nowTime) {
+        this.lastRotateTime = nowTime;
+    }
+
+
+    public boolean rotateTimePassed(long nowTime) {
+        return (nowTime - this.getLastRotateTime() >= rotateCooldown);
     }
 }
