@@ -39,16 +39,16 @@ public class Level {
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
 
-        String[] guards = s.split(" GUARDS"+ newLine);
+        String[] guards = s.split(" GUARDS" + newLine);
         String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS" + newLine);
-        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS"+newLine);
-        String[] doors = computers[computers.length - 1].split(" DOORS"+newLine);
-        String[] desks = doors[doors.length - 1].split(" DESKS"+newLine);
-        String[] hackers = desks[desks.length - 1].split(" HACKER"+newLine);
+        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS" + newLine);
+        String[] doors = computers[computers.length - 1].split(" DOORS" + newLine);
+        String[] desks = doors[doors.length - 1].split(" DESKS" + newLine);
+        String[] hackers = desks[desks.length - 1].split(" HACKER" + newLine);
         String[] maps = hackers[hackers.length - 1].split(" MAP");
 
         String map = maps[0];
-        String[] mapRows = map.split("/\n");
+        String[] mapRows = map.split("/" + newLine);
 
         LinkedList<Obstacle> obstacleList = new LinkedList<Obstacle>();
         LinkedList<Computer> computerList = new LinkedList<Computer>();
@@ -115,12 +115,15 @@ public class Level {
                     int consecutiveHacks = Integer.valueOf(properties[1]);
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
+
                 if(cell.equals("WALL")) {
                     String[] properties = desks[deskIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                 }
-                /*public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
+
+                /*
+                public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
                 switch (cell){
                     case "WALL":
                         Direction direction = new Direction(0);
