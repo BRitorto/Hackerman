@@ -39,7 +39,6 @@ public class Level {
         String s = readFile(filename);
 
         String[] guards = s.split(" GUARDS\n");
-        System.out.println(guards.length);
         String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
         String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
         String[] doors = computers[computers.length - 1].split(" DOORS\n");
