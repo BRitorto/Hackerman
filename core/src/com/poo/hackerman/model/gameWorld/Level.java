@@ -52,7 +52,7 @@ public class Level {
         PlayerCharacter hacker = null;
         Door door = null;
         int guardIndex = 0, cameraIndex = 0, computerIndex = 0, doorIndex = 0, deskIndex = 0;
-        int rowNumber = 0;
+        int rowNumber = 16;
         for (String row : mapRows) {
             String[] cells = row.split(",");
             int cellNumber = 0;
@@ -174,7 +174,7 @@ public class Level {
                         break;*/
                 cellNumber++;
             }
-            rowNumber++;
+            rowNumber--;
         }
         return new EntityManager(hacker,door,enemyList,computerList,obstacleList);
     }
