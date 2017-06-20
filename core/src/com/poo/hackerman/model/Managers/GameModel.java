@@ -45,6 +45,29 @@ public class GameModel {
     public void nextLevel() {
         currentLevel++;
 
+        /*Door doorO = new Door(new Position(100,200),new Direction(Direction.DOWN));
+
+        PlayerCharacter player = new PlayerCharacter(new Position(80,16), new Direction(Direction.UP), 10);
+        Guard guard = new Guard(new Position(80,300), new Direction(Direction.DOWN_RIGHT), 10, 4);
+
+        guard.addInstruction(new Position(80,16));
+
+        List<EnemyCharacter> enemiesO = new ArrayList<EnemyCharacter>();
+        enemiesO.add(guard);
+
+        List<Computer> computersO = new LinkedList<Computer>();
+        computersO.add(new Computer(new Position(0,230), new Direction(Direction.DOWN), 10));
+
+        List<Obstacle> obstaclesO = new LinkedList<Obstacle>();
+        obstaclesO.add(new Obstacle(new Position(150,60), new Direction(Direction.RIGHT), Obstacle.obstacleType.DESK));
+
+        EntityManager entityManager = new EntityManager(player, doorO, enemiesO, computersO, obstaclesO);
+        gameMap = new GameMap(entityManager);
+
+        //gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
+        computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
+        resume();*/
+
         gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();

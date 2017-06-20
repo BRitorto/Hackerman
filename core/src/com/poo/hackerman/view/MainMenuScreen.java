@@ -21,14 +21,14 @@ public class MainMenuScreen implements Screen {
     private Texture exitButtonInactive;
     private Texture hackermanTitle;
 
-    private static final int TITLE_WIDTH = 702;
-    private static final int TITLE_HEIGHT = 86;
+    private static final int TITLE_WIDTH = 526;
+    private static final int TITLE_HEIGHT = 64;
     private static final int BUTTON_WIDTH = 219;
-    private static final int BUTTON_HEIGHT = 73;
-    private static final int CENTER_X = 318;
-    private static final int PLAY_Y = 375;
+    private static final int BUTTON_HEIGHT = 74;
+    private static final int CENTER_X = 259;
+    private static final int PLAY_Y = 287;
     //private static final int LOAD_Y = 475;
-    private static final int EXIT_Y = 475;
+    private static final int EXIT_Y = 387;
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int playY = PLAY_Y - BUTTON_HEIGHT;
     //private static final int loadY = LOAD_Y - BUTTON_HEIGHT;
@@ -63,16 +63,16 @@ public class MainMenuScreen implements Screen {
     }
 
     public void draw() {
-        game.getBatch().draw(hackermanTitle, 76, 450, TITLE_WIDTH, TITLE_HEIGHT);
+        game.getBatch().draw(hackermanTitle, 105, 400, TITLE_WIDTH, TITLE_HEIGHT);
 
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > playY && Gdx.input.getY() < PLAY_Y) {
-            game.getBatch().draw(playButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(playButtonActive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 game.setState(HackerGame.STATE.INITIALIZE);
             }
         } else {
-            game.getBatch().draw(playButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(playButtonInactive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         /*if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > loadY && Gdx.input.getY() < LOAD_Y) {
@@ -82,13 +82,13 @@ public class MainMenuScreen implements Screen {
         }*/
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y) {
-            game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonActive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(HackerGame.STATE.EXIT_YES);
             }
         } else {
-            game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

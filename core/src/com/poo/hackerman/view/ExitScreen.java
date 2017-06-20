@@ -25,9 +25,9 @@ public class ExitScreen implements Screen {
     //buttons
     private static final int BUTTON_WIDTH = 219;
     private static final int BUTTON_HEIGHT = 73;
-    private static final int CENTER_X = 318;
-    private static final int TOP_Y = 375;
-    private static final int BOTTOM_Y = 475;
+    private static final int CENTER_X = 259;
+    private static final int TOP_Y = 287;
+    private static final int BOTTOM_Y = 387;
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int topY = TOP_Y - BUTTON_HEIGHT;
     private static final int bottomY = BOTTOM_Y - BUTTON_HEIGHT;
@@ -58,28 +58,28 @@ public class ExitScreen implements Screen {
     }
 
     public void draw() {
-        game.getBatch().draw(exitGame, 231, 450, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
+        game.getBatch().draw(exitGame, 172, 400, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
         //resume button
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.getBatch().draw(resumeButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonActive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(HackerGame.STATE.RESUME);
             }
         } else {
-            game.getBatch().draw(resumeButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonInactive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         //exit button
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > bottomY && Gdx.input.getY() < BOTTOM_Y) {
-            game.getBatch().draw(exitButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT );
+            game.getBatch().draw(exitButtonActive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(HackerGame.STATE.EXIT_YES);
             }
         } else {
-            game.getBatch().draw(exitButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 

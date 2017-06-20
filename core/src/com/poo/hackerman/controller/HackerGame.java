@@ -56,6 +56,7 @@ public class HackerGame extends Game {
             } break;
 
             case EXIT: {
+                modelManager.getGameModel().setPause();
                 setScreen(getExitScreen());
             } break;
 
