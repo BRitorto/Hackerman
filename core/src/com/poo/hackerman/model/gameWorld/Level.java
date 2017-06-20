@@ -107,7 +107,7 @@ public class Level {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
-                    hacker = new PlayerCharacter(position, direction, 5);
+                    hacker = new PlayerCharacter(position, direction, 5);   //cambiar velocidad
                 }
                 if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");
