@@ -28,6 +28,7 @@ import java.util.Scanner;
  */
 public class Level {
 
+    public static String newLine = System.getProperty("line.separator");
     private EntityManager entityManager;
 
     public Level(String filename){
@@ -38,12 +39,12 @@ public class Level {
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
 
-        String[] guards = s.split(" GUARDS\n");
-        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
-        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
-        String[] doors = computers[computers.length - 1].split(" DOORS\n");
-        String[] desks = doors[doors.length - 1].split(" DESKS\n");
-        String[] hackers = desks[desks.length - 1].split(" HACKER\n");
+        String[] guards = s.split(" GUARDS"+ newLine);
+        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS" + newLine);
+        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS"+newLine);
+        String[] doors = computers[computers.length - 1].split(" DOORS"+newLine);
+        String[] desks = doors[doors.length - 1].split(" DESKS"+newLine);
+        String[] hackers = desks[desks.length - 1].split(" HACKER"+newLine);
         String[] maps = hackers[hackers.length - 1].split(" MAP");
 
         String map = maps[0];
