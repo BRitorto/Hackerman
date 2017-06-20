@@ -13,8 +13,8 @@ public abstract class DynamicEntity extends Entity {
     private static final long serialVersionUID = 1L;
 
     // State fields
-    protected int state = IDLE;
-    protected static final int MOVING = 1;
+    public int state = IDLE;
+    public static final int MOVING = 1;
 
     // Movement fields
     protected int velocity;
@@ -25,7 +25,7 @@ public abstract class DynamicEntity extends Entity {
         this.velocity = velocity;
     }
     
-    protected int getState() {
+    public int getState() {
         return state;
     }
 

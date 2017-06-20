@@ -47,8 +47,8 @@ public class ModelManager implements Runnable{
 
         if(lPressed) dir = new Direction(Direction.LEFT);
         if(rPressed) dir = new Direction(Direction.RIGHT);
-        if(uPressed) dir = new Direction(Direction.UP);
-        if(dPressed) dir = new Direction(Direction.DOWN);
+        if(uPressed) dir = new Direction(Direction.DOWN);
+        if(dPressed) dir = new Direction(Direction.UP);
 
         if (pPressed)
             game.setState(HackerGame.STATE.PAUSE);
