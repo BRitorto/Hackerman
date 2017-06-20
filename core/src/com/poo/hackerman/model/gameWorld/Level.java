@@ -116,7 +116,7 @@ public class Level {
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
 
-                if(cell.equals("WALL")) {
+                if(cell.equals("DESK")) {
                     String[] properties = desks[deskIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));

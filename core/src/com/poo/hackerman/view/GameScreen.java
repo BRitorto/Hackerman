@@ -62,8 +62,8 @@ public class GameScreen extends ScreenAdapter {
         computerHackedT = new Texture("computersHacked.png");
         fakeCompT = new Texture("fakeCompT.png");
         deskT = new Texture("desk.png");
-        wallT = new Texture("wall.png");
-        background = new Texture("floor2.png");
+        wallT = new Texture("wall2.png");
+        background = new Texture("wall.png");
         heartT = new Texture("heart.jpg");
 
         hacker = new UIEntity(hackerT, player);
