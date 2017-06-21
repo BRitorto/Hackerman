@@ -60,14 +60,14 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        hackerT = new Texture("hacker2.png");
-        guardT = new Texture("guard2.png");
-        doorT = new Texture("door1.png");
-        computersT = new Texture("computer1.png");
+        hackerT = new Texture("hacker.png");
+        guardT = new Texture("guard.png");
+        doorT = new Texture("door.png");
+        computersT = new Texture("computer2.png");
         computerHackedT = new Texture("computersHacked.png");
         fakeCompT = new Texture("fakeCompT.png");
         deskT = new Texture("desk.png");
-        wallT = new Texture("wall3.png");
+        wallT = new Texture("wall2.png");
         background = new Texture("bg.png");
         heartT = new Texture("heart.png");
 

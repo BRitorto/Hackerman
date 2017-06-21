@@ -3,12 +3,13 @@ package com.poo.hackerman.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.poo.hackerman.controller.HackerGame;
+import com.poo.hackerman.model.gameWorld.GameMap;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 23*32*2;
-		config.height = 17*32*2;
+		config.width  = 23*GameMap.CELL_SIZE;
+		config.height = 17*GameMap.CELL_SIZE;
 		new LwjglApplication(new HackerGame(), config);
 	}
 }
