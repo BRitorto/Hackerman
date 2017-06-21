@@ -42,13 +42,14 @@ public class ModelManager implements Runnable{
         boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
         boolean pPressed = Gdx.input.isKeyPressed(Input.Keys.P);
         boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.E);
+        boolean sPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
 
-        Direction dir = null;
-
-        if(lPressed) dir = new Direction(Direction.LEFT);
-        if(rPressed) dir = new Direction(Direction.RIGHT);
-        if(uPressed) dir = new Direction(Direction.DOWN);
-        if(dPressed) dir = new Direction(Direction.UP);
+        if(sPressed) {
+            entityManager.getPlayer().setInteracting();
+        }
+        if(!sPressed) {
+            entityManager.getPlayer().stopInteracting();
+        }
 
         if (pPressed)
             game.setState(HackerGame.STATE.PAUSE);
@@ -57,9 +58,29 @@ public class ModelManager implements Runnable{
             game.setState(HackerGame.STATE.EXIT);
 
         if (lPressed || rPressed || uPressed || dPressed) {
+            Direction dir = getDirection(lPressed,rPressed,dPressed,uPressed);
             entityManager.getPlayer().tryToMove(dir);
         }
 
+    }
+
+    private Direction getDirection(boolean lPressed, boolean rPressed, boolean dPressed, boolean uPressed) {
+        if(rPressed && uPressed)
+            return new Direction(Direction.DOWN_RIGHT);
+        else if(lPressed && uPressed)
+            return new Direction(Direction.DOWN_LEFT);
+        else if(rPressed && dPressed)
+            return new Direction(Direction.UP_RIGHT);
+        else if(lPressed && dPressed)
+            return new Direction(Direction.UP_LEFT);
+        else if(lPressed)
+            return new Direction(Direction.LEFT);
+        else if(rPressed)
+            return new Direction(Direction.RIGHT);
+        else if(uPressed)
+            return new Direction(Direction.DOWN);
+        else //if(dPressed)
+            return new Direction(Direction.UP);
     }
 
     public void run() {

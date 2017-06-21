@@ -28,6 +28,7 @@ import java.util.Scanner;
  */
 public class Level {
 
+    public static String newLine = System.getProperty("line.separator");
     private EntityManager entityManager;
 
     public Level(String filename){
@@ -38,16 +39,16 @@ public class Level {
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
 
-        String[] guards = s.split(" GUARDS\n");
-        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS\n");
-        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS\n");
-        String[] doors = computers[computers.length - 1].split(" DOORS\n");
-        String[] desks = doors[doors.length - 1].split(" DESKS\n");
-        String[] hackers = desks[desks.length - 1].split(" HACKER\n");
+        String[] guards = s.split(" GUARDS" + newLine);
+        String[] cameraguards = guards[guards.length - 1].split(" CAMERAGUARDS" + newLine);
+        String[] computers = cameraguards[cameraguards.length - 1].split(" COMPUTERS" + newLine);
+        String[] doors = computers[computers.length - 1].split(" DOORS" + newLine);
+        String[] desks = doors[doors.length - 1].split(" DESKS" + newLine);
+        String[] hackers = desks[desks.length - 1].split(" HACKER" + newLine);
         String[] maps = hackers[hackers.length - 1].split(" MAP");
 
         String map = maps[0];
-        String[] mapRows = map.split("/\n");
+        String[] mapRows = map.split("/" + newLine);
 
         LinkedList<Obstacle> obstacleList = new LinkedList<Obstacle>();
         LinkedList<Computer> computerList = new LinkedList<Computer>();
@@ -63,17 +64,17 @@ public class Level {
             String[] cells = row.split(",");
             int cellNumber = 0;
             for (String cell : cells) {
-                Position position = new Position(cellNumber * GameMap.CELL_SIZE, rowNumber * GameMap.CELL_SIZE);
+                Position position = new Position(GameMap.CELL_SIZE/2 + cellNumber * GameMap.CELL_SIZE,  rowNumber * GameMap.CELL_SIZE);
                 if(cell.equals("WALL")) {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
                 }
-                if(cell.equals("DOOR")) {
+                else if(cell.equals("DOOR")) {
                     String[] properties = doors[doorIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     door = new Door(position, direction);
                 }
-                if(cell.equals("GUARD")) {
+                else if(cell.equals("GUARD")) {
                     String[] properties = guards[guardIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     int velocity = Integer.valueOf(properties[1]);
@@ -88,7 +89,7 @@ public class Level {
                         enemyList.add(new Guard(position, direction, velocity, range));
                     }
                 }
-                if(cell.equals("CAMERAGUARD")) {
+                else if(cell.equals("CAMERAGUARD")) {
                     String[] properties = cameraguards[cameraIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer range = Integer.valueOf(properties[1]);
@@ -102,24 +103,27 @@ public class Level {
                         enemyList.add(new CameraGuard(position, direction, range));
                     }
                 }
-                if(cell.equals("PLAYER")) {
+                else if(cell.equals("PLAYER")) {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
                     hacker = new PlayerCharacter(position, direction, velocity);
                 }
-                if(cell.equals("COMPUTER")) {
+                else if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     int consecutiveHacks = Integer.valueOf(properties[1]);
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
-                if(cell.equals("WALL")) {
+
+                else if(cell.equals("DESK")) {
                     String[] properties = desks[deskIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                 }
-                /*public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
+
+                /*
+                public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
                 switch (cell){
                     case "WALL":
                         Direction direction = new Direction(0);

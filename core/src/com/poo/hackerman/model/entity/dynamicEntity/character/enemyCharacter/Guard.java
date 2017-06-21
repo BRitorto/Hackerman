@@ -54,6 +54,7 @@ public class Guard extends EnemyCharacter {
 
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
+            System.out.println("Player detected");
             playerDetected = true;
         }
         if(instructions == null) {
@@ -62,7 +63,6 @@ public class Guard extends EnemyCharacter {
         if(getState() == IDLE) {
             updateCurrentPosition();
             Direction direction = nextDirection();
-            System.out.println("Guard is IDLE nextDir: " + direction);
             tryToMove(direction);
         }
         move();
@@ -87,7 +87,7 @@ public class Guard extends EnemyCharacter {
 
     private void updateCurrentPosition() {
         if(getPosition().sameGridIndex(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
-            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());
+            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());        //x+y % size
         }
     }
 

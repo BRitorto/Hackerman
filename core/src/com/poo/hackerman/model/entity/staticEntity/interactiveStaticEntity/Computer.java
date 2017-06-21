@@ -26,7 +26,6 @@ public class Computer extends InteractiveStaticEntity {
     public void interact() {
         if(isOn) {
             long nowTime = System.currentTimeMillis();
-
             if (timer.hackTimePassed(nowTime)) {
                 currentConsecutiveHacks = 1;
                 return;

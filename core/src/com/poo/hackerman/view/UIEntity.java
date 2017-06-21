@@ -30,7 +30,6 @@ public class UIEntity {
      * @param dynamicEntity
      */
     public UIEntity(Texture playerTexture, DynamicEntity dynamicEntity) {
-        int orientation = dynamicEntity.getDirection().getCode();
         TextureRegion[][] playerTextures = TextureRegion.split(playerTexture,TILE_WIDTH,TILE_HEIGHT);
         this.dynamicEntity = dynamicEntity;
         animationDown = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
@@ -54,7 +53,6 @@ public class UIEntity {
         animationTimer += delta;
     }
 
-
     public float getX() {
         return dynamicEntity.getPosition().getX();
     }
@@ -70,7 +68,6 @@ public class UIEntity {
             update(0.1f);
         }
         int orientation = dynamicEntity.getDirection().getCode();
-        System.out.println(dynamicEntity.getClass() + " " +dynamicEntity.getDirection());
         switch (orientation) {
             case Direction.UP:
                 animation = animationUp;
@@ -84,10 +81,23 @@ public class UIEntity {
             case Direction.RIGHT:
                 animation = animationRight;
                 break;
+            case Direction.DOWN_LEFT:
+                animation = animationLeft;
+                break;
+            case Direction.DOWN_RIGHT:
+                animation = animationRight;
+                break;
+            case Direction.UP_LEFT:
+                animation = animationLeft;
+                break;
+            case Direction.UP_RIGHT:
+                animation = animationRight;
+                break;
             default:
                 animation = animationUp;
         }
         TextureRegion currentFrame = (TextureRegion) animation.getKeyFrame(animationTimer);
         batch.draw(currentFrame,dynamicEntity.getPosition().getX(),dynamicEntity.getPosition().getY() );
     }
+
 }
