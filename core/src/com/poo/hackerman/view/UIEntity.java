@@ -15,8 +15,8 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
  */
 public class UIEntity {
 
-    private static final int TILE_WIDTH = 64;
-    private static final int TILE_HEIGHT = 64;
+    private static final int TILE_WIDTH = 32;
+    private static final int TILE_HEIGHT = 32;
 
     private final Animation animationUp,animationDown,animationLeft,animationRight;
     private static final float FRAME_DURATION = 0.25F;
