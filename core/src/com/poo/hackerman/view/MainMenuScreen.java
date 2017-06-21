@@ -25,8 +25,8 @@ public class MainMenuScreen implements Screen {
 
     private static final int TITLE_WIDTH = 526;
     private static final int TITLE_HEIGHT = 64;
-    private static final int BUTTON_WIDTH = 438;
-    private static final int BUTTON_HEIGHT = 147;
+    private static final int BUTTON_WIDTH = 219;
+    private static final int BUTTON_HEIGHT = 73;
 
     private static final int CENTER_TITLE = GameMap.WIDTH/2 - TITLE_WIDTH/2;
     private static final int CENTER_X = GameMap.WIDTH/2 - BUTTON_WIDTH/2;
@@ -34,9 +34,9 @@ public class MainMenuScreen implements Screen {
     //private static final int LOAD_Y = 475;
     private static final int EXIT_Y = GameMap.HEIGHT - GameMap.HEIGHT/4;
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
-    private static final int playY =PLAY_Y - BUTTON_HEIGHT -30;
+    private static final int playY =PLAY_Y - BUTTON_HEIGHT;
     //private static final int loadY = LOAD_Y - BUTTON_HEIGHT;
-    private static final int exitY = EXIT_Y - BUTTON_HEIGHT -30;
+    private static final int exitY = EXIT_Y - BUTTON_HEIGHT;
 
     public MainMenuScreen(HackerGame game) {
 
@@ -70,7 +70,7 @@ public class MainMenuScreen implements Screen {
         game.getBatch().draw(hackermanTitle,CENTER_TITLE ,3*GameMap.HEIGHT/4, TITLE_WIDTH, TITLE_HEIGHT);
 
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > playY && Gdx.input.getY() < PLAY_Y - 30) {
+                && Gdx.input.getY() > playY && Gdx.input.getY() < PLAY_Y ) {
             game.getBatch().draw(playButtonActive, CENTER_X, 2*GameMap.HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 game.setState(HackerGame.STATE.INITIALIZE);
@@ -85,7 +85,7 @@ public class MainMenuScreen implements Screen {
             game.getBatch().draw(loadGameButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         }*/
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y - 30) {
+                && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y) {
             game.getBatch().draw(exitButtonActive, CENTER_X, GameMap.HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
