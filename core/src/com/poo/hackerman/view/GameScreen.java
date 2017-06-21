@@ -20,8 +20,8 @@ import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
 
-    private static final float WORLD_WIDTH = 23*32;
-    private static final float WORLD_HEIGHT = 17*32;
+    public static final float WORLD_WIDTH = 23*32;
+    public static final float WORLD_HEIGHT = 17*32;
     private Viewport viewport;
     private OrthographicCamera camera;
     private EntityManager entityManager;

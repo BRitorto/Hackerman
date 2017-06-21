@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.poo.hackerman.controller.HackerGame;
+import com.poo.hackerman.model.gameWorld.GameMap;
 
 /**
  * Created by Bianca on 29/05/2017.
@@ -23,7 +24,7 @@ public class GameOverScreen implements Screen {
     //buttons
     private static final int BUTTON_WIDTH = 219;
     private static final int BUTTON_HEIGHT = 73;
-    private static final int CENTER_X = 318;
+    private static final int CENTER_X = GameMap.WIDTH/2 - BUTTON_WIDTH/2;
     private static final int TOP_Y = 345;
     private static final int buttonX = CENTER_X + BUTTON_WIDTH;
     private static final int topY = TOP_Y - BUTTON_HEIGHT;
