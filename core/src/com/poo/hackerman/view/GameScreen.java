@@ -15,6 +15,7 @@ import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Compu
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 
+import java.util.Collection;
 import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
@@ -27,9 +28,9 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
 
     private UIEntity hacker;
-    private Sprite door;
+    private UIStaticEntity door;
     private UIEntity[] enemies;
-    private Sprite[] computers, obstacles, hearts;
+    private UIStaticEntity[] computers, obstacles, hearts;
     private List<Computer> computersO;
     private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
     private Texture hackerT, guardT;
@@ -68,45 +69,14 @@ public class GameScreen extends ScreenAdapter {
         heartT = new Texture("heart.png");
 
         hacker = new UIEntity(hackerT, player);
-        enemies = new UIEntity[enemiesO.size()];
-        for(int i = 0; i < enemiesO.size() ; i++) {
-            enemies[i] = new UIEntity(guardT, enemiesO.get(i));
-        }
+        door = new UIStaticEntity(doorT);
+        door.setPosition(doorO.getPosition().getX(), doorO.getPosition().getY());
 
-        door = new Sprite(doorT);
-        computers = new Sprite[computersO.size()];
-        obstacles = new Sprite[obstaclesO.size()];
-        hearts = new Sprite[3];
+        createEnemies(enemiesO);
+        createObstacles(obstaclesO);
+        createComputers(computersO);
+        createLives();
 
-        door.setX(doorO.getPosition().getX());
-        door.setY(doorO.getPosition().getY());
-
-        for(int i = 0; i < 3; i++) {
-            hearts[i] = new Sprite(heartT);
-            hearts[i].setX(GameMap.WIDTH - (i+1)*34);
-            hearts[i].setY(GameMap.HEIGHT - 64);
-        }
-
-        for(int i = 0; i < computersO.size(); i++) {
-            computers[i] = new Sprite(computersT);
-            (computers[i]).setX(computersO.get(i).getPosition().getX());
-            (computers[i]).setY(computersO.get(i).getPosition().getY());
-        }
-
-
-        for(int i = 0; i < obstaclesO.size() ; i++) {
-            if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.DESK) {
-                obstacles[i] = new Sprite(deskT);
-            }
-            else if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.WALL) {
-                obstacles[i] = new Sprite(wallT);
-            }
-            else {
-                obstacles[i] = new Sprite(fakeCompT);
-            }
-            (obstacles[i]).setX(obstaclesO.get(i).getPosition().getX());
-            (obstacles[i]).setY(obstaclesO.get(i).getPosition().getY());
-        }
     }
 
     public void resume() {
@@ -137,6 +107,45 @@ public class GameScreen extends ScreenAdapter {
         draw();
     }
 
+    private void createEnemies(List<EnemyCharacter> enemiesO) {
+        enemies = new UIEntity[enemiesO.size()];
+        for(int i = 0; i < enemiesO.size() ; i++) {
+            enemies[i] = new UIEntity(guardT, enemiesO.get(i));
+        }
+    }
+
+    private void createObstacles(List<Obstacle> obstaclesO) {
+        obstacles = new UIStaticEntity[obstaclesO.size()];
+        for(int i = 0; i < obstaclesO.size() ; i++) {
+            if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.DESK) {
+                obstacles[i] = new UIStaticEntity(deskT);
+            }
+            else if(obstaclesO.get(i).getObstacleType() == Obstacle.obstacleType.WALL) {
+                obstacles[i] = new UIStaticEntity(wallT);
+            }
+            else {
+                obstacles[i] = new UIStaticEntity(fakeCompT);
+            }
+            obstacles[i].setPosition(obstaclesO.get(i).getPosition().getX(),obstaclesO.get(i).getPosition().getY());
+        }
+    }
+
+    private void createComputers(List<Computer> computersO) {
+        computers = new UIStaticEntity[computersO.size()];
+        for(int i = 0; i < computersO.size(); i++) {
+            computers[i] = new UIStaticEntity(computersT);
+            computers[i].setPosition(computersO.get(i).getPosition().getX(),computersO.get(i).getPosition().getY());
+        }
+    }
+
+    private void createLives() {
+        hearts = new UIStaticEntity[3];
+        for(int i = 0; i < 3; i++) {
+            hearts[i] = new UIStaticEntity(heartT);
+            hearts[i].setPosition(GameMap.WIDTH - (i+1)*34,GameMap.HEIGHT - 64);
+        }
+    }
+
     private void draw() {
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
@@ -152,7 +161,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawObstacles() {
-        for(Sprite s : obstacles) {
+        for(UIStaticEntity s : obstacles) {
             s.draw(batch);
         }
     }
