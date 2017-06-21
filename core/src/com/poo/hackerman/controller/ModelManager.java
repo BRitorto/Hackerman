@@ -42,6 +42,14 @@ public class ModelManager implements Runnable{
         boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
         boolean pPressed = Gdx.input.isKeyPressed(Input.Keys.P);
         boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.E);
+        boolean sPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
+
+        if(sPressed) {
+            entityManager.getPlayer().setInteracting();
+        }
+        if(!sPressed) {
+            entityManager.getPlayer().stopInteracting();
+        }
 
         if (pPressed)
             game.setState(HackerGame.STATE.PAUSE);

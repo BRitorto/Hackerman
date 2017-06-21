@@ -81,6 +81,18 @@ public class UIEntity {
             case Direction.RIGHT:
                 animation = animationRight;
                 break;
+            case Direction.DOWN_LEFT:
+                animation = animationLeft;
+                break;
+            case Direction.DOWN_RIGHT:
+                animation = animationRight;
+                break;
+            case Direction.UP_LEFT:
+                animation = animationLeft;
+                break;
+            case Direction.UP_RIGHT:
+                animation = animationRight;
+                break;
             default:
                 animation = animationUp;
         }
