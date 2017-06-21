@@ -55,7 +55,6 @@ public class GameScreen extends ScreenAdapter {
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
         hackerT = new Texture("hacker.png");
-
         guardT = new Texture("guard.png");
         doorT = new Texture("door.png");
         computersT = new Texture("computersT.png");
@@ -64,11 +63,9 @@ public class GameScreen extends ScreenAdapter {
         deskT = new Texture("desk.png");
         wallT = new Texture("wall2.png");
         background = new Texture("wall.png");
-        heartT = new Texture("heart.jpg");
+        heartT = new Texture("heart.png");
 
         hacker = new UIEntity(hackerT, player);
-
-
         enemies = new UIEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
             enemies[i] = new UIEntity(guardT, enemiesO.get(i));
@@ -84,8 +81,9 @@ public class GameScreen extends ScreenAdapter {
 
         for(int i = 0; i < 3; i++) {
             hearts[i] = new Sprite(heartT);
-            hearts[i].setX(i+10);
+            hearts[i].setX(i*34);
             hearts[i].setY(10);
+            System.out.println(hearts[i].getX());
         }
 
         for(int i = 0; i < computersO.size(); i++) {
@@ -142,14 +140,13 @@ public class GameScreen extends ScreenAdapter {
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
         batch.begin();
-        batch.draw(background, 0, 0);
+        //batch.draw(background, 0, 0);
 
         drawObstacles();
         drawEnemies();
         drawComputers();
-        hacker.draw(batch);
-
         drawLives();
+        hacker.draw(batch);
         batch.end();
     }
 
@@ -175,7 +172,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawLives() {
-        for(int i =0; i < game.getModelManager().getGameModel().getLives(); i++) {
+
+        for(int i = 0; i < game.getModelManager().getGameModel().getLives(); i++) {
             hearts[i].draw(batch);
         }
     }
