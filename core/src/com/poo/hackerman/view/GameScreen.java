@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.controller.HackerGame;
@@ -20,8 +21,8 @@ import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
 
-    public static final float WORLD_WIDTH = 23*32;
-    public static final float WORLD_HEIGHT = 17*32;
+    private static final float WORLD_WIDTH = 23*GameMap.CELL_SIZE;
+    private static final float WORLD_HEIGHT = 17*GameMap.CELL_SIZE;
     private Viewport viewport;
     private OrthographicCamera camera;
     private EntityManager entityManager;
@@ -36,6 +37,7 @@ public class GameScreen extends ScreenAdapter {
     private Texture hackerT, guardT;
     private Texture background;
     private HackerGame game;
+    private ShapeRenderer shapeRenderer;
 
     public GameScreen(HackerGame game) {
         this.game = game;
@@ -43,6 +45,7 @@ public class GameScreen extends ScreenAdapter {
     }
     @Override
     public void show() {
+        shapeRenderer = new ShapeRenderer();
         entityManager = game.getModelManager().getEntityManager();
         super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -57,15 +60,15 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
-        hackerT = new Texture("hacker.png");
-        guardT = new Texture("guard.png");
-        doorT = new Texture("door.png");
-        computersT = new Texture("computersT.png");
+        hackerT = new Texture("hacker2.png");
+        guardT = new Texture("guard2.png");
+        doorT = new Texture("door1.png");
+        computersT = new Texture("computer1.png");
         computerHackedT = new Texture("computersHacked.png");
         fakeCompT = new Texture("fakeCompT.png");
         deskT = new Texture("desk.png");
-        wallT = new Texture("wall2.png");
-        background = new Texture("wall.png");
+        wallT = new Texture("wall3.png");
+        background = new Texture("bg.png");
         heartT = new Texture("heart.png");
 
         hacker = new UIEntity(hackerT, player);
@@ -150,14 +153,33 @@ public class GameScreen extends ScreenAdapter {
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
         batch.begin();
-        //batch.draw(background, 0, 0);
-
+        drawBackground();
         drawObstacles();
         drawEnemies();
         drawComputers();
         drawLives();
+        door.draw(batch);
         hacker.draw(batch);
+        //drawGrid();
         batch.end();
+    }
+
+    private void drawBackground() {
+        for(int i = 0; i <= GameMap.WIDTH/ background.getWidth(); i ++) {
+            for(int j = 0 ; j <= GameMap.HEIGHT/ background.getHeight() ; j++) {
+                batch.draw(background, i* background.getWidth(), j*background.getHeight());
+            }
+        }
+    }
+
+    private void drawGrid() {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        for (int x = 0; x < Gdx.graphics.getWidth(); x += GameMap.CELL_SIZE) {
+            for (int y = 0; y < Gdx.graphics.getHeight(); y += GameMap.CELL_SIZE) {
+                shapeRenderer.rect(x,y, GameMap.CELL_SIZE, GameMap.CELL_SIZE);
+            }
+        }
+        shapeRenderer.end();
     }
 
     private void drawObstacles() {
