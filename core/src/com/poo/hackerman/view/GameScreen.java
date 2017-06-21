@@ -13,6 +13,8 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Ene
 import com.poo.hackerman.model.entity.staticEntity.Obstacle;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
+import com.poo.hackerman.model.gameWorld.GameMap;
+
 import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
@@ -81,9 +83,8 @@ public class GameScreen extends ScreenAdapter {
 
         for(int i = 0; i < 3; i++) {
             hearts[i] = new Sprite(heartT);
-            hearts[i].setX(i*34);
-            hearts[i].setY(10);
-            System.out.println(hearts[i].getX());
+            hearts[i].setX(GameMap.WIDTH - (i+1)*34);
+            hearts[i].setY(GameMap.HEIGHT - 64);
         }
 
         for(int i = 0; i < computersO.size(); i++) {
