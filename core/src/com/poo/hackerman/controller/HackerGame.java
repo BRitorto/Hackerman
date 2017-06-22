@@ -19,7 +19,6 @@ public class HackerGame extends Game {
     private STATE state = STATE.CREATED;
 
     private ModelManager modelManager;
-    private EntityManager entityManager;
 
     private MainMenuScreen mainMenuScreen;
     private ExitScreen exitScreen;
@@ -122,8 +121,6 @@ public class HackerGame extends Game {
     public ModelManager getModelManager() {return this.modelManager;}
 
     public Screen getWonScreen() {return wonScreen;}
-
-    public EntityManager getEntityManager() { return this.entityManager; }
 
     public SpriteBatch getBatch() {
         return batch;

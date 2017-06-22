@@ -29,13 +29,13 @@ import java.util.Scanner;
 public class Level {
 
     public static String newLine = System.getProperty("line.separator");
-    private EntityManager entityManager;
+    private String filename;
 
     public Level(String filename){
-        this.entityManager = setEntityManager(filename);
+        this.filename = filename;
     }
 
-    private EntityManager setEntityManager(String filename) { //el ultimo elemento de cada array es basura para ese elemento
+    public EntityManager getEntityManager() { //el ultimo elemento de cada array es basura para ese elemento
         //ej: guards[guards.lenght-1] no es un guard
         String s = readFile(filename);
 
@@ -204,10 +204,6 @@ public class Level {
             e.printStackTrace();
         }
         return "";
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
     }
 
     /*

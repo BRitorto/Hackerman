@@ -18,7 +18,6 @@ import java.util.TimerTask;
 public class ModelManager implements Runnable{
 
     private GameModel gameModel;
-    private EntityManager entityManager;
     private HackerGame game;
     private Thread thread;
 
@@ -44,7 +43,6 @@ public class ModelManager implements Runnable{
         gameModel.nextLevel();
         thread = new Thread(this, "Model manager thread");
         thread.start();
-        entityManager = gameModel.getGameMap().getEntityManager();
     }
 
     /**
@@ -62,7 +60,7 @@ public class ModelManager implements Runnable{
         boolean sPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
 
         if(sPressed) {
-            entityManager.getPlayer().setInteracting();
+            gameModel.getGameMap().getEntityManager().getPlayer().setInteracting();
         }
         if (pPressed)
             game.setState(HackerGame.STATE.PAUSE);
@@ -72,7 +70,7 @@ public class ModelManager implements Runnable{
 
         if (lPressed || rPressed || uPressed || dPressed) {
             Direction dir = getDirection(lPressed,rPressed,dPressed,uPressed);
-            entityManager.getPlayer().tryToMove(dir);
+            gameModel.getGameMap().getEntityManager().getPlayer().tryToMove(dir);
         }
 
     }
@@ -133,8 +131,12 @@ public class ModelManager implements Runnable{
         return gameModel;
     }
 
-    public HackerGame getGame() {return game;}
+    public HackerGame getGame() {
+        return game;
+    }
 
-    public EntityManager getEntityManager() {return gameModel.getGameMap().getEntityManager();}
+    public EntityManager getEntityManager() {
+        return gameModel.getGameMap().getEntityManager();
+    }
 
 }

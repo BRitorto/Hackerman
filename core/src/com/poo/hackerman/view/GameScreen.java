@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
-import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -48,9 +47,9 @@ public class GameScreen extends ScreenAdapter {
     }
     @Override
     public void show() {
-        super.show();
         shapeRenderer = new ShapeRenderer();
         entityManager = game.getModelManager().getEntityManager();
+        super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -218,7 +217,6 @@ public class GameScreen extends ScreenAdapter {
             else if(!computersO.get(i).isOn()) {
                 computers[i].setTexture(fakeCompT);
             }
-            computers[i].rotate(computersO.get(i).getDirection());
             computers[i].draw(batch);
         }
     }
