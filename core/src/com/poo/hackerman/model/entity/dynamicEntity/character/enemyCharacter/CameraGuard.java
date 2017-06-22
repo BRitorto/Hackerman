@@ -36,7 +36,7 @@ public class CameraGuard extends EnemyCharacter {
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
         super(position, direction, 0, range);
-        this. instructions = instructions;
+        this.instructions = instructions;
         currentDirection = 0;
         playerDetected = false;
     }

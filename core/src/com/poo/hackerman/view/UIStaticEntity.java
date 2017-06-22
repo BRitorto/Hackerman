@@ -3,6 +3,7 @@ package com.poo.hackerman.view;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.poo.hackerman.model.entity.Direction;
 
 /**
  * Created by cderienzo on 6/20/2017.
@@ -24,6 +25,18 @@ public class UIStaticEntity {
 
     public void draw(Batch batch) {
         batch.draw(texture,sprite.getX(),sprite.getY());
+    }
+    public void rotate(Direction direction){
+        if(direction.getCode() == Direction.LEFT){
+            sprite.rotate90(true);
+        }
+        else if(direction.getCode() == Direction.RIGHT) {
+            sprite.rotate90(false);
+        }
+        else if(direction.getCode() == Direction.UP) {
+            sprite.flip(false,true);
+        }
+
     }
 
     public void setTexture(Texture texture) {
