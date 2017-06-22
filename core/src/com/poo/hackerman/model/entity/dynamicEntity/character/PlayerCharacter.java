@@ -3,6 +3,7 @@ package com.poo.hackerman.model.entity.dynamicEntity.character;
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
+import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.InteractiveStaticEntity;
 import com.poo.hackerman.model.gameWorld.GameMap;
 

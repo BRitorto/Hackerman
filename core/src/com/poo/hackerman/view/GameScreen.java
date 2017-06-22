@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
 import com.poo.hackerman.model.entity.staticEntity.Obstacle;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
@@ -31,10 +32,10 @@ public class GameScreen extends ScreenAdapter {
     private UIEntity hacker;
     private UIStaticEntity door;
     private UIEntity[] enemies;
-    private UIStaticEntity[] computers, obstacles, hearts;
+    private UIStaticEntity[] computers, obstacles, hearts, cameras;
     private List<Computer> computersO;
     private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
-    private Texture hackerT, guardT;
+    private Texture hackerT, guardT, cameraT;
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
@@ -60,11 +61,13 @@ public class GameScreen extends ScreenAdapter {
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
+
         hackerT = new Texture("hacker.png");
         guardT = new Texture("guard.png");
+        cameraT = new Texture("cameraT.png");
         doorT = new Texture("door.png");
         computersT = new Texture("computer2.png");
-        computerHackedT = new Texture("computersHacked.png");
+        computerHackedT = new Texture("computer2Hacked.png");
         fakeCompT = new Texture("fakeCompT.png");
         deskT = new Texture("desk.png");
         wallT = new Texture("wall2.png");
@@ -112,8 +115,14 @@ public class GameScreen extends ScreenAdapter {
 
     private void createEnemies(List<EnemyCharacter> enemiesO) {
         enemies = new UIEntity[enemiesO.size()];
+        cameras = new UIStaticEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
-            enemies[i] = new UIEntity(guardT, enemiesO.get(i));
+            if(enemiesO.get(i).getClass().equals(CameraGuard.class)) {
+                cameras[i] = new UIStaticEntity(cameraT);
+            }
+            else {
+                enemies[i] = new UIEntity(guardT, enemiesO.get(i));
+            }
         }
     }
 
@@ -156,6 +165,7 @@ public class GameScreen extends ScreenAdapter {
         drawBackground();
         drawObstacles();
         drawEnemies();
+        drawCameras();
         drawComputers();
         drawLives();
         door.draw(batch);
@@ -164,6 +174,12 @@ public class GameScreen extends ScreenAdapter {
         batch.end();
     }
 
+    private void drawCameras() {
+        for (UIStaticEntity cameraGuard : cameras) {
+            cameraGuard.draw(batch);
+        }
+
+    }
     private void drawBackground() {
         for(int i = 0; i <= GameMap.WIDTH/ background.getWidth(); i ++) {
             for(int j = 0 ; j <= GameMap.HEIGHT/ background.getHeight() ; j++) {
@@ -199,7 +215,10 @@ public class GameScreen extends ScreenAdapter {
 
     private void drawEnemies() {
         for(UIEntity enemy : enemies) {
-            enemy.draw(batch);
+            if(enemy!=null){
+                enemy.draw(batch);
+            }
+
         }
     }
 
