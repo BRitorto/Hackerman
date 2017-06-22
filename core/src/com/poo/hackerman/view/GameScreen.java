@@ -24,6 +24,7 @@ public class GameScreen extends ScreenAdapter {
 
     private static final float WORLD_WIDTH = 23*GameMap.CELL_SIZE;
     private static final float WORLD_HEIGHT = 17*GameMap.CELL_SIZE;
+
     private Viewport viewport;
     private OrthographicCamera camera;
     private EntityManager entityManager;

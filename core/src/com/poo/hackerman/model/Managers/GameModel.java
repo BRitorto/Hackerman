@@ -40,11 +40,17 @@ public class GameModel {
         lives = MAX_LIVES;
         setPause();
         currentLevel = -1;                     //model no inicializado
-
     }
 
+    /**
+     *
+     * Sets the next level of the game
+     *
+     */
     public void nextLevel() {
         currentLevel++;
+        currentLevel++;currentLevel++;
+
         gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();

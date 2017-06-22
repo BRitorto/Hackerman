@@ -31,7 +31,7 @@ public class Guard extends EnemyCharacter {
 
     public Guard(Position position, Direction direction, int velocity, int range, List<Position> instructions) {
         super(position, direction, velocity, range);
-        this. instructions = instructions;
+        this.instructions = instructions;
         currentPosition = 0;
         playerDetected = false;
     }
@@ -51,6 +51,13 @@ public class Guard extends EnemyCharacter {
     public void addInstruction(int index, Position position) {
         instructions.add(index, position);
     }
+
+    /**
+     *
+     * Checks if each individual guard has detected the player or not
+     * If the guard is idle, it sets it moving
+     *
+     */
 
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {

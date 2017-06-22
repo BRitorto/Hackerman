@@ -22,11 +22,23 @@ public class ModelManager implements Runnable{
     private HackerGame game;
     private Thread thread;
 
+    /**
+     *
+     * Creates a new GameModel which in turn creates a grid and reads a Level from
+     * the level files
+     */
+
     public ModelManager(HackerGame game) {
         gameModel = new GameModel();
         this.game = game;
 
     }
+
+    /**
+     * Is in charge of initializing the thread in which the game will run on
+     * It assigns the EntityManager so that it can be accessed by the view
+     *
+     */
 
     public void initialize() {
         gameModel.nextLevel();
@@ -34,6 +46,11 @@ public class ModelManager implements Runnable{
         thread.start();
         entityManager = gameModel.getGameMap().getEntityManager();
     }
+
+    /**
+     *
+     * Reads and processes the user's input
+     */
 
     public void queryInput() {
         boolean lPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
@@ -60,6 +77,11 @@ public class ModelManager implements Runnable{
 
     }
 
+    /**
+     *
+     * Creates a new direction based on the user's input
+     */
+
     private Direction getDirection(boolean lPressed, boolean rPressed, boolean dPressed, boolean uPressed) {
         if(rPressed && uPressed)
             return new Direction(Direction.DOWN_RIGHT);
@@ -78,6 +100,15 @@ public class ModelManager implements Runnable{
         else //if(dPressed)
             return new Direction(Direction.UP);
     }
+
+    /**
+     *
+     * Is in charge of making the entities tick and of setting up the next level
+     * if the user passes the current one
+     * It also asks the GameModel all the time whether or not the player has lost the game
+     * If he has, it sets the state to "Game Over"
+     *
+     */
 
     public void run() {
         Timer timer = new Timer();

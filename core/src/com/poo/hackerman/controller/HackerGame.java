@@ -28,7 +28,12 @@ public class HackerGame extends Game {
     private GameScreen gameScreen;
     private WonScreen wonScreen;
 
-
+    /**
+     *
+     * creates a new instance that extends from an ApplicationListener
+     * HackerGame creates a new ModelManager which is going to initialize the model
+     * this class manages the Game's screens according to the state and initializes and saves the batch
+     */
     public HackerGame () {
         this.modelManager = new ModelManager(this);
     }
@@ -45,6 +50,14 @@ public class HackerGame extends Game {
 
         setScreen(mainMenuScreen);
     }
+
+    /**
+     *
+     * @param state
+     * Recieves a state and sets the game's state depending on the variable recieved
+     * According to the user input, it tells the Model what to to with the game
+     *
+     */
 
     public void setState (STATE state) {
         switch (state) {
