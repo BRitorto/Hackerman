@@ -81,9 +81,14 @@ public class Level {
                     int range = Integer.valueOf(properties[2]);
                     if (properties.length > 3) {
                         ArrayList<Position> instructions = new ArrayList<Position>();
+                        /*
                         for (int i = 3; i < properties.length; i += 2) {
                             instructions.add(new Position(i, i + 1));
                         }
+                        */
+                        instructions.add(new Position(144,300));
+
+                        instructions.add(new Position(400,120));
                         enemyList.add(new Guard(position, direction, velocity, range, instructions));
                     } else {
                         enemyList.add(new Guard(position, direction, velocity, range));
@@ -107,7 +112,7 @@ public class Level {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
-                    hacker = new PlayerCharacter(position, direction, 10);   //cambiar velocidad
+                    hacker = new PlayerCharacter(position, direction, velocity);   //cambiar velocidad
                 }
                 else if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");

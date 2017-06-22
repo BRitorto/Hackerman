@@ -36,7 +36,6 @@ public class Light {
         for(int i = 0; i < range; i++) {
             boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
             if(detected) {
-                System.out.println("detected");
                 return true;
             }
             p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);

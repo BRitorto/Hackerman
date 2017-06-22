@@ -33,6 +33,7 @@ public class Timer implements Serializable {
         else {
             moveCooldown = MOVE_COOLDOWN_BASE / velocity;
         }
+        state = NODIAGONAL;
     }
 
     /**
@@ -53,7 +54,9 @@ public class Timer implements Serializable {
         if(direction.isDiagonal()){
             this.state = DIAGONAL;
         }
-        this.state = NODIAGONAL;
+        else {
+            this.state = NODIAGONAL;
+        }
     }
 
     public void updateLastMoveTime(long nowTime) {
@@ -67,7 +70,7 @@ public class Timer implements Serializable {
      * @return true if elapsed time overpass the cooldown. false otherwise.
      */
     public boolean moveTimePassed(long nowTime) {
-        return (nowTime - this.getLastMoveTime() >= moveCooldown + (state * 4 / 10));
+        return (nowTime - this.getLastMoveTime() >= moveCooldown + ((float)(state * moveCooldown * 4) / (float)10));
     }
 
 

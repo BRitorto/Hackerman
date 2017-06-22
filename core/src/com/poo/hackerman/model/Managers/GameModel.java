@@ -33,7 +33,7 @@ public class GameModel {
 
     public GameModel() {
         levels = new ArrayList<Level>();
-        levels.add(new Level("levels/level2.txt"));
+        levels.add(new Level("levels/level1.txt"));
         levels.add(new Level("levels/level1.txt"));           //path con el level que quiero levantar
         levels.add(new Level("levels/level2.txt"));
         levels.add(new Level("levels/level3.txt"));
@@ -49,8 +49,6 @@ public class GameModel {
      */
     public void nextLevel() {
         currentLevel++;
-        currentLevel++;currentLevel++;
-
         gameMap = new GameMap(levels.get(currentLevel).getEntityManager());
         computerManager = new ComputerManager(gameMap.getEntityManager().getDoor(), gameMap.getEntityManager().getComputers());
         resume();

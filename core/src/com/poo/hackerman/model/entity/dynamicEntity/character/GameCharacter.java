@@ -13,7 +13,7 @@ public abstract class GameCharacter extends DynamicEntity {
     private int movesRemaining;
     private Timer timer;
 
-    private static final long TIME_ROTATING = 100;
+    private static final long TIME_ROTATING = 50;
 
 
     protected GameCharacter(Position position, Direction direction, int velocity) {
@@ -73,7 +73,7 @@ public abstract class GameCharacter extends DynamicEntity {
             movesRemaining--;
 
             int[] dir = direction.getDir();
-            Position aux = getPosition();               //prueba
+            Position aux = new Position(getPosition().getX(), getPosition().getY());               //prueba
             getPosition().incrementPosition(dir[0], dir[1]);
             if(!aux.sameGridIndex(getPosition())) {        //prueba
                 grid.freePosition(aux);

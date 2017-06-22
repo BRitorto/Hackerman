@@ -61,7 +61,6 @@ public class Guard extends EnemyCharacter {
 
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
-            System.out.println("Player detected");
             playerDetected = true;
         }
         if(instructions == null) {

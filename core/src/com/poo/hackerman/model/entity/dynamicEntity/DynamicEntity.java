@@ -18,7 +18,7 @@ public abstract class DynamicEntity extends Entity {
     public static final int ROTATING = 2;
 
     // Movement fields
-    protected int velocity;
+    private int velocity;
     protected Grid grid;
 
     protected DynamicEntity(Position position, Direction direction, int velocity) {
