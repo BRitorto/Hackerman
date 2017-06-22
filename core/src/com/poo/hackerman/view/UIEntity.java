@@ -9,14 +9,15 @@ import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Entity;
 import com.poo.hackerman.model.entity.dynamicEntity.DynamicEntity;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
+import com.poo.hackerman.model.gameWorld.GameMap;
 
 /**
  * Created by cderienzo on 6/7/2017.
  */
 public class UIEntity {
 
-    private static final int TILE_WIDTH = 32;
-    private static final int TILE_HEIGHT = 32;
+    private static final int TILE_WIDTH = GameMap.CELL_SIZE;
+    private static final int TILE_HEIGHT = GameMap.CELL_SIZE;
 
     private final Animation animationUp,animationDown,animationLeft,animationRight;
     private static final float FRAME_DURATION = 0.25F;

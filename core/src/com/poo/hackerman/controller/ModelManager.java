@@ -47,10 +47,6 @@ public class ModelManager implements Runnable{
         if(sPressed) {
             entityManager.getPlayer().setInteracting();
         }
-        if(!sPressed) {
-            entityManager.getPlayer().stopInteracting();
-        }
-
         if (pPressed)
             game.setState(HackerGame.STATE.PAUSE);
 
