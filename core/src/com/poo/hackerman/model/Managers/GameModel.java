@@ -68,12 +68,7 @@ public class GameModel {
             computerManager.updateComputers();
             if(playerCaught()) {
                 lives--;
-                if(gameOver()) {
-                    setPause();
-                }
-                else {
-                    retryLevel();
-                }
+                setPause();
             }
         }
     }
@@ -105,11 +100,11 @@ public class GameModel {
         return gameMap;
     }
 
-    private boolean playerCaught() {
+    public boolean playerCaught() {
         return gameMap.getEntityManager().playerCaught();
     }
 
-    private void retryLevel() {
+    public void retryLevel() {
         currentLevel--;
         nextLevel();            //no aumento el currentLevel
     }

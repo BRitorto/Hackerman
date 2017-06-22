@@ -15,7 +15,7 @@ public class HackerGame extends Game {
 
     private SpriteBatch batch;
 
-    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, GAME_OVER, WON}
+    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, NEW_LEVEL, GAME_OVER, WON}
     private STATE state = STATE.CREATED;
 
     private ModelManager modelManager;
@@ -85,6 +85,11 @@ public class HackerGame extends Game {
                 modelManager.getGameModel().resume();
                 setScreen(gameScreen);
             } break;
+
+            case NEW_LEVEL: {
+                createGameScreen(this);
+                setScreen(gameScreen);
+            }
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();

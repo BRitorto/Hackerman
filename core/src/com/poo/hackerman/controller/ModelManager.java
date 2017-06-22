@@ -8,6 +8,7 @@ import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.model.Managers.GameModel;
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Entity;
+import com.poo.hackerman.view.GameScreen;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -116,10 +117,15 @@ public class ModelManager implements Runnable{
                 if(gameModel.gameOver()) {
                     game.setState(HackerGame.STATE.GAME_OVER);
                 }
-                else if (gameModel.passedLevel() && gameModel.hasNextLevel()) {
-                    gameModel.nextLevel();
+                else if(gameModel.playerCaught()) {
+                    gameModel.retryLevel();
+                    game.setState(HackerGame.STATE.NEW_LEVEL);
                 }
-                else if (gameModel.passedLevel() && !gameModel.hasNextLevel()){
+                else if(gameModel.passedLevel() && gameModel.hasNextLevel()) {
+                    gameModel.nextLevel();
+                    game.setState(HackerGame.STATE.NEW_LEVEL);
+                }
+                else if(gameModel.passedLevel() && !gameModel.hasNextLevel()){
                     game.setState(HackerGame.STATE.WON);
                 }
             }
