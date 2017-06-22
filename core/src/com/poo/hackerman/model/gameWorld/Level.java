@@ -110,14 +110,14 @@ public class Level {
                     hacker = new PlayerCharacter(position, direction, velocity);
                 }
                 else if(cell.equals("COMPUTER")) {
-                    String[] properties = computers[computerIndex].split(",");
+                    String[] properties = computers[computerIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     int consecutiveHacks = Integer.valueOf(properties[1]);
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
 
                 else if(cell.equals("DESK")) {
-                    String[] properties = desks[deskIndex].split(",");
+                    String[] properties = desks[deskIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                 }
