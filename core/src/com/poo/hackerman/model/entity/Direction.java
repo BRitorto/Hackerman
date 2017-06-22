@@ -18,7 +18,7 @@ public class Direction implements Serializable {
     public static final int LEFT = 6;
     public static final int UP_LEFT = 7;
 
-    private static final int[][] dir = {{0,-1}, {1,-1}, {1,0}, {1,1}, {0,1}, {-1,1}, {-1,0}, {-1,-1}};
+    private static final int[][] dir = {{0,1}, {1,1}, {1,0}, {1,-1}, {0,-1}, {-1,-1}, {-1,0}, {-1,1}};
 
     private int code;
 

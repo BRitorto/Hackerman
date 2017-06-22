@@ -83,21 +83,21 @@ public class ModelManager implements Runnable{
 
     private Direction getDirection(boolean lPressed, boolean rPressed, boolean dPressed, boolean uPressed) {
         if(rPressed && uPressed)
-            return new Direction(Direction.DOWN_RIGHT);
-        else if(lPressed && uPressed)
-            return new Direction(Direction.DOWN_LEFT);
-        else if(rPressed && dPressed)
             return new Direction(Direction.UP_RIGHT);
+        else if(lPressed && uPressed)
+            return new Direction(Direction.UP);
+        else if(rPressed && dPressed)
+            return new Direction(Direction.DOWN_RIGHT);
         else if(lPressed && dPressed)
-            return new Direction(Direction.UP_LEFT);
+            return new Direction(Direction.DOWN_LEFT);
         else if(lPressed)
             return new Direction(Direction.LEFT);
         else if(rPressed)
             return new Direction(Direction.RIGHT);
         else if(uPressed)
-            return new Direction(Direction.DOWN);
-        else //if(dPressed)
             return new Direction(Direction.UP);
+        else //if(dPressed)
+            return new Direction(Direction.DOWN);
     }
 
     /**

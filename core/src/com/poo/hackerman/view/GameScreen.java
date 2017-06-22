@@ -176,6 +176,7 @@ public class GameScreen extends ScreenAdapter {
         hacker.draw(batch);
         //drawGrid();
         batch.end();
+        drawLights();
     }
 
     private void drawCameras() {
@@ -231,6 +232,24 @@ public class GameScreen extends ScreenAdapter {
                 enemy.draw(batch);
             }
         }
+    }
+
+    private void drawLights() {
+        for(UIEntity enemy : enemies) {
+            if(enemy!=null){
+                drawLight(enemy);
+            }
+        }
+    }
+
+    private void drawLight(UIEntity enemy) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.GOLD);
+        int[] dir = enemy.getDirection().getDir();
+        float x = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+        float y = enemy.getY()+ dir[1]*GameMap.CELL_SIZE;
+        shapeRenderer.triangle(x,y,x-50,y+50,x+50,y+50);
+        shapeRenderer.end();
     }
 
     private void drawLives() {

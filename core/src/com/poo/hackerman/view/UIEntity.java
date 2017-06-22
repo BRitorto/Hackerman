@@ -33,8 +33,8 @@ public class UIEntity {
     public UIEntity(Texture playerTexture, DynamicEntity dynamicEntity) {
         TextureRegion[][] playerTextures = TextureRegion.split(playerTexture,TILE_WIDTH,TILE_HEIGHT);
         this.dynamicEntity = dynamicEntity;
-        animationDown = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
-        animationUp = new Animation(FRAME_DURATION,playerTextures[2][0], playerTextures[2][1], playerTextures[2][2],playerTextures[2][3],playerTextures[2][4],playerTextures[2][5],playerTextures[2][6],playerTextures[2][7],playerTextures[2][8]);
+        animationUp = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);
+        animationDown = new Animation(FRAME_DURATION,playerTextures[2][0], playerTextures[2][1], playerTextures[2][2],playerTextures[2][3],playerTextures[2][4],playerTextures[2][5],playerTextures[2][6],playerTextures[2][7],playerTextures[2][8]);
         animationLeft = new Animation(FRAME_DURATION,playerTextures[1][0], playerTextures[1][1], playerTextures[1][2],playerTextures[1][3],playerTextures[1][4],playerTextures[1][5],playerTextures[1][6],playerTextures[1][7],playerTextures[1][8]);
         animationRight = new Animation(FRAME_DURATION,playerTextures[3][0], playerTextures[3][1], playerTextures[3][2],playerTextures[3][3],playerTextures[3][4],playerTextures[3][5],playerTextures[3][6],playerTextures[3][7],playerTextures[3][8]);
 
@@ -101,4 +101,7 @@ public class UIEntity {
         batch.draw(currentFrame,dynamicEntity.getPosition().getX(),dynamicEntity.getPosition().getY() );
     }
 
+    public Direction getDirection() {
+        return dynamicEntity.getDirection();
+    }
 }
