@@ -240,7 +240,10 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-
+    public void renew(){
+        game.setScreen(new GameScreen(game));
+        this.dispose();
+    }
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
