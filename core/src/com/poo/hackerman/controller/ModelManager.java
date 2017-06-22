@@ -62,13 +62,13 @@ public class ModelManager implements Runnable{
         if(sPressed) {
             gameModel.getGameMap().getEntityManager().getPlayer().setInteracting();
         }
-        if (pPressed)
+        if(pPressed)
             game.setState(HackerGame.STATE.PAUSE);
 
-        if (ePressed)
+        if(ePressed)
             game.setState(HackerGame.STATE.EXIT);
 
-        if (lPressed || rPressed || uPressed || dPressed) {
+        if(lPressed || rPressed || uPressed || dPressed) {
             Direction dir = getDirection(lPressed,rPressed,dPressed,uPressed);
             gameModel.getGameMap().getEntityManager().getPlayer().tryToMove(dir);
         }

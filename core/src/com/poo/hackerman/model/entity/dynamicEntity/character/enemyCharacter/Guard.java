@@ -2,6 +2,7 @@ package com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter;
 
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Position;
+import com.poo.hackerman.model.gameWorld.GameMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +109,7 @@ public class Guard extends EnemyCharacter {
 
     /**
      *
-     * @return True if the guard journey shapes a cycle
+     * @return True if the guard´s journey ends in the position it began
      */
     private boolean isCycle() {
         return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
