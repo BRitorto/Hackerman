@@ -26,7 +26,6 @@ public class GameModel {
     private boolean paused;
     private List<Level> levels;
     private int currentLevel;
-    private boolean restarted;
 
     private int lives;
     private static final int MAX_LIVES = 3;
@@ -39,7 +38,6 @@ public class GameModel {
         levels.add(new Level("levels/level3.txt"));
         lives = MAX_LIVES;
         setPause();
-        restarted= false;
         currentLevel = -1;                     //model no inicializado
     }
 
@@ -111,12 +109,8 @@ public class GameModel {
         return gameMap.getEntityManager().playerCaught();
     }
 
-    public boolean getRestarted(){
-        return restarted;
-    }
     private void retryLevel() {
         currentLevel--;
-        restarted = true;
         nextLevel();            //no aumento el currentLevel
     }
 }

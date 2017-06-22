@@ -111,9 +111,6 @@ public class GameScreen extends ScreenAdapter {
         super.render(delta);
         entityManager = game.getModelManager().getEntityManager();
         game.getModelManager().queryInput();
-        if(game.getModelManager().getGameModel().getRestarted()){
-            game.setScreen(new GameScreen(game));
-        }
         clearScreen();
         draw();
     }
