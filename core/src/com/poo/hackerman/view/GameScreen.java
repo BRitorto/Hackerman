@@ -213,6 +213,9 @@ public class GameScreen extends ScreenAdapter {
             if(computersO.get(i).isHacked()){
                 computers[i].setTexture(computerHackedT);
             }
+            else if(!computersO.get(i).isOn()) {
+                computers[i].setTexture(fakeCompT);
+            }
             computers[i].draw(batch);
         }
     }
