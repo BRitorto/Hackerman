@@ -31,9 +31,6 @@ public class PlayerCharacter extends GameCharacter {
     public void setInteracting() {
         interacting = true;
     }
-    public void stopInteracting() {
-        interacting = false;
-    }
 
     public void interact() {
         int[] dir = direction.getDir();
@@ -43,7 +40,7 @@ public class PlayerCharacter extends GameCharacter {
             return;
 
 
-        if(grid.getCell(objective).getEntity() != null && Computer.class.equals(grid.getCell(objective).getEntity().getClass())) {
+        if(grid.getCell(objective).getEntity() != null && InteractiveStaticEntity.class.equals(grid.getCell(objective).getEntity().getClass())) {
             InteractiveStaticEntity entity = (InteractiveStaticEntity) grid.getCell(objective).getEntity();
             entity.interact();
         }

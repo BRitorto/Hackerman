@@ -8,8 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Created by cderienzo on 6/20/2017.
  */
 public class UIStaticEntity {
+
     private Texture texture;
     private Sprite sprite;
+
     public UIStaticEntity(Texture texture) {
         this.texture = texture;
         sprite = new Sprite(texture);

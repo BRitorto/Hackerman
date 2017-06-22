@@ -69,12 +69,12 @@ public class Level {
                     Direction direction = new Direction(0);
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
                 }
-                else if(cell.equals("DOOR")) {
+                if(cell.equals("DOOR")) {
                     String[] properties = doors[doorIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     door = new Door(position, direction);
                 }
-                else if(cell.equals("GUARD")) {
+                if(cell.equals("GUARD")) {
                     String[] properties = guards[guardIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     int velocity = Integer.valueOf(properties[1]);
@@ -89,7 +89,7 @@ public class Level {
                         enemyList.add(new Guard(position, direction, velocity, range));
                     }
                 }
-                else if(cell.equals("CAMERAGUARD")) {
+                if(cell.equals("CAMERAGUARD")) {
                     String[] properties = cameraguards[cameraIndex++].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer range = Integer.valueOf(properties[1]);
@@ -103,20 +103,20 @@ public class Level {
                         enemyList.add(new CameraGuard(position, direction, range));
                     }
                 }
-                else if(cell.equals("PLAYER")) {
+                if(cell.equals("PLAYER")) {
                     String[] properties = hackers[0].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     Integer velocity = Integer.valueOf(properties[1]);
-                    hacker = new PlayerCharacter(position, direction, velocity);
+                    hacker = new PlayerCharacter(position, direction, 10);   //cambiar velocidad
                 }
-                else if(cell.equals("COMPUTER")) {
+                if(cell.equals("COMPUTER")) {
                     String[] properties = computers[computerIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     int consecutiveHacks = Integer.valueOf(properties[1]);
                     computerList.add(new Computer(position, direction, consecutiveHacks));
                 }
 
-                else if(cell.equals("DESK")) {
+                if(cell.equals("DESK")) {
                     String[] properties = desks[deskIndex].split(",");
                     Direction direction = new Direction(Integer.valueOf(properties[0]));
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
