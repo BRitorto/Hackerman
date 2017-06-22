@@ -82,7 +82,7 @@ public class Level {
                     if (properties.length > 3) {
                         ArrayList<Position> instructions = new ArrayList<Position>();
                         for (int i = 3; i < properties.length-1; i += 2) {
-                            instructions.add(new Position(Integer.valueOf(properties[i]), Integer.valueOf(properties[i + 1])));
+                            instructions.add(new Position(Integer.valueOf(properties[i])*GameMap.CELL_SIZE, Integer.valueOf(properties[i + 1])*GameMap.CELL_SIZE));
                         }
                         enemyList.add(new Guard(position, direction, velocity, range, instructions));
                     } else {
