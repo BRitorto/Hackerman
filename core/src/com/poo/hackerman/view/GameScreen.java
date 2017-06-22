@@ -246,9 +246,38 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.GOLD);
         int[] dir = enemy.getDirection().getDir();
-        float x = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
-        float y = enemy.getY()+ dir[1]*GameMap.CELL_SIZE;
-        shapeRenderer.triangle(x,y,x-50,y+50,x+50,y+50);
+        float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+        y1 = enemy.getY()/*+ dir[1]*GameMap.CELL_SIZE*/;
+
+        switch(enemy.getDirection().getCode())
+        {
+            case Direction.UP:
+                x2 = x1 - 50;
+                y2 = y1 + 50;
+                x3 = x1 + 50;
+                y3 = y1 + 50;
+                break;
+            case Direction.DOWN:
+                x2 = x1 - 50;
+                y2 = y1 - 50;
+                x3 = x1 + 50;
+                y3 = y1 - 50;
+                break;
+            case Direction.RIGHT:
+                x2 = x1 + 50;
+                y2 = y1 + 50;
+                x3 = x1 + 50;
+                y3 = y1 - 50;
+                break;
+            case Direction.LEFT:
+                x2 = x1 - 50;
+                y2 = y1 + 50;
+                x3 = x1 - 50;
+                y3 = y1 - 50;
+                break;
+        }
+        shapeRenderer.triangle(x1,y1,x2,y2,x3,y3);
         shapeRenderer.end();
     }
 
