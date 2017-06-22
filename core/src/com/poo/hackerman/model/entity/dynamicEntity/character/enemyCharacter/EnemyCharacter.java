@@ -18,7 +18,7 @@ public abstract class EnemyCharacter extends GameCharacter {
 
     public abstract boolean hackerDetected();
 
-    protected Light getMylight() {
+    public Light getMylight() {
             return mylight;
         }
 

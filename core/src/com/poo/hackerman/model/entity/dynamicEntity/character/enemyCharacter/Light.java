@@ -72,4 +72,8 @@ public class Light {
         }
         return entity.getClass().equals(PlayerCharacter.class);
     }
+
+    public int getRange() {
+        return range;
+    }
 }

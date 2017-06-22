@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
+import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -47,9 +48,9 @@ public class GameScreen extends ScreenAdapter {
     }
     @Override
     public void show() {
+        super.show();
         shapeRenderer = new ShapeRenderer();
         entityManager = game.getModelManager().getEntityManager();
-        super.show();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
@@ -110,6 +111,9 @@ public class GameScreen extends ScreenAdapter {
         super.render(delta);
         entityManager = game.getModelManager().getEntityManager();
         game.getModelManager().queryInput();
+        if(game.getModelManager().getGameModel().getRestarted()){
+            game.setScreen(new GameScreen(game));
+        }
         clearScreen();
         draw();
     }
@@ -148,6 +152,7 @@ public class GameScreen extends ScreenAdapter {
         computers = new UIStaticEntity[computersO.size()];
         for(int i = 0; i < computersO.size(); i++) {
             computers[i] = new UIStaticEntity(computersT);
+            computers[i].rotate(computersO.get(i).getDirection());
             computers[i].setPosition(computersO.get(i).getPosition().getX(),computersO.get(i).getPosition().getY());
         }
     }
@@ -185,6 +190,7 @@ public class GameScreen extends ScreenAdapter {
         }
 
     }
+
     private void drawBackground() {
         for(int i = 0; i <= GameMap.WIDTH/ background.getWidth(); i ++) {
             for(int j = 0 ; j <= GameMap.HEIGHT/ background.getHeight() ; j++) {
@@ -217,6 +223,7 @@ public class GameScreen extends ScreenAdapter {
             else if(!computersO.get(i).isOn()) {
                 computers[i].setTexture(fakeCompT);
             }
+            //computers[i].rotate(computersO.get(i).getDirection());
             computers[i].draw(batch);
         }
     }
@@ -226,7 +233,6 @@ public class GameScreen extends ScreenAdapter {
             if(enemy!=null){
                 enemy.draw(batch);
             }
-
         }
     }
 
