@@ -119,6 +119,7 @@ public class GameScreen extends ScreenAdapter {
         for(int i = 0; i < enemiesO.size() ; i++) {
             if(enemiesO.get(i).getClass().equals(CameraGuard.class)) {
                 cameras[i] = new UIStaticEntity(cameraT);
+                cameras[i].setPosition(enemiesO.get(i).getPosition().getX(),enemiesO.get(i).getPosition().getY());
             }
             else {
                 enemies[i] = new UIEntity(guardT, enemiesO.get(i));
