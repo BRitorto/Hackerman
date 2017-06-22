@@ -115,7 +115,6 @@ public class GameScreen extends ScreenAdapter {
 
     private void createEnemies(List<EnemyCharacter> enemiesO) {
         enemies = new UIEntity[enemiesO.size()];
-        //A ver
         cameras = new UIStaticEntity[enemiesO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
             if(enemiesO.get(i).getClass().equals(CameraGuard.class)) {
@@ -178,7 +177,10 @@ public class GameScreen extends ScreenAdapter {
 
     private void drawCameras() {
         for (UIStaticEntity cameraGuard : cameras) {
-            cameraGuard.draw(batch);
+            if(cameraGuard!=null) {
+                cameraGuard.draw(batch);
+            }
+
         }
 
     }
