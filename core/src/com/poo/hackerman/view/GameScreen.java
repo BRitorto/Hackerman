@@ -20,8 +20,7 @@ import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 
 public class GameScreen extends ScreenAdapter {
@@ -33,17 +32,20 @@ public class GameScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private EntityManager entityManager;
     private SpriteBatch batch;
+    private List<EnemyCharacter> enemiesO;
 
     private UIEntity hacker;
     private UIStaticEntity door;
     private UIEntity[] enemies;
     private UIStaticEntity[] computers, obstacles, hearts, cameras;
+    private List<CameraGuard> camerasO;
     private List<Computer> computersO;
     private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
     private Texture hackerT, guardT, cameraT;
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
+    private boolean restart;
 
     public GameScreen(HackerGame game) {
         this.game = game;
@@ -62,7 +64,15 @@ public class GameScreen extends ScreenAdapter {
 
         PlayerCharacter player = entityManager.getPlayer();
         Door doorO = entityManager.getDoor();
-        List<EnemyCharacter> enemiesO = entityManager.getEnemies();
+        enemiesO = entityManager.getEnemies();
+        //cameras = new UIStaticEntity[enemiesO.size()];
+        camerasO = new ArrayList<CameraGuard>();
+        for(EnemyCharacter enemyCharacter: enemiesO) {
+            if(enemyCharacter.getClass().equals(CameraGuard.class)) {
+                camerasO.add((CameraGuard)enemyCharacter);
+                enemiesO.remove(enemyCharacter);
+            }
+        }
         computersO = entityManager.getComputers();
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
@@ -114,21 +124,26 @@ public class GameScreen extends ScreenAdapter {
         super.render(delta);
         entityManager = game.getModelManager().getEntityManager();
         game.getModelManager().queryInput();
+
+        if(restart){
+            game.setScreen(new GameScreen(game));
+            this.dispose();
+        }
         clearScreen();
         draw();
     }
 
     private void createEnemies(List<EnemyCharacter> enemiesO) {
         enemies = new UIEntity[enemiesO.size()];
-        cameras = new UIStaticEntity[enemiesO.size()];
+        cameras = new UIStaticEntity[camerasO.size()];
         for(int i = 0; i < enemiesO.size() ; i++) {
-            if(enemiesO.get(i).getClass().equals(CameraGuard.class)) {
-                cameras[i] = new UIStaticEntity(cameraT);
-                cameras[i].setPosition(enemiesO.get(i).getPosition().getX(),enemiesO.get(i).getPosition().getY());
-            }
-            else {
+            if(!enemiesO.get(i).getClass().equals(CameraGuard.class)) {
                 enemies[i] = new UIEntity(guardT, enemiesO.get(i));
             }
+        }
+        for (int i= 0; i < camerasO.size(); i++){
+            cameras[i] = new UIStaticEntity(cameraT, camerasO.get(i));
+            cameras[i].setPosition(camerasO.get(i).getPosition().getX(),camerasO.get(i).getPosition().getY());
         }
     }
 
@@ -187,9 +202,7 @@ public class GameScreen extends ScreenAdapter {
             if(cameraGuard!=null) {
                 cameraGuard.draw(batch);
             }
-
         }
-
     }
 
     private void drawBackground() {
@@ -237,56 +250,109 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-
     private void drawLights() {
-        for(UIEntity enemy : enemies) {
-            if(enemy!=null){
-                drawLight(enemy);
+
+        for(int i = 0; i < enemies.length; i++) {
+            if(enemies[i]!=null){
+                drawLight(enemies[i], enemiesO.get(i).getMylight().getRange());
+            }
+        }
+
+        for (int i = 0; i < cameras.length; i++) {
+            if(cameras[i]!=null) {
+                drawLight(cameras[i],camerasO.get(i).getMylight().getRange());
             }
         }
     }
 
-    private void drawLight(UIEntity enemy) {
+    private void drawLight(UIStaticEntity camera, int range) {
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.YELLOW);
+        int[] dir = camera.getDirection().getDir();
+        float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        float myrange = range * GameMap.CELL_SIZE;
+        switch(camera.getDirection().getCode())
+        {
+            case Direction.UP:
+                x1 = camera.getX()+ dir[0]*GameMap.CELL_SIZE +  cameraT.getWidth()/2;
+                y1 = camera.getY() - cameraT.getHeight()/2;
+                x2 = x1 - GameMap.CELL_SIZE;
+                y2 = y1 + myrange;
+                x3 = x1 + GameMap.CELL_SIZE;
+                y3 = y1 + myrange;
+                break;
+            case Direction.DOWN:
+                x1 = camera.getX()+ dir[0]*GameMap.CELL_SIZE +  cameraT.getWidth()/2;
+                y1 = camera.getY() - cameraT.getHeight()/2;
+                x2 = x1 - GameMap.CELL_SIZE;
+                y2 = y1 - myrange;
+                x3 = x1 + GameMap.CELL_SIZE;
+                y3 = y1 - myrange;
+                break;
+            case Direction.RIGHT:
+                x1 = camera.getX() + cameraT.getWidth()/2;
+                y1 = camera.getY() - cameraT.getHeight()/2;
+                x2 = x1 + myrange;
+                y2 = y1 + GameMap.CELL_SIZE;
+                x3 = x1 + myrange;
+                y3 = y1 - GameMap.CELL_SIZE;
+                break;
+            case Direction.LEFT:
+                x1 = camera.getX()+ cameraT.getWidth()/2;
+                y1 = camera.getY() - cameraT.getHeight()/2;
+                x2 = x1 - myrange;
+                y2 = y1 + GameMap.CELL_SIZE;
+                x3 = x1 - myrange;
+                y3 = y1 - GameMap.CELL_SIZE;
+                break;
+        }
+        shapeRenderer.triangle(x1,y1,x2,y2,x3,y3);
+        shapeRenderer.end();
+    }
+
+    private void drawLight(UIEntity enemy, int range) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.GOLD);
         int[] dir = enemy.getDirection().getDir();
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        float myrange = range * GameMap.CELL_SIZE;
         switch(enemy.getDirection().getCode())
         {
             case Direction.UP:
                 x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 - 50;
-                y2 = y1 + 50;
-                x3 = x1 + 50;
-                y3 = y1 + 50;
+                x2 = x1 - GameMap.CELL_SIZE;
+                y2 = y1 + myrange;
+                x3 = x1 + GameMap.CELL_SIZE;
+                y3 = y1 + myrange;
                 break;
             case Direction.DOWN:
                 x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 - 50;
-                y2 = y1 - 50;
-                x3 = x1 + 50;
-                y3 = y1 - 50;
+                x2 = x1 - GameMap.CELL_SIZE;
+                y2 = y1 - myrange;
+                x3 = x1 + GameMap.CELL_SIZE;
+                y3 = y1 - myrange;
                 break;
             case Direction.RIGHT:
                 x1 = enemy.getX() + GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 + 50;
-                y2 = y1 + 50;
-                x3 = x1 + 50;
-                y3 = y1 - 50;
+                x2 = x1 + myrange;
+                y2 = y1 + GameMap.CELL_SIZE;
+                x3 = x1 + myrange;
+                y3 = y1 - GameMap.CELL_SIZE;
                 break;
             case Direction.LEFT:
                 x1 = enemy.getX()+GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 - 50;
-                y2 = y1 + 50;
-                x3 = x1 - 50;
-                y3 = y1 - 50;
+                x2 = x1 - myrange;
+                y2 = y1 + GameMap.CELL_SIZE;
+                x3 = x1 - myrange;
+                y3 = y1 - GameMap.CELL_SIZE;
                 break;
         }
         shapeRenderer.triangle(x1,y1,x2,y2,x3,y3);
+        shapeRenderer.setColor(Color.YELLOW);
         shapeRenderer.end();
     }
 

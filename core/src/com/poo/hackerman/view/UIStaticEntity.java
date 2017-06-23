@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.poo.hackerman.model.entity.Direction;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 
 /**
  * Created by cderienzo on 6/20/2017.
@@ -12,11 +13,18 @@ public class UIStaticEntity {
 
     private Texture texture;
     private Sprite sprite;
+    private CameraGuard cameraGuard;
 
     public UIStaticEntity(Texture texture) {
         this.texture = texture;
         sprite = new Sprite(texture);
     }
+    public UIStaticEntity(Texture texture, CameraGuard cameraGuard) {
+        this.texture = texture;
+        sprite = new Sprite(texture);
+        this.cameraGuard = cameraGuard;
+    }
+
 
     public void setPosition(int x, int y) {
         sprite.setX(x);
@@ -41,5 +49,17 @@ public class UIStaticEntity {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
+    }
+
+    public float getX() {
+        return sprite.getX();
+    }
+
+    public float getY() {
+        return sprite.getY();
+    }
+
+    public Direction getDirection() {
+        return cameraGuard.getDirection();
     }
 }
