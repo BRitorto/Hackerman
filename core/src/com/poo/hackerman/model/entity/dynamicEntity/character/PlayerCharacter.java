@@ -36,11 +36,10 @@ public class PlayerCharacter extends GameCharacter {
         int[] dir = direction.getDir();
 
         Position objective = new Position(getPosition().getX() + dir[0] * GameMap.CELL_SIZE, getPosition().getY() + dir[1] * GameMap.CELL_SIZE);
-        if(!objective.withinBoundaries())
+        if(!objective.withinBoundaries()) {
             return;
-
-
-        if(grid.getCell(objective).getEntity() != null && InteractiveStaticEntity.class.equals(grid.getCell(objective).getEntity().getClass())) {
+        }
+        if(grid.getCell(objective).getEntity() != null && (grid.getCell(objective).getEntity() instanceof InteractiveStaticEntity)) {
             InteractiveStaticEntity entity = (InteractiveStaticEntity) grid.getCell(objective).getEntity();
             entity.interact();
         }

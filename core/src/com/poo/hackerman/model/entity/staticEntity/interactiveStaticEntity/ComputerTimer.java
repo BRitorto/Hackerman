@@ -6,7 +6,7 @@ package com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity;
 public class ComputerTimer {
 
     // Cooldown times for characters
-    private static final long HACKING_BASE = 10; // in ms
+    private static final long HACKING_BASE = 20; // in ms
 
 
     // Time attributes for characters
@@ -31,7 +31,7 @@ public class ComputerTimer {
     }
 
     public boolean hackTimePassed(long nowTime) {
-        return (nowTime - this.getLastHackTime() >= HACKING_BASE);
+        return (nowTime - this.getLastHackTime()) >= HACKING_BASE;
     }
 
 }

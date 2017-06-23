@@ -62,6 +62,7 @@ public class Guard extends EnemyCharacter {
 
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
+            System.out.println("lo cache");
             playerDetected = true;
         }
         if(instructions == null) {

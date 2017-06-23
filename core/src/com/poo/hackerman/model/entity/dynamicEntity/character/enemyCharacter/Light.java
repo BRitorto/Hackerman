@@ -33,7 +33,11 @@ public class Light {
         Direction dirRight = guardDirection.getRight();
         Direction dirLeft = guardDirection.getLeft();
 
+
         for(int i = 0; i < range; i++) {
+            if(!p1.withinBoundaries() || !checkPlayer(p1, grid)) {
+                return false;
+            }
             boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
             if(detected) {
                 return true;

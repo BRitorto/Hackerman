@@ -87,8 +87,8 @@ public class HackerGame extends Game {
             } break;
 
             case NEW_LEVEL: {
-                createGameScreen(this);
-                setScreen(gameScreen);
+
+                break;
             }
 
             case GAME_OVER: {
@@ -129,6 +129,10 @@ public class HackerGame extends Game {
 
     public SpriteBatch getBatch() {
         return batch;
+    }
+
+    public STATE getState() {
+        return state;
     }
 
     //no lo pushe
