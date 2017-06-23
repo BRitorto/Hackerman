@@ -103,7 +103,9 @@ public class UIEntity {
         TextureRegion currentFrame = (TextureRegion) animation.getKeyFrame(animationTimer);
         batch.draw(currentFrame,dynamicEntity.getPosition().getX()-currentFrame.getRegionWidth()/2,dynamicEntity.getPosition().getY());
     }
-
+    public DynamicEntity getDynamicEntity() {
+        return dynamicEntity;
+    }
     public Direction getDirection() {
         return dynamicEntity.getDirection();
     }

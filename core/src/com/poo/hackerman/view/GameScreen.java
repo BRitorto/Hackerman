@@ -2,6 +2,7 @@ package com.poo.hackerman.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -14,6 +15,7 @@ import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Guard;
 import com.poo.hackerman.model.entity.staticEntity.Obstacle;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
@@ -45,9 +47,11 @@ public class GameScreen extends ScreenAdapter {
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
-    private boolean restart;
+    private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
+
 
     public GameScreen(HackerGame game) {
+        music.play();
         this.game = game;
         batch = game.getBatch();
     }
@@ -68,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
         //cameras = new UIStaticEntity[enemiesO.size()];
         camerasO = new ArrayList<CameraGuard>();
         for(EnemyCharacter enemyCharacter: enemiesO) {
-            if(enemyCharacter.getClass().equals(CameraGuard.class)) {
+            if(enemyCharacter instanceof CameraGuard) {
                 camerasO.add((CameraGuard)enemyCharacter);
                 enemiesO.remove(enemyCharacter);
             }
@@ -107,6 +111,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         super.dispose();
+        music.dispose();
     }
 
     @Override
@@ -124,11 +129,6 @@ public class GameScreen extends ScreenAdapter {
         super.render(delta);
         entityManager = game.getModelManager().getEntityManager();
         game.getModelManager().queryInput();
-
-        if(restart){
-            game.setScreen(new GameScreen(game));
-            this.dispose();
-        }
         clearScreen();
         draw();
     }
@@ -136,8 +136,8 @@ public class GameScreen extends ScreenAdapter {
     private void createEnemies(List<EnemyCharacter> enemiesO) {
         enemies = new UIEntity[enemiesO.size()];
         cameras = new UIStaticEntity[camerasO.size()];
-        for(int i = 0; i < enemiesO.size() ; i++) {
-            if(!enemiesO.get(i).getClass().equals(CameraGuard.class)) {
+        for(int i = 0; i < enemiesO.size(); i++) {
+            if(enemiesO.get(i) instanceof Guard) {
                 enemies[i] = new UIEntity(guardT, enemiesO.get(i));
             }
         }
@@ -269,39 +269,19 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawLight(UIStaticEntity mycamera, int range) {
+        camera.update();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = mycamera.getDirection().getDir();
-        float x1 = 0, y1 = 0;
         float myrange = (range+1) * GameMap.CELL_SIZE;
-        int start = 0;
-        switch(mycamera.getDirection().getCode())
-        {
-            case Direction.UP:
-                x1 = mycamera.getX()+ dir[0]*GameMap.CELL_SIZE;
-                y1 = mycamera.getY();
-                start = 60;
-                break;
-            case Direction.DOWN:
-                x1 = mycamera.getX()+ dir[0]*GameMap.CELL_SIZE;
-                y1 = mycamera.getY();
-                start = 240;
-                break;
-            case Direction.RIGHT:
-                x1 = mycamera.getX() + GameMap.CELL_SIZE/2;
-                y1 = mycamera.getY();
-                start = -30;
-                break;
-            case Direction.LEFT:
-                x1 = mycamera.getX()+GameMap.CELL_SIZE/2;
-                y1 = mycamera.getY();
-                start = 150;
-                break;
-        }
-        shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,myrange,start,60);
+        float x1 = mycamera.getX()+  dir[0] * cameraT.getWidth()/2;
+        float y1 = mycamera.getY() + dir[1] * cameraT.getHeight()/2;
+        int start = 45 - mycamera.getDirection().getCode()*45;
+
         shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.arc(x1,y1,myrange,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
@@ -310,37 +290,14 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.getProjectionMatrix();
         int[] dir = enemy.getDirection().getDir();
-        float x1 = 0, y1 = 0;
         float myrange = range * GameMap.CELL_SIZE;
-        int start = 0;
-        switch(enemy.getDirection().getCode())
-        {
-            case Direction.UP:
-                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE;
-                y1 = enemy.getY();
-                start = 60;
-                break;
-            case Direction.DOWN:
-                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE;
-                y1 = enemy.getY();
-                start = 240;
-                break;
-            case Direction.RIGHT:
-                x1 = enemy.getX() + GameMap.CELL_SIZE/2;
-                y1 = enemy.getY();
-                start = -30;
-                break;
-            case Direction.LEFT:
-                x1 = enemy.getX() - GameMap.CELL_SIZE/2;
-                y1 = enemy.getY();
-                start = 150;
-                break;
-        }
-        shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,myrange,start,60);
+        float x1 = enemy.getX()+  dir[0] * cameraT.getWidth()/2;
+        float y1 = enemy.getY() + dir[1] * cameraT.getHeight()/2;
+        int start = 45 - enemy.getDirection().getCode()*45;
         shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.arc(x1,y1,myrange,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
