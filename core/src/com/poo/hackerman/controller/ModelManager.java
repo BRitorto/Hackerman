@@ -85,7 +85,7 @@ public class ModelManager implements Runnable{
         if(rPressed && uPressed)
             return new Direction(Direction.UP_RIGHT);
         else if(lPressed && uPressed)
-            return new Direction(Direction.UP);
+            return new Direction(Direction.UP_LEFT);
         else if(rPressed && dPressed)
             return new Direction(Direction.DOWN_RIGHT);
         else if(lPressed && dPressed)
