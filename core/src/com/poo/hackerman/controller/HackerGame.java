@@ -50,6 +50,11 @@ public class HackerGame extends Game {
 
         batch = new SpriteBatch();
         mainMenuScreen = new MainMenuScreen(this);
+        pausedScreen = new PausedScreen(this);
+        exitScreen = new ExitScreen(this);
+        gameOverScreen = new GameOverScreen(this);
+        wonScreen = new WonScreen(this);
+
         setScreen(mainMenuScreen);
     }
 
@@ -71,7 +76,6 @@ public class HackerGame extends Game {
             } break;
 
             case EXIT: {
-                exitScreen = new ExitScreen(this);
                 modelManager.getGameModel().setPause();
                 setScreen(exitScreen);
             } break;
@@ -81,7 +85,6 @@ public class HackerGame extends Game {
             } break;
 
             case PAUSE: {
-                pausedScreen = new PausedScreen(this);
                 modelManager.getGameModel().setPause();
                 setScreen(pausedScreen);
             } break;
@@ -96,13 +99,11 @@ public class HackerGame extends Game {
             break;
 
             case GAME_OVER: {
-                gameOverScreen = new GameOverScreen(this);
                 modelManager.getGameModel().setPause();
                 setScreen(gameOverScreen);
             } break;
 
             case WON: {
-                wonScreen = new WonScreen(this);
                 setScreen(wonScreen);
                 Gdx.app.exit();
             } break;

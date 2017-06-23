@@ -51,7 +51,7 @@ public class PausedScreen implements Screen {
         buttonXLow = Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4;
         buttonXHigh = (Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4) + BUTTON_WIDTH/2;
 
-        buttonYLow = buttonYHigh + BUTTON_HEIGHT + 50;
+        buttonYLow = buttonYHigh + BUTTON_HEIGHT;
         buttonYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/2;
     }
 
