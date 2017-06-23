@@ -268,95 +268,82 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void drawLight(UIStaticEntity camera, int range) {
+    private void drawLight(UIStaticEntity mycamera, int range) {
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.YELLOW);
-        int[] dir = camera.getDirection().getDir();
-        float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        int[] dir = mycamera.getDirection().getDir();
+        float x1 = 0, y1 = 0;
         float myrange = (range+1) * GameMap.CELL_SIZE;
-        switch(camera.getDirection().getCode())
+        int start = 0;
+        switch(mycamera.getDirection().getCode())
         {
             case Direction.UP:
-                x1 = camera.getX()+ dir[0]*GameMap.CELL_SIZE +  cameraT.getWidth()/2;
-                y1 = camera.getY() - cameraT.getHeight()/2;
-                x2 = x1 - GameMap.CELL_SIZE;
-                y2 = y1 + myrange;
-                x3 = x1 + GameMap.CELL_SIZE;
-                y3 = y1 + myrange;
+                x1 = mycamera.getX()+ dir[0]*GameMap.CELL_SIZE;
+                y1 = mycamera.getY();
+                start = 60;
                 break;
             case Direction.DOWN:
-                x1 = camera.getX()+ dir[0]*GameMap.CELL_SIZE +  cameraT.getWidth()/2;
-                y1 = camera.getY() - cameraT.getHeight()/2;
-                x2 = x1 - GameMap.CELL_SIZE;
-                y2 = y1 - myrange;
-                x3 = x1 + GameMap.CELL_SIZE;
-                y3 = y1 - myrange;
+                x1 = mycamera.getX()+ dir[0]*GameMap.CELL_SIZE;
+                y1 = mycamera.getY();
+                start = 240;
                 break;
             case Direction.RIGHT:
-                x1 = camera.getX() + cameraT.getWidth()/2;
-                y1 = camera.getY() - cameraT.getHeight()/2;
-                x2 = x1 + myrange;
-                y2 = y1 + GameMap.CELL_SIZE;
-                x3 = x1 + myrange;
-                y3 = y1 - GameMap.CELL_SIZE;
+                x1 = mycamera.getX() + GameMap.CELL_SIZE/2;
+                y1 = mycamera.getY();
+                start = -30;
                 break;
             case Direction.LEFT:
-                x1 = camera.getX()+ cameraT.getWidth()/2;
-                y1 = camera.getY() - cameraT.getHeight()/2;
-                x2 = x1 - myrange;
-                y2 = y1 + GameMap.CELL_SIZE;
-                x3 = x1 - myrange;
-                y3 = y1 - GameMap.CELL_SIZE;
+                x1 = mycamera.getX()+GameMap.CELL_SIZE/2;
+                y1 = mycamera.getY();
+                start = 150;
                 break;
         }
-        shapeRenderer.triangle(x1,y1,x2,y2,x3,y3);
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.arc(x1,y1,myrange,start,60);
+        shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
         shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     private void drawLight(UIEntity enemy, int range) {
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.YELLOW);
+        shapeRenderer.getProjectionMatrix();
         int[] dir = enemy.getDirection().getDir();
-        float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        float x1 = 0, y1 = 0;
         float myrange = range * GameMap.CELL_SIZE;
+        int start = 0;
         switch(enemy.getDirection().getCode())
         {
             case Direction.UP:
-                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE;
                 y1 = enemy.getY();
-                x2 = x1 - GameMap.CELL_SIZE;
-                y2 = y1 + myrange;
-                x3 = x1 + GameMap.CELL_SIZE;
-                y3 = y1 + myrange;
+                start = 60;
                 break;
             case Direction.DOWN:
-                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE;
                 y1 = enemy.getY();
-                x2 = x1 - GameMap.CELL_SIZE;
-                y2 = y1 - myrange;
-                x3 = x1 + GameMap.CELL_SIZE;
-                y3 = y1 - myrange;
+                start = 240;
                 break;
             case Direction.RIGHT:
                 x1 = enemy.getX() + GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 + myrange;
-                y2 = y1 + GameMap.CELL_SIZE;
-                x3 = x1 + myrange;
-                y3 = y1 - GameMap.CELL_SIZE;
+                start = -30;
                 break;
             case Direction.LEFT:
-                x1 = enemy.getX()+GameMap.CELL_SIZE/2;
+                x1 = enemy.getX() - GameMap.CELL_SIZE/2;
                 y1 = enemy.getY();
-                x2 = x1 - myrange;
-                y2 = y1 + GameMap.CELL_SIZE;
-                x3 = x1 - myrange;
-                y3 = y1 - GameMap.CELL_SIZE;
+                start = 150;
                 break;
         }
-        shapeRenderer.triangle(x1,y1,x2,y2,x3,y3);
-        shapeRenderer.setColor(Color.YELLOW);
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        shapeRenderer.arc(x1,y1,myrange,start,60);
+        shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
         shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
     }
 
     private void drawLives() {
