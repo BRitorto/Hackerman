@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.resizable = false;
-		config.fullscreen = true;
+		//config.fullscreen = true;
 		config.width  = 23*GameMap.CELL_SIZE;
 		config.height = 17*GameMap.CELL_SIZE;
 		new LwjglApplication(new HackerGame(), config);

@@ -26,7 +26,6 @@ public class Grid {
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-        System.out.println("Adding: " + entity.getClass() + " in: " + entity.getPosition().getX()/ GameMap.CELL_SIZE+ " " + entity.getPosition().getY()/ GameMap.CELL_SIZE);
         int i = entity.getPosition().getX() / GameMap.CELL_SIZE;
         int j = entity.getPosition().getY() / GameMap.CELL_SIZE;
         matrix[i][j].add(entity);               //puede tirar exception
