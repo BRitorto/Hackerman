@@ -4,7 +4,11 @@ package com.poo.hackerman.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.view.*;
 
@@ -27,6 +31,10 @@ public class HackerGame extends Game {
     private GameScreen gameScreen;
     private WonScreen wonScreen;
 
+    private Viewport viewport;
+    private Camera camera;
+
+
     /**
      *
      * creates a new instance that extends from an ApplicationListener
@@ -42,11 +50,6 @@ public class HackerGame extends Game {
 
         batch = new SpriteBatch();
         mainMenuScreen = new MainMenuScreen(this);
-        exitScreen = new ExitScreen(this);
-        pausedScreen = new PausedScreen(this);
-        gameOverScreen = new GameOverScreen(this);
-        wonScreen = new WonScreen(this);
-
         setScreen(mainMenuScreen);
     }
 
@@ -63,13 +66,14 @@ public class HackerGame extends Game {
 
             case INITIALIZE: {
                 modelManager.initialize();
-                createGameScreen(this);
+                gameScreen = new GameScreen(this);
                 setScreen(gameScreen);
             } break;
 
             case EXIT: {
+                exitScreen = new ExitScreen(this);
                 modelManager.getGameModel().setPause();
-                setScreen(getExitScreen());
+                setScreen(exitScreen);
             } break;
 
             case EXIT_YES: {
@@ -77,6 +81,7 @@ public class HackerGame extends Game {
             } break;
 
             case PAUSE: {
+                pausedScreen = new PausedScreen(this);
                 modelManager.getGameModel().setPause();
                 setScreen(pausedScreen);
             } break;
@@ -91,19 +96,17 @@ public class HackerGame extends Game {
             break;
 
             case GAME_OVER: {
+                gameOverScreen = new GameOverScreen(this);
                 modelManager.getGameModel().setPause();
                 setScreen(gameOverScreen);
             } break;
 
             case WON: {
+                wonScreen = new WonScreen(this);
                 setScreen(wonScreen);
                 Gdx.app.exit();
             } break;
         }
-    }
-
-    public void createGameScreen(HackerGame game) {
-        gameScreen = new GameScreen(this);
     }
 
     public GameScreen getGameScreen() {
