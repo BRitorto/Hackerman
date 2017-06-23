@@ -41,7 +41,7 @@ public class MainMenuScreen implements Screen {
 
         this.game = game;
 
-        playButtonInactive = new Texture(Gdx.files.internal("playinactive.png"));
+        playButtonInactive = new Texture("playinactive.png");
         playButtonActive = new Texture("playactive.png");
         exitButtonActive = new Texture("exitactive.png");
         exitButtonInactive = new Texture("exitinactive.png");
@@ -87,12 +87,7 @@ public class MainMenuScreen implements Screen {
         } else {
             game.getBatch().draw(playButtonInactive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
-        /*if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > loadY && Gdx.input.getY() < LOAD_Y) {
-            game.getBatch().draw(loadGameButtonActive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
-        } else {
-            game.getBatch().draw(loadGameButtonInactive, CENTER_X, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
-        }*/
+
         if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
                 && Gdx.input.getY() > exitY && Gdx.input.getY() < EXIT_Y) {
             game.getBatch().draw(exitButtonActive, CENTER_X, GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);

@@ -19,21 +19,37 @@ public class GameOverScreen implements Screen {
     private Texture exitButtonActive;
     private Texture exitButtonInactive;
     //text
-    private static final int GAME_OVER_TEXT_WIDTH = 351;
-    private static final int GAME_OVER_TEXT_HEIGHT = 43;
+    private static final int GAME_OVER_TEXT_WIDTH = 351*2;
+    private static final int GAME_OVER_TEXT_HEIGHT = 43*2;
     //buttons
-    private static final int BUTTON_WIDTH = 219;
-    private static final int BUTTON_HEIGHT = 73;
-    private static final int CENTER_X = GameMap.WIDTH/2 - BUTTON_WIDTH/2;
-    private static final int TOP_Y = 345;
-    private static final int buttonX = CENTER_X + BUTTON_WIDTH;
-    private static final int topY = TOP_Y - BUTTON_HEIGHT;
+    private int CENTER_TITLE;
+    private int GAME_HEIGHT;
+    private int GAME_WIDTH;
+    private static final int BUTTON_WIDTH = 219*2;
+    private static final int BUTTON_HEIGHT = 73*2;
+    private int CENTER_X;
+    private int buttonXHigh;
+    private int buttonXLow;
+    private int buttonYLow;
+    private int buttonYHigh;
 
     public GameOverScreen(HackerGame game) {
         this.game = game;
         gameOver = new Texture(Gdx.files.internal("gameover.png"));
         exitButtonActive = new Texture(Gdx.files.internal("exitactive.png"));
         exitButtonInactive = new Texture(Gdx.files.internal("exitinactive.png"));
+
+        GAME_HEIGHT = GameMap.HEIGHT;
+        GAME_WIDTH = GameMap.WIDTH;
+
+        CENTER_TITLE = GAME_WIDTH/2 - GAME_OVER_TEXT_WIDTH/2;
+        CENTER_X = GAME_WIDTH/2 - BUTTON_WIDTH/2;
+
+        buttonXLow = Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4;
+        buttonXHigh = (Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4) + BUTTON_WIDTH/2;
+
+        buttonYLow = buttonYHigh + BUTTON_HEIGHT;
+        buttonYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/2;
     }
 
     @Override
@@ -53,16 +69,16 @@ public class GameOverScreen implements Screen {
     }
 
     public void draw() {
-        game.getBatch().draw(gameOver, 231, 450, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
-        if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.getBatch().draw(exitButtonActive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT );
+        game.getBatch().draw(gameOver, CENTER_TITLE, 3*GAME_HEIGHT/4, GAME_OVER_TEXT_WIDTH, GAME_OVER_TEXT_HEIGHT );
+        if (Gdx.input.getX() < buttonXHigh && Gdx.input.getX() > buttonXLow
+                && Gdx.input.getY() > buttonYLow && Gdx.input.getY() < buttonYHigh) {
+            game.getBatch().draw(exitButtonActive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 game.setState(HackerGame.STATE.EXIT_YES);
                 game.setScreen((Screen)game.getGameScreen());
             }
         } else {
-            game.getBatch().draw(exitButtonInactive, CENTER_X, 300, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 
