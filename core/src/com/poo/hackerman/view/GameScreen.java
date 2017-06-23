@@ -3,6 +3,7 @@ package com.poo.hackerman.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -18,6 +19,8 @@ import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Compu
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -168,10 +171,10 @@ public class GameScreen extends ScreenAdapter {
         batch.begin();
         drawBackground();
         drawObstacles();
-        drawEnemies();
         drawCameras();
         drawComputers();
         drawLives();
+        drawEnemies();
         door.draw(batch);
         hacker.draw(batch);
         //drawGrid();
@@ -234,6 +237,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+
     private void drawLights() {
         for(UIEntity enemy : enemies) {
             if(enemy!=null){
@@ -247,30 +251,35 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.setColor(Color.GOLD);
         int[] dir = enemy.getDirection().getDir();
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-        x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
-        y1 = enemy.getY()/*+ dir[1]*GameMap.CELL_SIZE*/;
-
         switch(enemy.getDirection().getCode())
         {
             case Direction.UP:
+                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+                y1 = enemy.getY();
                 x2 = x1 - 50;
                 y2 = y1 + 50;
                 x3 = x1 + 50;
                 y3 = y1 + 50;
                 break;
             case Direction.DOWN:
+                x1 = enemy.getX()+ dir[0]*GameMap.CELL_SIZE +  GameMap.CELL_SIZE/2;
+                y1 = enemy.getY();
                 x2 = x1 - 50;
                 y2 = y1 - 50;
                 x3 = x1 + 50;
                 y3 = y1 - 50;
                 break;
             case Direction.RIGHT:
+                x1 = enemy.getX() + GameMap.CELL_SIZE/2;
+                y1 = enemy.getY();
                 x2 = x1 + 50;
                 y2 = y1 + 50;
                 x3 = x1 + 50;
                 y3 = y1 - 50;
                 break;
             case Direction.LEFT:
+                x1 = enemy.getX()+GameMap.CELL_SIZE/2;
+                y1 = enemy.getY();
                 x2 = x1 - 50;
                 y2 = y1 + 50;
                 x3 = x1 - 50;
@@ -288,10 +297,6 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    public void renew(){
-        game.setScreen(new GameScreen(game));
-        this.dispose();
-    }
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
