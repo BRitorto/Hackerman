@@ -35,7 +35,7 @@ public class Light {
 
 
         for(int i = 0; i < range; i++) {
-            if(!p1.withinBoundaries() || !checkPlayer(p1, grid)) {
+            if(!p1.withinBoundaries() || (!grid.isPossibleAdd(p1) && !checkPlayer(p1, grid))) {
                 return false;
             }
             boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
