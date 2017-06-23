@@ -27,8 +27,8 @@ public class UIStaticEntity {
 
 
     public void setPosition(int x, int y) {
-        sprite.setX(x);
-        sprite.setY(y);
+        sprite.setX(x-texture.getWidth()/2);
+        sprite.setY(y-texture.getHeight()/2);
     }
 
     public void draw(Batch batch) {

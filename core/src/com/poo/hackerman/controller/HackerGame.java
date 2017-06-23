@@ -87,9 +87,8 @@ public class HackerGame extends Game {
             } break;
 
             case NEW_LEVEL: {
-
-                break;
             }
+            break;
 
             case GAME_OVER: {
                 modelManager.getGameModel().setPause();
@@ -129,10 +128,6 @@ public class HackerGame extends Game {
 
     public SpriteBatch getBatch() {
         return batch;
-    }
-
-    public STATE getState() {
-        return state;
     }
 
     //no lo pushe

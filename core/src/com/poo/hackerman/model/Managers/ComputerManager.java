@@ -24,7 +24,7 @@ public class ComputerManager {
     public void updateComputers() {
         if(computers.get(currentComputer).isHacked()){
             computers.get(currentComputer).setOff();
-            if(currentComputer == computers.size()) {
+            if(currentComputer >= computers.size()-1) {
                 openDoor();
             }
             else{

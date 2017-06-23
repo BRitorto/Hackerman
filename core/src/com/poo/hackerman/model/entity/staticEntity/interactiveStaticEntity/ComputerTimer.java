@@ -31,7 +31,7 @@ public class ComputerTimer {
     }
 
     public boolean hackTimePassed(long nowTime) {
-        return (nowTime - this.getLastHackTime()) >= HACKING_BASE;
+        return (this.getLastHackTime() - nowTime) >= HACKING_BASE;
     }
 
 }

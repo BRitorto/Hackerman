@@ -27,7 +27,6 @@ public class Computer extends InteractiveStaticEntity {
         if(isOn) {
             long nowTime = System.currentTimeMillis();
             if (timer.hackTimePassed(nowTime)) {
-                System.out.println("estoy en 1");
                 currentConsecutiveHacks = 1;
                 return;
             }
@@ -36,7 +35,6 @@ public class Computer extends InteractiveStaticEntity {
             currentConsecutiveHacks++;
 
             if(currentConsecutiveHacks == consecutiveHacks) {
-                System.out.println("fui hackeada");
                 isHacked = true;
             }
         }

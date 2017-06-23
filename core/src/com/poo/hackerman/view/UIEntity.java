@@ -42,7 +42,6 @@ public class UIEntity {
         animationLeft = new Animation(FRAME_DURATION,playerTextures[1][0], playerTextures[1][1], playerTextures[1][2],playerTextures[1][3],playerTextures[1][4],playerTextures[1][5],playerTextures[1][6],playerTextures[1][7],playerTextures[1][8]);
         animationRight = new Animation(FRAME_DURATION,playerTextures[3][0], playerTextures[3][1], playerTextures[3][2],playerTextures[3][3],playerTextures[3][4],playerTextures[3][5],playerTextures[3][6],playerTextures[3][7],playerTextures[3][8]);
 
-
         animationUp.setPlayMode(Animation.PlayMode.LOOP);
         animationDown.setPlayMode(Animation.PlayMode.LOOP);
         animationLeft.setPlayMode(Animation.PlayMode.LOOP);
@@ -102,7 +101,7 @@ public class UIEntity {
                 animation = animationUp;
         }
         TextureRegion currentFrame = (TextureRegion) animation.getKeyFrame(animationTimer);
-        batch.draw(currentFrame,dynamicEntity.getPosition().getX(),dynamicEntity.getPosition().getY() );
+        batch.draw(currentFrame,dynamicEntity.getPosition().getX()-currentFrame.getRegionWidth()/2,dynamicEntity.getPosition().getY());
     }
 
     public Direction getDirection() {

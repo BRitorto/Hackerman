@@ -206,7 +206,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawBackground() {
-        for(int i = 0; i <= GameMap.WIDTH/ background.getWidth(); i ++) {
+        for(int i = 0; i <= GameMap.WIDTH/ background.getWidth(); i++) {
             for(int j = 0 ; j <= GameMap.HEIGHT/ background.getHeight() ; j++) {
                 batch.draw(background, i* background.getWidth(), j*background.getHeight());
             }
@@ -236,6 +236,9 @@ public class GameScreen extends ScreenAdapter {
             }
             else if(!computersO.get(i).isOn()) {
                 computers[i].setTexture(fakeCompT);
+            }
+            else {
+                computers[i].setTexture(computersT);
             }
             //computers[i].rotate(computersO.get(i).getDirection());
             computers[i].draw(batch);
@@ -270,7 +273,7 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.setColor(Color.YELLOW);
         int[] dir = camera.getDirection().getDir();
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-        float myrange = range * GameMap.CELL_SIZE;
+        float myrange = (range+1) * GameMap.CELL_SIZE;
         switch(camera.getDirection().getCode())
         {
             case Direction.UP:
@@ -312,7 +315,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void drawLight(UIEntity enemy, int range) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.GOLD);
+        shapeRenderer.setColor(Color.YELLOW);
         int[] dir = enemy.getDirection().getDir();
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
         float myrange = range * GameMap.CELL_SIZE;

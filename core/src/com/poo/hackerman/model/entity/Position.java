@@ -53,7 +53,7 @@ public class Position implements Serializable {
     }
 
     public boolean withinBoundaries() {
-        return getX() > 0 && getX() < GameMap.WIDTH && getY() > 0 && getY() < GameMap.HEIGHT;
+        return getX() >= 0 && getX() < GameMap.WIDTH && getY() >= 0 && getY() < GameMap.HEIGHT;
     }
 
     public Position toGridIndexes() {

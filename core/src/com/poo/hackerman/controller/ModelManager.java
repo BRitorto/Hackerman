@@ -57,7 +57,7 @@ public class ModelManager implements Runnable{
         boolean uPressed = Gdx.input.isKeyPressed(Input.Keys.UP);
         boolean dPressed = Gdx.input.isKeyPressed(Input.Keys.DOWN);
         boolean pPressed = Gdx.input.isKeyPressed(Input.Keys.P);
-        boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.E);
+        boolean ePressed = Gdx.input.isKeyPressed(Input.Keys.ESCAPE);
         boolean sPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE);
 
         if(sPressed) {
@@ -118,10 +118,12 @@ public class ModelManager implements Runnable{
                     game.setState(HackerGame.STATE.GAME_OVER);
                 }
                 else if(gameModel.playerCaught()) {
+                    game.setState(HackerGame.STATE.PAUSE);
                     gameModel.retryLevel();
                     game.setState(HackerGame.STATE.NEW_LEVEL);
                 }
                 else if(gameModel.passedLevel() && gameModel.hasNextLevel()) {
+                    game.setState(HackerGame.STATE.PAUSE);
                     gameModel.nextLevel();
                     game.setState(HackerGame.STATE.NEW_LEVEL);
                 }
