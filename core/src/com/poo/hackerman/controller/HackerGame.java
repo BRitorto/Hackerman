@@ -134,6 +134,4 @@ public class HackerGame extends Game {
         return batch;
     }
 
-    //no lo pushe
-
 }

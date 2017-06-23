@@ -16,6 +16,8 @@ import com.poo.hackerman.view.GameScreen;
 public class ExitScreen implements Screen {
 
     private HackerGame game;
+    private int GAME_HEIGHT;
+    private int GAME_WIDTH;
     //texture
     private Texture resumeButtonActive;
     private Texture resumeButtonInactive;
@@ -23,17 +25,21 @@ public class ExitScreen implements Screen {
     private Texture exitButtonInactive;
     private Texture exitGame;
     //text
-    private static final int EXIT_TEXT_WIDTH = 392;
-    private static final int EXIT_TEXT_HEIGHT = 43;
+    private static final int EXIT_TEXT_WIDTH = 392*2;
+    private static final int EXIT_TEXT_HEIGHT = 43*2;
     //buttons
-    private static final int BUTTON_WIDTH = 219;
-    private static final int BUTTON_HEIGHT = 73;
-    private static final int CENTER_X = GameMap.WIDTH/2 - BUTTON_WIDTH/2;
-    private static final int TOP_Y = 287;
-    private static final int BOTTOM_Y = 387;
-    private static final int buttonX = CENTER_X + BUTTON_WIDTH;
-    private static final int topY = TOP_Y - BUTTON_HEIGHT;
-    private static final int bottomY = BOTTOM_Y - BUTTON_HEIGHT;
+    private static final int BUTTON_WIDTH = 219*2;
+    private static final int BUTTON_HEIGHT = 73*2;
+    private int CENTER_X;
+    private int CENTER_TITLE;
+
+
+    private int buttonXHigh = CENTER_X + BUTTON_WIDTH;
+    private int buttonXLow;
+    private int buttonTopYLow;
+    private int buttonTopYHigh;
+    private int buttonBottomYLow;
+    private int buttonBottomYHigh;
 
 
     public ExitScreen(HackerGame game) {
@@ -43,6 +49,23 @@ public class ExitScreen implements Screen {
         exitButtonActive = new Texture(Gdx.files.internal("exitactive.png"));
         exitButtonInactive = new Texture(Gdx.files.internal("exitinactive.png"));
         exitGame = new Texture(Gdx.files.internal("exitgame.png"));
+
+        GAME_HEIGHT = GameMap.HEIGHT;
+        GAME_WIDTH = GameMap.WIDTH;
+
+        CENTER_TITLE = GAME_WIDTH/2 - EXIT_TEXT_WIDTH/2;
+        CENTER_X = GAME_WIDTH/2 - BUTTON_WIDTH/2;
+
+        buttonXLow = Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4;
+        buttonXHigh = (Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4) + BUTTON_WIDTH/2;
+
+        buttonTopYLow = buttonTopYHigh + BUTTON_HEIGHT/2;
+        buttonTopYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/2;
+
+        buttonBottomYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/4;
+        buttonBottomYLow = buttonBottomYHigh - BUTTON_HEIGHT/2;
+
+
     }
 
     @Override
@@ -61,28 +84,28 @@ public class ExitScreen implements Screen {
     }
 
     public void draw() {
-        game.getBatch().draw(exitGame, 172, 400, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
+        game.getBatch().draw(exitGame, CENTER_TITLE, 3*GAME_HEIGHT/4, EXIT_TEXT_WIDTH, EXIT_TEXT_HEIGHT);
         //resume button
-        if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > topY && Gdx.input.getY() < TOP_Y) {
-            game.getBatch().draw(resumeButtonActive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
+        if (Gdx.input.getX() < buttonXHigh && Gdx.input.getX() > buttonXLow
+                && Gdx.input.getY() > buttonTopYLow && Gdx.input.getY() < buttonTopYHigh) {
+            game.getBatch().draw(resumeButtonActive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(HackerGame.STATE.RESUME);
             }
         } else {
-            game.getBatch().draw(resumeButtonInactive, CENTER_X, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(resumeButtonInactive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         //exit button
-        if (Gdx.input.getX() < buttonX && Gdx.input.getX() > CENTER_X
-                && Gdx.input.getY() > bottomY && Gdx.input.getY() < BOTTOM_Y) {
-            game.getBatch().draw(exitButtonActive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT );
+        if (Gdx.input.getX() < buttonXHigh && Gdx.input.getX() > buttonXLow
+                && Gdx.input.getY() > buttonBottomYLow && Gdx.input.getY() < buttonBottomYHigh) {
+            game.getBatch().draw(exitButtonActive, CENTER_X, GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT );
             if (Gdx.input.isTouched()) {
                 this.dispose();
                 game.setState(HackerGame.STATE.EXIT_YES);
             }
         } else {
-            game.getBatch().draw(exitButtonInactive, CENTER_X, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
+            game.getBatch().draw(exitButtonInactive, CENTER_X, GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
     }
 
