@@ -13,7 +13,7 @@ public abstract class GameCharacter extends DynamicEntity {
     private int movesRemaining;
     private Timer timer;
 
-    private static final long TIME_ROTATING = 50;
+    private static final long TIME_ROTATING = 40;
 
 
     protected GameCharacter(Position position, Direction direction, int velocity) {
@@ -51,8 +51,10 @@ public abstract class GameCharacter extends DynamicEntity {
             state = MOVING;
             movesRemaining = GameMap.CELL_SIZE/4;
             timer.updateLastMoveTime(System.currentTimeMillis(), direction);
-            //grid.freePosition(getPosition());
-            //grid.add(this, destination);
+            if(!destination.sameGridIndex(getPosition())) {        //prueba
+                grid.freePosition(getPosition());
+                grid.add(this, destination);
+            }
         }
     }
 
@@ -75,11 +77,6 @@ public abstract class GameCharacter extends DynamicEntity {
             int[] dir = direction.getDir();
             Position aux = new Position(getPosition().getX(), getPosition().getY());               //prueba
             getPosition().incrementPosition(dir[0], dir[1]);
-            if(!aux.sameGridIndex(getPosition())) {        //prueba
-                grid.freePosition(aux);
-                grid.add(this, getPosition());
-            }
-
         }
     }
 

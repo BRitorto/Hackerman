@@ -37,10 +37,9 @@ public class Cell {
     }
 
     public void add(Entity entity) throws OccupiedCellException {
-       /*if(!this.isEmpty()) {
-           System.out.println("Error en "+entity.getClass()+" "+entity.getPosition().getX()+" "+entity.getPosition().getY());
+       if(!this.isEmpty()) {
            throw new OccupiedCellException();
-       }*/
+       }
        if(entity == null) {
            return;
        }

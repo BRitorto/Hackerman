@@ -268,36 +268,34 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void drawLight(UIStaticEntity mycamera, int range) {
+    private void drawLight(UIStaticEntity mycamera, float range) {
         camera.update();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = mycamera.getDirection().getDir();
-        float myrange = (range+1) * GameMap.CELL_SIZE;
         float x1 = mycamera.getX() + cameraT.getWidth()/2;
         float y1 = mycamera.getY() + cameraT.getHeight()/2;
         int start = 45 - mycamera.getDirection().getCode() * 45;
 
         shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
         shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,myrange,start,90);
+        shapeRenderer.arc(x1,y1,range,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
-    private void drawLight(UIEntity enemy, int range) {
+    private void drawLight(UIEntity enemy, float range) {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = enemy.getDirection().getDir();
-        float myrange = range * GameMap.CELL_SIZE;
         float x1 = enemy.getX() + (dir[0]==-1?-1:1) * cameraT.getWidth()/2;
         float y1 = enemy.getY() + cameraT.getHeight()/2;
         int start = 45 - enemy.getDirection().getCode()*45;
         shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
         shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,myrange,start,90);
+        shapeRenderer.arc(x1,y1,range,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 

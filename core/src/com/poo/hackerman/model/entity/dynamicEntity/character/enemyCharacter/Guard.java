@@ -59,10 +59,8 @@ public class Guard extends EnemyCharacter {
      * If the guard is idle, it sets it moving
      *
      */
-
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
-            System.out.println("lo cache");
             playerDetected = true;
         }
         if(instructions == null) {

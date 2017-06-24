@@ -3,6 +3,7 @@ package com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter;
 import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.Entity;
 import com.poo.hackerman.model.entity.Position;
+import com.poo.hackerman.model.entity.dynamicEntity.character.GameCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.gameWorld.GameMap;
 import com.poo.hackerman.model.gameWorld.Grid;
@@ -13,9 +14,11 @@ import com.poo.hackerman.model.gameWorld.Grid;
 public class Light {
 
     private int range;
+    private float uiRange;
 
     public Light(int range) {
         this.range = range;
+        this.uiRange = range * GameMap.CELL_SIZE;
     }
 
     /**
@@ -29,20 +32,19 @@ public class Light {
 
         int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia
 
-        Position p1 = new Position(guardPosition.getX() + guardDir[0] * GameMap.CELL_SIZE, guardPosition.getY() + guardDir[1] * GameMap.CELL_SIZE);
+        Position p1 = new Position(guardPosition.getX(), guardPosition.getY());
         Direction dirRight = guardDirection.getRight();
         Direction dirLeft = guardDirection.getLeft();
 
-
         for(int i = 0; i < range; i++) {
-            if(!p1.withinBoundaries() || (!grid.isPossibleAdd(p1) && !checkPlayer(p1, grid))) {
-                return false;
-            }
             boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
             if(detected) {
                 return true;
             }
             p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);
+            if(grid.isPossibleAdd(p1) || grid.getCell(p1).getEntity() instanceof GameCharacter) {
+                this.uiRange = guardPosition.distanceOf(p1);
+            }
         }
         return false;
     }
@@ -60,7 +62,7 @@ public class Light {
             if(checkPlayer(posCopy, grid)) {
                 return true;
             }
-            if(!grid.isPossibleAdd(posCopy)) {
+            if(!grid.isPossibleAdd(posCopy) && !(grid.getCell(posCopy).getEntity() instanceof GameCharacter)) {
                 return false;
             }
             posCopy.incrementPosition(dir[0] * GameMap.CELL_SIZE, dir[1] * GameMap.CELL_SIZE);
@@ -77,7 +79,7 @@ public class Light {
         return entity.getClass().equals(PlayerCharacter.class);
     }
 
-    public int getRange() {
-        return range;
+    public float getRange() {
+        return uiRange;
     }
 }
