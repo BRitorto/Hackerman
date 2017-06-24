@@ -96,7 +96,7 @@ public class Level {
                     if (properties.length > 2) {
                         ArrayList<Direction> instructions = new ArrayList<Direction>();
                         for (int i = 2; i < properties.length; i++) {
-                            instructions.add(new Direction(i));
+                            instructions.add(new Direction(Integer.valueOf(properties[i])));
                         }
                         enemyList.add(new CameraGuard(position, direction, range, instructions));
                     } else {

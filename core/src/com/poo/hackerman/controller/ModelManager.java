@@ -118,7 +118,7 @@ public class ModelManager implements Runnable{
                     game.setState(HackerGame.STATE.GAME_OVER);
                 }
                 else if(gameModel.playerCaught()) {
-                    game.setState(HackerGame.STATE.PAUSE);
+                    game.setState(HackerGame.STATE.RETRY);
                     gameModel.retryLevel();
                     game.setState(HackerGame.STATE.NEW_LEVEL);
                 }

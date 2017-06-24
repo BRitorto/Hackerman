@@ -19,7 +19,7 @@ public class HackerGame extends Game {
 
     private SpriteBatch batch;
 
-    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, NEW_LEVEL, GAME_OVER, WON}
+    public enum STATE {CREATED, INITIALIZE, EXIT, EXIT_YES, PAUSE, RESUME, NEW_LEVEL, GAME_OVER, WON, RETRY}
     private STATE state = STATE.CREATED;
 
     private ModelManager modelManager;
@@ -30,6 +30,7 @@ public class HackerGame extends Game {
     private GameOverScreen gameOverScreen;
     private GameScreen gameScreen;
     private WonScreen wonScreen;
+    private RetryScreen retryScreen;
 
     private Viewport viewport;
     private Camera camera;
@@ -54,6 +55,7 @@ public class HackerGame extends Game {
         exitScreen = new ExitScreen(this);
         gameOverScreen = new GameOverScreen(this);
         wonScreen = new WonScreen(this);
+        retryScreen = new RetryScreen(this);
 
         setScreen(mainMenuScreen);
     }
@@ -106,6 +108,11 @@ public class HackerGame extends Game {
             case WON: {
                 setScreen(wonScreen);
                 Gdx.app.exit();
+            } break;
+
+            case RETRY: {
+                modelManager.getGameModel().setPause();
+                setScreen(retryScreen);
             } break;
         }
     }

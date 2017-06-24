@@ -47,11 +47,11 @@ public class GameScreen extends ScreenAdapter {
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
-    private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
+    //private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
 
 
     public GameScreen(HackerGame game) {
-        music.play();
+        //music.play();
         this.game = game;
         batch = game.getBatch();
     }
@@ -111,7 +111,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         super.dispose();
-        music.dispose();
+        //music.dispose();
     }
 
     @Override

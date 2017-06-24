@@ -9,7 +9,7 @@ import java.util.List;
 import static com.poo.hackerman.model.entity.Entity.IDLE;
 
 /**
- * An Enemy that cant move
+ * An Enemy that can´t move
  */
 public class CameraGuard extends EnemyCharacter {
 
@@ -35,10 +35,10 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
-        super(position, direction, 0, range);
-        this.instructions = instructions;
-        currentDirection = 0;
-        playerDetected = false;
+        this(position,direction,range);
+        this.instructions.addAll(instructions);
+        for(Direction instruction : this.instructions)
+            System.out.println(instruction.getCode());
     }
 
     public void addInstruction(Direction direction) {
