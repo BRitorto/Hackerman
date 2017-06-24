@@ -277,10 +277,9 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        int[] dir = enemy.getDirection().getDir();
         float x1 = enemy.getX();
         float y1 = enemy.getY();
-        int start = 45 - enemy.getDirection().getCode()*45;
+        int start = 45 - enemy.getDirection().getCode() * 45;
         if(enemy.getDynamicEntity().getClass().equals(CameraGuard.class)) {
             shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
         }
