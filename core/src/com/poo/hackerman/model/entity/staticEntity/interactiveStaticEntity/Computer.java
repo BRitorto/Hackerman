@@ -35,7 +35,7 @@ public class Computer extends InteractiveStaticEntity {
             timer.updateLastHackTime(nowTime);
             currentConsecutiveHacks++;
 
-            if(currentConsecutiveHacks == consecutiveHacks) {
+            if(currentConsecutiveHacks >= consecutiveHacks) {
                 isHacked = true;
             }
         }

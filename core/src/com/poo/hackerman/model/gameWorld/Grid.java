@@ -38,18 +38,26 @@ public class Grid {
     }
 
     public Cell getCell(Position position) {
-        Position positionGrid = position.toGridIndexes();
-        return matrix[positionGrid.getX()][positionGrid.getY()];
+        if(position.withinBoundaries()) {
+            Position positionGrid = position.toGridIndexes();
+            return matrix[positionGrid.getX()][positionGrid.getY()];
+        }
+        return null;
     }
 
     public void freePosition(Position position) {
-        Position positionGrid = position.toGridIndexes();
-        matrix[positionGrid.getX()][positionGrid.getY()].free();
+        if(position.withinBoundaries()) {
+            Position positionGrid = position.toGridIndexes();
+            matrix[positionGrid.getX()][positionGrid.getY()].free();
+        }
     }
 
     public boolean isPossibleAdd(Position position) {
-        Position positionGrid = position.toGridIndexes();
-        return matrix[positionGrid.getX()][positionGrid.getY()].isEmpty();
+        if(position.withinBoundaries()) {
+            Position positionGrid = position.toGridIndexes();
+            return matrix[positionGrid.getX()][positionGrid.getY()].isEmpty();
+        }
+        return false;
     }
 
     private void initializeMatrix() {

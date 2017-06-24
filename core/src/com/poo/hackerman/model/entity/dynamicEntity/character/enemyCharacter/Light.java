@@ -42,7 +42,7 @@ public class Light {
                 return true;
             }
             p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);
-            if(grid.isPossibleAdd(p1) || grid.getCell(p1).getEntity() instanceof GameCharacter) {
+            if(grid.isPossibleAdd(p1) || (grid.getCell(p1) != null && grid.getCell(p1).getEntity() instanceof GameCharacter)) {
                 this.uiRange = guardPosition.distanceOf(p1);
             }
         }

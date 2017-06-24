@@ -25,7 +25,6 @@ public class ComputerTimer {
     }
 
     public boolean hackTimePassed(long nowTime) {
-        System.out.println(nowTime + " vs " + getLastHackTime());
         return (nowTime - this.getLastHackTime()) >= HACKING_BASE;
     }
 
