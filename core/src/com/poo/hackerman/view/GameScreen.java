@@ -275,9 +275,9 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = mycamera.getDirection().getDir();
         float myrange = (range+1) * GameMap.CELL_SIZE;
-        float x1 = mycamera.getX()+  dir[0] * cameraT.getWidth()/2;
-        float y1 = mycamera.getY() + dir[1] * cameraT.getHeight()/2;
-        int start = 45 - mycamera.getDirection().getCode()*45;
+        float x1 = mycamera.getX() + cameraT.getWidth()/2;
+        float y1 = mycamera.getY() + cameraT.getHeight()/2;
+        int start = 45 - mycamera.getDirection().getCode() * 45;
 
         shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -292,8 +292,8 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = enemy.getDirection().getDir();
         float myrange = range * GameMap.CELL_SIZE;
-        float x1 = enemy.getX()+  dir[0] * cameraT.getWidth()/2;
-        float y1 = enemy.getY() + dir[1] * cameraT.getHeight()/2;
+        float x1 = enemy.getX() + (dir[0]==-1?-1:1) * cameraT.getWidth()/2;
+        float y1 = enemy.getY() + cameraT.getHeight()/2;
         int start = 45 - enemy.getDirection().getCode()*45;
         shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
         shapeRenderer.setProjectionMatrix(camera.combined);
