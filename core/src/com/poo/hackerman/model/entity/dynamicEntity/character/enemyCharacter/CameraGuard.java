@@ -37,8 +37,6 @@ public class CameraGuard extends EnemyCharacter {
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
         this(position,direction,range);
         this.instructions.addAll(instructions);
-        for(Direction instruction : this.instructions)
-            System.out.println(instruction.getCode());
     }
 
     public void addInstruction(Direction direction) {

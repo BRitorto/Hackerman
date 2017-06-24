@@ -278,7 +278,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = enemy.getDirection().getDir();
-        float myrange = range * GameMap.CELL_SIZE;
         float x1 = enemy.getX();
         float y1 = enemy.getY();
         int start = 45 - enemy.getDirection().getCode()*45;
@@ -290,7 +289,7 @@ public class GameScreen extends ScreenAdapter {
 
         }
         shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,myrange,start,90);
+        shapeRenderer.arc(x1,y1,range,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
