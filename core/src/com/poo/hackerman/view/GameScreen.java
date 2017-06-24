@@ -3,6 +3,7 @@ package com.poo.hackerman.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -38,8 +39,8 @@ public class GameScreen extends ScreenAdapter {
 
     private UIEntity hacker;
     private UIStaticEntity door;
-    private UIEntity[] enemies;
-    private UIStaticEntity[] computers, obstacles, hearts, cameras;
+    private UIEntity[] enemies, cameras;
+    private UIStaticEntity[] computers, obstacles, hearts;
     private List<CameraGuard> camerasO;
     private List<Computer> computersO;
     private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
@@ -47,11 +48,13 @@ public class GameScreen extends ScreenAdapter {
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
-    //private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
+    private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
+    private Music steps = Gdx.audio.newMusic(Gdx.files.internal("step.wav"));
+
 
 
     public GameScreen(HackerGame game) {
-        //music.play();
+        music.play();
         this.game = game;
         batch = game.getBatch();
     }
@@ -111,7 +114,8 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         super.dispose();
-        //music.dispose();
+        music.dispose();
+        steps.dispose();
     }
 
     @Override
@@ -135,15 +139,14 @@ public class GameScreen extends ScreenAdapter {
 
     private void createEnemies(List<EnemyCharacter> enemiesO) {
         enemies = new UIEntity[enemiesO.size()];
-        cameras = new UIStaticEntity[camerasO.size()];
+        cameras = new UIEntity[camerasO.size()];
         for(int i = 0; i < enemiesO.size(); i++) {
             if(enemiesO.get(i) instanceof Guard) {
                 enemies[i] = new UIEntity(guardT, enemiesO.get(i));
             }
         }
         for (int i= 0; i < camerasO.size(); i++){
-            cameras[i] = new UIStaticEntity(cameraT, camerasO.get(i));
-            cameras[i].setPosition(camerasO.get(i).getPosition().getX(),camerasO.get(i).getPosition().getY());
+            cameras[i] = new UIEntity(cameraT, camerasO.get(i));
         }
     }
 
@@ -191,16 +194,16 @@ public class GameScreen extends ScreenAdapter {
         drawLives();
         drawEnemies();
         door.draw(batch);
-        hacker.draw(batch);
+        hacker.draw(batch,steps);
         //drawGrid();
         batch.end();
         drawLights();
     }
 
     private void drawCameras() {
-        for (UIStaticEntity cameraGuard : cameras) {
+        for (UIEntity cameraGuard : cameras) {
             if(cameraGuard!=null) {
-                cameraGuard.draw(batch);
+                cameraGuard.draw(batch, steps);
             }
         }
     }
@@ -248,7 +251,7 @@ public class GameScreen extends ScreenAdapter {
     private void drawEnemies() {
         for(UIEntity enemy : enemies) {
             if(enemy!=null){
-                enemy.draw(batch);
+                enemy.draw(batch,steps);
             }
         }
     }
@@ -268,34 +271,26 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void drawLight(UIStaticEntity mycamera, float range) {
-        camera.update();
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        int[] dir = mycamera.getDirection().getDir();
-        float x1 = mycamera.getX() + cameraT.getWidth()/2;
-        float y1 = mycamera.getY() + cameraT.getHeight()/2;
-        int start = 45 - mycamera.getDirection().getCode() * 45;
-
-        shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
-        shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,range,start,90);
-        shapeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
-    }
-
     private void drawLight(UIEntity enemy, float range) {
+        camera.update();
+        shapeRenderer.setProjectionMatrix(camera.combined);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         int[] dir = enemy.getDirection().getDir();
-        float x1 = enemy.getX() + (dir[0]==-1?-1:1) * cameraT.getWidth()/2;
-        float y1 = enemy.getY() + cameraT.getHeight()/2;
+        float myrange = range * GameMap.CELL_SIZE;
+        float x1 = enemy.getX();
+        float y1 = enemy.getY();
         int start = 45 - enemy.getDirection().getCode()*45;
-        shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
+        if(enemy.getDynamicEntity().getClass().equals(CameraGuard.class)) {
+            shapeRenderer.setColor(new Color(Color.RED.r, Color.RED.g, Color.RED.b, 0.5f));
+        }
+        else {
+            shapeRenderer.setColor(new Color(Color.YELLOW.r, Color.YELLOW.g, Color.YELLOW.b, 0.5f));
+
+        }
         shapeRenderer.setProjectionMatrix(camera.combined);
-        shapeRenderer.arc(x1,y1,range,start,90);
+        shapeRenderer.arc(x1,y1,myrange,start,90);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 

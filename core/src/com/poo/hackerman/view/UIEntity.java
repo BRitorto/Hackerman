@@ -1,6 +1,9 @@
 package com.poo.hackerman.view;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -27,6 +30,7 @@ public class UIEntity {
     private static final float FRAME_DURATION = 0.25F;
     private float animationTimer = 0;
     private DynamicEntity dynamicEntity;
+
 
     /**
      * Creates a player and assigns a texture to it.
@@ -65,10 +69,10 @@ public class UIEntity {
         return dynamicEntity.getPosition().getY();
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(SpriteBatch batch, Music music) {
         Animation animation;
 
-        if (dynamicEntity.getState() == DynamicEntity.MOVING) {
+        if (dynamicEntity.getState() == DynamicEntity.MOVING || dynamicEntity.getState() == DynamicEntity.ROTATING) {
             update(0.1f);
         }
         int orientation = dynamicEntity.getDirection().getCode();
@@ -99,6 +103,9 @@ public class UIEntity {
                 break;
             default:
                 animation = animationUp;
+        }
+        if(dynamicEntity instanceof PlayerCharacter && dynamicEntity.getState()==DynamicEntity.MOVING) {
+            music.play();
         }
         TextureRegion currentFrame = (TextureRegion) animation.getKeyFrame(animationTimer);
         batch.draw(currentFrame,dynamicEntity.getPosition().getX()-currentFrame.getRegionWidth()/2,dynamicEntity.getPosition().getY());
