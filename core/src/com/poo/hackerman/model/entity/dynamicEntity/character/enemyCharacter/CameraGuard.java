@@ -32,6 +32,9 @@ public class CameraGuard extends EnemyCharacter {
         instructions.add(new Direction(direction.getCode()));
         currentDirection = 0;
         playerDetected = false;
+        getTimer().updateLastRotateTime(System.currentTimeMillis(), CAMERA_TIME_ROTATING);
+        state = ROTATING;
+        orientation = NORMAL_ORIENTATION;
     }
 
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
@@ -59,7 +62,7 @@ public class CameraGuard extends EnemyCharacter {
             return;
         }
         if(getState() == IDLE) {
-            updateCurrentDirection();
+            currentDirection =  Math.floorMod(currentDirection + orientation, instructions.size());
             getTimer().updateLastRotateTime(System.currentTimeMillis(), CAMERA_TIME_ROTATING);
             state = ROTATING;
             rotate(nextDirection());
@@ -74,17 +77,11 @@ public class CameraGuard extends EnemyCharacter {
         return instructions.get(currentDirection);
     }
 
-    private void updateCurrentDirection() {
-        if(getDirection().equals(instructions.get(currentDirection))) {
-            currentDirection =  Math.floorMod(currentDirection + orientation, instructions.size());
-        }
-    }
-
     private void updateOrientation() {
-        if(getDirection().equals(instructions.get(0))) {               //si estoy en la primer direccion
+        if(currentDirection == 0) {               //si estoy en la primer direccion
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getDirection().equals(instructions.get(instructions.size() - 1))) {          //si estoy en la ultima posision
+        else if(currentDirection == (instructions.size() - 1)) {          //si estoy en la ultima direccion
             orientation = INVERSE_ORIENTATION;
         }
     }
