@@ -4,12 +4,7 @@ package com.poo.hackerman.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.poo.hackerman.model.Managers.EntityManager;
 import com.poo.hackerman.view.*;
 
 /**
@@ -31,9 +26,7 @@ public class HackerGame extends Game {
     private GameScreen gameScreen;
     private WonScreen wonScreen;
     private RetryScreen retryScreen;
-
-    private Viewport viewport;
-    private Camera camera;
+    private NextLevelScreen nextLevelScreen;
 
 
     /**
@@ -56,6 +49,7 @@ public class HackerGame extends Game {
         gameOverScreen = new GameOverScreen(this);
         wonScreen = new WonScreen(this);
         retryScreen = new RetryScreen(this);
+        nextLevelScreen = new NextLevelScreen(this);
 
         setScreen(mainMenuScreen);
     }
@@ -97,6 +91,8 @@ public class HackerGame extends Game {
             } break;
 
             case NEW_LEVEL: {
+                modelManager.getGameModel().setPause();
+                setScreen(nextLevelScreen);
             }
             break;
 

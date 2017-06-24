@@ -113,5 +113,6 @@ public class Guard extends EnemyCharacter {
     private boolean isCycle() {
         return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
     }
+
 }
 

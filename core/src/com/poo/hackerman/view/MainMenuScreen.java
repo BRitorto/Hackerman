@@ -7,7 +7,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.poo.hackerman.controller.HackerGame;
+import com.poo.hackerman.model.entity.Direction;
+import com.poo.hackerman.model.entity.Position;
+import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
+import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Guard;
 import com.poo.hackerman.model.gameWorld.GameMap;
+
+import java.util.List;
 
 /**
  * Created by Bianca on 28/05/2017.
@@ -20,7 +26,7 @@ public class MainMenuScreen implements Screen {
     private Texture exitButtonActive;
     private Texture exitButtonInactive;
     private Texture hackermanTitle;
-    
+
     private int GAME_HEIGHT;
     private int GAME_WIDTH;
 
@@ -58,6 +64,7 @@ public class MainMenuScreen implements Screen {
 
         playY = PLAY_Y - BUTTON_HEIGHT;
         exitY = EXIT_Y - BUTTON_HEIGHT;
+
     }
 
     @Override

@@ -59,7 +59,7 @@ public class ExitScreen implements Screen {
         buttonXLow = Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4;
         buttonXHigh = (Gdx.graphics.getWidth()/2 - BUTTON_WIDTH/4) + BUTTON_WIDTH/2;
 
-        buttonTopYLow = buttonTopYHigh + BUTTON_HEIGHT/2;
+        buttonTopYLow = buttonTopYHigh + BUTTON_HEIGHT + 76;
         buttonTopYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/2;
 
         buttonBottomYHigh = Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/4;
