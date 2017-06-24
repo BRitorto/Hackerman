@@ -21,6 +21,10 @@ public class Light {
         this.uiRange = range * GameMap.CELL_SIZE;
     }
 
+    public float getRange() {
+        return uiRange;
+    }
+
     /**
      *
      * @param guardPosition
@@ -37,13 +41,16 @@ public class Light {
         Direction dirLeft = guardDirection.getLeft();
 
         for(int i = 0; i < range; i++) {
+            if (!grid.isPossibleAdd(p1) && !(grid.getCell(p1) != null && grid.getCell(p1).getEntity() instanceof GameCharacter)) {
+                return false;
+            }
             boolean detected = checkDirection(p1, dirRight, range-i, grid) || checkDirection(p1, dirLeft, range-i, grid);
             if(detected) {
                 return true;
             }
             p1.incrementPosition(guardDir[0] * GameMap.CELL_SIZE, guardDir[1] * GameMap.CELL_SIZE);
             if(grid.isPossibleAdd(p1) || (grid.getCell(p1) != null && grid.getCell(p1).getEntity() instanceof GameCharacter)) {
-                this.uiRange = guardPosition.distanceOf(p1);
+                uiRange = guardPosition.distanceOf(p1);
             }
         }
         return false;
@@ -79,7 +86,4 @@ public class Light {
         return entity.getClass().equals(PlayerCharacter.class);
     }
 
-    public float getRange() {
-        return uiRange;
-    }
 }
