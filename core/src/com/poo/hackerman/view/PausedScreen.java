@@ -2,6 +2,7 @@ package com.poo.hackerman.view;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -76,7 +77,7 @@ public class PausedScreen implements Screen {
         if (Gdx.input.getX() < buttonXHigh && Gdx.input.getX() > buttonXLow
                 && Gdx.input.getY() > buttonYLow && Gdx.input.getY() < buttonYHigh) {
             game.getBatch().draw(resumeButtonActive, CENTER_X, 2*GAME_HEIGHT/4, BUTTON_WIDTH, BUTTON_HEIGHT );
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
                 dispose();
                 game.setState(HackerGame.STATE.RESUME);
             }

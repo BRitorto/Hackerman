@@ -2,6 +2,7 @@ package com.poo.hackerman.view;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -66,7 +67,7 @@ public class NextLevelScreen implements Screen {
         if (Gdx.input.getX() < buttonXHigh && Gdx.input.getX() > buttonXLow
                 && Gdx.input.getY() > buttonYLow && Gdx.input.getY() < buttonYHigh) {
             game.getBatch().draw(nextLevelButtonActive, CENTER_X, GAME_HEIGHT/2, BUTTON_WIDTH, BUTTON_HEIGHT);
-            if (Gdx.input.isTouched()) {
+            if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
                 dispose();
                 game.setState(HackerGame.STATE.RESUME);
             }
