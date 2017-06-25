@@ -36,6 +36,10 @@ public class Door extends InteractiveStaticEntity{
         return !PASSABLE;
     }
 
+    public boolean isOpen() {
+        return isOpen;
+    }
+
     public boolean hasBeenPassed() {
         return passed;
     }

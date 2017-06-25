@@ -43,17 +43,19 @@ public class GameScreen extends ScreenAdapter {
     private UIStaticEntity[] computers, obstacles, hearts;
     private List<CameraGuard> camerasO;
     private List<Computer> computersO;
-    private Texture doorT, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
+    private Door doorO;
+    private Texture doorT,openDoor, computersT, computerHackedT, wallT, deskT, fakeCompT, heartT;
     private Texture hackerT, guardT, cameraT;
     private Texture background;
     private HackerGame game;
     private ShapeRenderer shapeRenderer;
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
     private Music steps = Gdx.audio.newMusic(Gdx.files.internal("step.wav"));
-
+    private Sound hacked = Gdx.audio.newSound(Gdx.files.internal("hacked.wav"));
 
 
     public GameScreen(HackerGame game) {
+        music.setVolume(0.1f);
         music.play();
         this.game = game;
         batch = game.getBatch();
@@ -70,7 +72,7 @@ public class GameScreen extends ScreenAdapter {
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
         PlayerCharacter player = entityManager.getPlayer();
-        Door doorO = entityManager.getDoor();
+        doorO = entityManager.getDoor();
         enemiesO = entityManager.getEnemies();
         //cameras = new UIStaticEntity[enemiesO.size()];
         camerasO = new ArrayList<CameraGuard>();
@@ -87,7 +89,8 @@ public class GameScreen extends ScreenAdapter {
         hackerT = new Texture("hacker.png");
         guardT = new Texture("guard.png");
         cameraT = new Texture("cameraT.png");
-        doorT = new Texture("door.png");
+        doorT = new Texture("closeddoor.png");
+        openDoor = new Texture("opendoor.png");
         computersT = new Texture("computer2.png");
         computerHackedT = new Texture("computer2Hacked.png");
         fakeCompT = new Texture("fakeCompT.png");
@@ -193,11 +196,18 @@ public class GameScreen extends ScreenAdapter {
         drawComputers();
         drawLives();
         drawEnemies();
-        door.draw(batch);
+        drawDoor();
         hacker.draw(batch,steps);
-        //drawGrid();
         batch.end();
         drawLights();
+    }
+
+    private void drawDoor() {
+        if(doorO.isOpen()) {
+            door.setTexture(openDoor);
+        }
+        door.draw(batch);
+
     }
 
     private void drawCameras() {
@@ -216,15 +226,6 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void drawGrid() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        for (int x = 0; x < Gdx.graphics.getWidth(); x += GameMap.CELL_SIZE) {
-            for (int y = 0; y < Gdx.graphics.getHeight(); y += GameMap.CELL_SIZE) {
-                shapeRenderer.rect(x,y, GameMap.CELL_SIZE, GameMap.CELL_SIZE);
-            }
-        }
-        shapeRenderer.end();
-    }
 
     private void drawObstacles() {
         for(UIStaticEntity s : obstacles) {
@@ -235,6 +236,7 @@ public class GameScreen extends ScreenAdapter {
     private void drawComputers() {
         for(int i = 0; i< computers.length; i++) {
             if(computersO.get(i).isHacked()){
+                //hacked.play(1.0f);
                 computers[i].setTexture(computerHackedT);
             }
             else if(!computersO.get(i).isOn()) {
@@ -243,8 +245,8 @@ public class GameScreen extends ScreenAdapter {
             else {
                 computers[i].setTexture(computersT);
             }
-            //computers[i].rotate(computersO.get(i).getDirection());
             computers[i].draw(batch);
+
         }
     }
 
