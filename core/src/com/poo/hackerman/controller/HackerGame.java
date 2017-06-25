@@ -99,7 +99,6 @@ public class HackerGame extends Game {
 
             case WON: {
                 setScreen(wonScreen);
-                Gdx.app.exit();
             } break;
 
             case RETRY: {

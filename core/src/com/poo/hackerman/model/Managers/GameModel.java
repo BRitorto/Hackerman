@@ -99,7 +99,8 @@ public class GameModel {
     }
 
     public boolean hasNextLevel() {
-        return currentLevel < levels.size();
+        System.out.println(currentLevel + " " + levels.size());
+        return currentLevel < levels.size()-1;
     }
 
     public GameMap getGameMap() {
