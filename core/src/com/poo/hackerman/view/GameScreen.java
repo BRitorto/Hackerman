@@ -52,10 +52,12 @@ public class GameScreen extends ScreenAdapter {
     private Music music = Gdx.audio.newMusic(Gdx.files.internal("song.mp3"));
     private Music steps = Gdx.audio.newMusic(Gdx.files.internal("step.wav"));
     private Sound hacked = Gdx.audio.newSound(Gdx.files.internal("hacked.wav"));
+    private int[] soundcheck;
 
 
     public GameScreen(HackerGame game) {
         music.setVolume(0.1f);
+        music.setLooping(true);
         music.play();
         this.game = game;
         batch = game.getBatch();
@@ -74,7 +76,6 @@ public class GameScreen extends ScreenAdapter {
         PlayerCharacter player = entityManager.getPlayer();
         doorO = entityManager.getDoor();
         enemiesO = entityManager.getEnemies();
-        //cameras = new UIStaticEntity[enemiesO.size()];
         camerasO = new ArrayList<CameraGuard>();
         for(EnemyCharacter enemyCharacter: enemiesO) {
             if(enemyCharacter instanceof CameraGuard) {
@@ -83,6 +84,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         computersO = entityManager.getComputers();
+        soundcheck = new int[computersO.size()];
         List<Obstacle> obstaclesO = entityManager.getObstacles();
 
 
@@ -226,7 +228,6 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-
     private void drawObstacles() {
         for(UIStaticEntity s : obstacles) {
             s.draw(batch);
@@ -236,7 +237,10 @@ public class GameScreen extends ScreenAdapter {
     private void drawComputers() {
         for(int i = 0; i< computers.length; i++) {
             if(computersO.get(i).isHacked()){
-                //hacked.play(1.0f);
+                if(soundcheck[i] == 0) {
+                    hacked.play();
+                    soundcheck[i]++;
+                }
                 computers[i].setTexture(computerHackedT);
             }
             else if(!computersO.get(i).isOn()) {
