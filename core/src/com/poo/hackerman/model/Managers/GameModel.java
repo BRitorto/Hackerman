@@ -98,9 +98,7 @@ public class GameModel {
         return lives == 0;
     }
 
-    public boolean hasNextLevel() {
-        return currentLevel < levels.size()-1;
-    }
+    public boolean hasNextLevel() {return currentLevel < levels.size()-1;}
 
     public GameMap getGameMap() {
         return gameMap;

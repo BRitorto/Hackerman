@@ -1,7 +1,5 @@
 package com.poo.hackerman.controller;
 
-
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.poo.hackerman.model.Managers.EntityManager;
