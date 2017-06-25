@@ -57,6 +57,7 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(HackerGame game) {
         music.setVolume(0.1f);
+        steps.setVolume(0.3f);
         music.setLooping(true);
         music.play();
         this.game = game;
