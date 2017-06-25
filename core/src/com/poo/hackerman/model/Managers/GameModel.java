@@ -33,7 +33,7 @@ public class GameModel {
 
     public GameModel() {
         levels = new ArrayList<Level>();
-        levels.add(new Level("levels/level2.txt"));
+        levels.add(new Level("levels/level1.txt"));
         levels.add(new Level("levels/level2.txt"));
         levels.add(new Level("levels/level3.txt"));
         lives = MAX_LIVES;
