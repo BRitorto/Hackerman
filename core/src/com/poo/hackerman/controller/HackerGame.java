@@ -34,6 +34,7 @@ public class HackerGame extends Game {
      * HackerGame creates a new ModelManager which is going to initialize the model
      * this class manages the Game's screens according to the state and initializes and saves the batch
      */
+
     public HackerGame () {
         this.modelManager = new ModelManager(this);
     }

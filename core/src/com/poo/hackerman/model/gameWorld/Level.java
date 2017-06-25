@@ -35,8 +35,8 @@ public class Level {
         this.filename = filename;
     }
 
-    public EntityManager getEntityManager() { //el ultimo elemento de cada array es basura para ese elemento
-        //ej: guards[guards.lenght-1] no es un guard
+    public EntityManager getEntityManager() {
+
         String s = readFile(filename);
 
         String[] guards = s.split(" GUARDS" + newLine);
@@ -122,66 +122,6 @@ public class Level {
                     obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
                 }
 
-                /*
-                public enum obj {WALL,DOOR,GUARD,CAMERAGUARD,HACKER,COMPUTER,DESK}
-                switch (cell){
-                    case "WALL":
-                        Direction direction = new Direction(0);
-                        obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.WALL));
-                        break;
-                    case "DOOR":
-                        String[] properties = doors[doorIndex++].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        door = new Door(position, direction);
-                        break;
-                    case "GUARD":
-                        properties = guards[guardIndex++].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        int velocity = Integer.valueOf(properties[1]);
-                        int range = Integer.valueOf(properties[2]);
-                        if(properties.length>3){
-                            ArrayList<Position> instructions = new ArrayList<Position>();
-                            for(int i=3;i<properties.length;i+=2){
-                                instructions.add(new Position(i,i+1));
-                            }
-                            enemyList.add(new Guard(position, direction, velocity, range,instructions));
-                        }
-                        else {
-                            enemyList.add(new Guard(position, direction, velocity, range));
-                        }
-                        break;
-                    case "CAMERAGUARD":
-                        properties = cameraguards[cameraIndex++].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        range = Integer.valueOf(properties[1]);
-                        if(properties.length>2){
-                            ArrayList<Direction> instructions = new ArrayList<Direction>();
-                            for(int i=2;i<properties.length;i++){
-                                instructions.add(new Direction(i));
-                            }
-                            enemyList.add(new CameraGuard(position, direction, range,instructions));
-                        }
-                        else {
-                            enemyList.add(new CameraGuard(position, direction, range));
-                        }
-                        break;
-                    case "HACKER":
-                        properties = hackers[0].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        velocity = Integer.valueOf(properties[1]);
-                        hacker = new PlayerCharacter(position, direction, velocity);
-                        break;
-                    case "COMPUTER":
-                        properties = computers[computerIndex].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        int consecutiveHacks = Integer.valueOf(properties[1]);
-                        computerList.add(new Computer(position, direction, consecutiveHacks));
-                        break;
-                    case "DESK":
-                        properties = desks[deskIndex].split(",");
-                        direction = new Direction(Integer.valueOf(properties[0]));
-                        obstacleList.add(new Obstacle(position, direction, Obstacle.obstacleType.DESK));
-                        break;*/
                 cellNumber++;
             }
             rowNumber++;
@@ -194,44 +134,9 @@ public class Level {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(filename));
             return new String(bytes,"UTF-8");
-
-            /*String content = new Scanner(new File(filename)).useDelimiter("\\Z").next();
-            System.out.println(content);*/ //OPCION 2
-
-            /*FileInputStream fisTargetFile = new FileInputStream(new File("test.txt"));
-            String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");*/ //OPCION 3
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "";
     }
-
-    /*
-    private EntityManager setEntityManager(LinkedList<LinkedList<Entity>> level) {
-
-        LinkedList<Obstacle> obstacles = new LinkedList<>();
-        LinkedList<Computer> computers = new LinkedList<>();
-        LinkedList<EnemyCharacter> enemies = new LinkedList<>();
-        PlayerCharacter hacker = null;
-        Door door = null;
-        for(LinkedList<Entity> row:level){
-            for(Entity entity:row){
-                if(entity instanceof Computer)
-                    computers.add((Computer)entity);
-                else if(entity instanceof Obstacle)
-                    obstacles.add((Obstacle)entity);
-                else if(entity instanceof EnemyCharacter)
-                    enemies.add((EnemyCharacter)entity);
-                else if(entity instanceof Door)
-                    door=(Door) entity;
-                else if(entity instanceof PlayerCharacter)
-                    hacker=(PlayerCharacter)entity;
-            }
-        }
-        return new EntityManager(hacker,door,enemies,computers,obstacles);
-    }
-
-    public LinkedList<LinkedList<Entity>> getGrid() { return grid; }
-    */
-
 }

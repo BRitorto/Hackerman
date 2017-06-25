@@ -21,7 +21,7 @@ import com.poo.hackerman.model.gameWorld.GameMap;
 /**
  * Created by cderienzo on 6/7/2017.
  */
-public class UIEntity {
+public class UIDynamicEntity {
 
     private static final int TILE_WIDTH = GameMap.CELL_SIZE;
     private static final int TILE_HEIGHT = GameMap.CELL_SIZE;
@@ -31,14 +31,14 @@ public class UIEntity {
     private float animationTimer = 0;
     private DynamicEntity dynamicEntity;
 
-
     /**
      * Creates a player and assigns a texture to it.
      * Creates an animation by splitting the given sprite sheet into an array of TILE_WIDTHxTILE_HEIGHT dimension.
      * @param playerTexture
      * @param dynamicEntity
      */
-    public UIEntity(Texture playerTexture, DynamicEntity dynamicEntity) {
+
+    public UIDynamicEntity(Texture playerTexture, DynamicEntity dynamicEntity) {
         TextureRegion[][] playerTextures = TextureRegion.split(playerTexture,TILE_WIDTH,TILE_HEIGHT);
         this.dynamicEntity = dynamicEntity;
         animationUp = new Animation(FRAME_DURATION,playerTextures[0][0], playerTextures[0][1], playerTextures[0][2],playerTextures[0][3],playerTextures[0][4],playerTextures[0][5],playerTextures[0][6],playerTextures[0][7],playerTextures[0][8]);

@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.poo.hackerman.controller.HackerGame;
 import com.poo.hackerman.model.Managers.EntityManager;
-import com.poo.hackerman.model.entity.Direction;
 import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.CameraGuard;
 import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
@@ -22,7 +21,6 @@ import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Compu
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -37,9 +35,9 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private List<EnemyCharacter> enemiesO;
 
-    private UIEntity hacker;
+    private UIDynamicEntity hacker;
     private UIStaticEntity door;
-    private UIEntity[] enemies, cameras;
+    private UIDynamicEntity[] enemies, cameras;
     private UIStaticEntity[] computers, obstacles, hearts;
     private List<CameraGuard> camerasO;
     private List<Computer> computersO;
@@ -102,7 +100,7 @@ public class GameScreen extends ScreenAdapter {
         background = new Texture("bg.png");
         heartT = new Texture("heart.png");
 
-        hacker = new UIEntity(hackerT, player);
+        hacker = new UIDynamicEntity(hackerT, player);
         door = new UIStaticEntity(doorT);
         door.setPosition(doorO.getPosition().getX(), doorO.getPosition().getY());
 
@@ -144,15 +142,15 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void createEnemies(List<EnemyCharacter> enemiesO) {
-        enemies = new UIEntity[enemiesO.size()];
-        cameras = new UIEntity[camerasO.size()];
+        enemies = new UIDynamicEntity[enemiesO.size()];
+        cameras = new UIDynamicEntity[camerasO.size()];
         for(int i = 0; i < enemiesO.size(); i++) {
             if(enemiesO.get(i) instanceof Guard) {
-                enemies[i] = new UIEntity(guardT, enemiesO.get(i));
+                enemies[i] = new UIDynamicEntity(guardT, enemiesO.get(i));
             }
         }
         for (int i= 0; i < camerasO.size(); i++){
-            cameras[i] = new UIEntity(cameraT, camerasO.get(i));
+            cameras[i] = new UIDynamicEntity(cameraT, camerasO.get(i));
         }
     }
 
@@ -214,7 +212,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawCameras() {
-        for (UIEntity cameraGuard : cameras) {
+        for (UIDynamicEntity cameraGuard : cameras) {
             if(cameraGuard!=null) {
                 cameraGuard.draw(batch, steps);
             }
@@ -256,7 +254,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void drawEnemies() {
-        for(UIEntity enemy : enemies) {
+        for(UIDynamicEntity enemy : enemies) {
             if(enemy!=null){
                 enemy.draw(batch,steps);
             }
@@ -278,7 +276,7 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
-    private void drawLight(UIEntity enemy, float range) {
+    private void drawLight(UIDynamicEntity enemy, float range) {
         camera.update();
         shapeRenderer.setProjectionMatrix(camera.combined);
         Gdx.gl.glEnable(GL20.GL_BLEND);
