@@ -5,11 +5,14 @@ package com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity;
  */
 public class ComputerTimer {
 
-    // Cooldown times for characters
-    private static final long HACKING_BASE = 40; // in ms
+    /**
+     * "Cooldown times" for characters in miliseconds
+     */
+    private static final long HACKING_BASE = 40;
 
-
-    // Time attributes for characters
+    /**
+     * Time attributes of the characters
+     */
     private long lastHackTime;
 
     public ComputerTimer() {

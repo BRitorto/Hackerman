@@ -6,10 +6,10 @@ import com.poo.hackerman.model.entity.Entity;
 import java.util.List;
 
 public class GameMap {
+
     public static int CELL_SIZE = 64;
     public static final int WIDTH = 23*CELL_SIZE;
     public static final int HEIGHT = 17*CELL_SIZE;
-
 
     private Grid grid;
 
@@ -19,7 +19,7 @@ public class GameMap {
         this.entityManager = entityManager;
         List<Entity> entities = entityManager.getEntities();
         grid = new Grid();
-        grid.add(entities);                                     //puede tirar OccupedCellException
+        grid.add(entities);
         entityManager.setGrid(grid);
     }
 

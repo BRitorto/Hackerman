@@ -21,6 +21,11 @@ public class ComputerManager {
 
     }
 
+    /**
+     * Updates the computer's status
+     * If all computer are hacked, it enables the door to be interacted with
+     */
+
     public void updateComputers() {
         if(computers.get(currentComputer).isHacked()){
             computers.get(currentComputer).setOff();

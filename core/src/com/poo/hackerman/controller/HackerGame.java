@@ -28,7 +28,6 @@ public class HackerGame extends Game {
     private RetryScreen retryScreen;
     private NextLevelScreen nextLevelScreen;
 
-
     /**
      *
      * creates a new instance that extends from an ApplicationListener
@@ -55,16 +54,13 @@ public class HackerGame extends Game {
     }
 
     /**
-     *
-     * @param state
-     * Recieves a state and sets the game's state depending on the variable recieved
+     * @param state sets the game's state according to this variable
      * According to the user input, it tells the Model what to to with the game
      *
      */
 
     public void setState (STATE state) {
         switch (state) {
-
             case INITIALIZE: {
                 modelManager.initialize();
                 gameScreen = new GameScreen(this);

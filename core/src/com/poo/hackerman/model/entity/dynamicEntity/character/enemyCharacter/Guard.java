@@ -9,7 +9,6 @@ import java.util.List;
 
 import static com.poo.hackerman.model.entity.Entity.IDLE;
 
-
 /**
  * An Enemy that moves
  */
@@ -37,28 +36,6 @@ public class Guard extends EnemyCharacter {
         playerDetected = false;
     }
 
-    /**
-     * @param position Position to add to the instructions
-     */
-    public void addInstruction(Position position) {
-        instructions.add(position);
-    }
-
-    /**
-     *
-     * @param index Index of the position to add
-     * @param position Position to add to the instructions
-     */
-    public void addInstruction(int index, Position position) {
-        instructions.add(index, position);
-    }
-
-    /**
-     *
-     * Checks if each individual guard has detected the player or not
-     * If the guard is idle, it sets it moving
-     *
-     */
     public void tick() {
         if(getMylight().collision(position, direction, grid)) {
             playerDetected = true;
@@ -75,14 +52,10 @@ public class Guard extends EnemyCharacter {
         updateStatus();
     }
 
-    public boolean hackerDetected() {
-        return playerDetected;
-    }
-
     /**
-     *
-     * @return the next direction in which de guard has to move
+     * @return the next direction in which the guard has to move
      */
+
     private Direction nextDirection() {
         if(!isCycle()) {
             updateOrientation();
@@ -91,28 +64,64 @@ public class Guard extends EnemyCharacter {
 
     }
 
+    /**
+     * Updates the guard's current position depending on the instructions it has been handed
+     */
+
     private void updateCurrentPosition() {
-        if(getPosition().sameGridIndex(instructions.get(currentPosition))) {       //si mi posicion es una de la lista
-            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());        //x+y % size
+        if(getPosition().sameGridIndex(instructions.get(currentPosition))) {
+            currentPosition = Math.floorMod(currentPosition + orientation, instructions.size());
         }
     }
 
+    /**
+     * Turns the guard around if the next instruction is for it to move backwards
+     */
+
     private void updateOrientation() {
-        if(getPosition().sameGridIndex(instructions.get(0))) {               //si estoy en la primer direccion
+        if(getPosition().sameGridIndex(instructions.get(0))) {
             orientation = NORMAL_ORIENTATION;
         }
-        else if(getPosition().sameGridIndex(instructions.get(instructions.size() - 1))) {          //si estoy en la ultima posision
+        else if(getPosition().sameGridIndex(instructions.get(instructions.size() - 1))) {
             orientation = INVERSE_ORIENTATION;
         }
     }
 
     /**
      *
-     * @return True if the guard´s journey ends in the position it began
+     * @return true if the guard´s journey ends in the position it began
      */
+
     private boolean isCycle() {
         return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
     }
+
+    public boolean hackerDetected() {
+        return playerDetected;
+    }
+
+    /**
+     * @param position position to add to the instructions
+     */
+
+    public void addInstruction(Position position) {
+        instructions.add(position);
+    }
+
+    /**
+     *
+     * @param index index of the position to add
+     * @param position position to add to the instructions
+     */
+
+    public void addInstruction(int index, Position position) {
+        instructions.add(index, position);
+    }
+
+    /**
+     * Checks if each individual guard has detected the player or not
+     * If the guard is idle, it sets it moving
+     */
 
 }
 

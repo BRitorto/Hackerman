@@ -3,14 +3,13 @@ package com.poo.hackerman.model.entity;
 import java.io.Serializable;
 
 /**
- * Class that represents an object in the game that occupies a space.
+ * Entities are objects in the game. They occupy a position on the grid
  */
+
 public abstract class Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     public static final int IDLE = 0;
-
     protected static final boolean PASSABLE = true;
 
     protected Position position;
@@ -19,6 +18,14 @@ public abstract class Entity implements Serializable {
     protected Entity(Position position, Direction direction) {
         this.position = position;
         this.direction = direction;
+    }
+
+    public boolean equals(Object object){
+        if(object==null || getClass().equals(object.getClass())) {
+            return false;
+        }
+        Entity aux = (Entity) object;
+        return this.getPosition().equals(aux.getPosition());
     }
 
     public Position getPosition() {
@@ -39,12 +46,5 @@ public abstract class Entity implements Serializable {
 
     public abstract boolean isPassable();
 
-    public boolean equals(Object object){
-        if(object==null || getClass().equals(object.getClass())) {
-            return false;
-        }
-        Entity aux = (Entity) object;
-        return this.getPosition().equals(aux.getPosition());
-    }
 
 }

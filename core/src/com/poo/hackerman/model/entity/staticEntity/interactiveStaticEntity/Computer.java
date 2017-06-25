@@ -23,6 +23,17 @@ public class Computer extends InteractiveStaticEntity {
         isHacked = false;
     }
 
+    /**
+     *
+     * This function is called when a PlayerCharacter wants to interact with a computer
+     * (i.e. presses the space bar in front of it).
+     * It checks whether or not the player has pressed the space bar long enough to "hack"
+     * the computer. Each computer has a different "hack time" determined by the variable
+     * "consecutiveHacks".
+     * If the player manages to hack the computer, isHacked gets set to "true"
+     *
+     */
+
     public void interact() {
         if(isOn) {
             long nowTime = System.currentTimeMillis();

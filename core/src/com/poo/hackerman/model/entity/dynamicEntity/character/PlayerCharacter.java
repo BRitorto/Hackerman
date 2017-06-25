@@ -32,6 +32,12 @@ public class PlayerCharacter extends GameCharacter {
         interacting = true;
     }
 
+    /**
+     * Is called when the player presses the space bar
+     * Checks whether or not the player has an interactive entity directly in front of him
+     * If it does, it calls the entity's "interact" method
+     */
+
     public void interact() {
         int[] dir = direction.getDir();
 

@@ -11,6 +11,14 @@ public abstract class EnemyCharacter extends GameCharacter {
 
     private Light mylight;
 
+    /**
+     * @param position the initial enemy character's position
+     * @param direction the initial direction it is facing towards
+     * @param range its light's range
+     * @param velocity the velocity in which it will move. If it is a camera, this parameter will be 0
+     *
+     */
+
     protected EnemyCharacter(Position position, Direction direction, int velocity, int range) {
         super(position, direction, velocity);
         mylight = new Light(range);

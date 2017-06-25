@@ -5,7 +5,7 @@ import com.poo.hackerman.model.entity.Position;
 import com.poo.hackerman.model.entity.staticEntity.StaticEntity;
 
 /**
- * A static entity that can interactive with the player.
+ * A static entity the player can interact with
  */
 public abstract class InteractiveStaticEntity extends StaticEntity {
 
@@ -14,6 +14,4 @@ public abstract class InteractiveStaticEntity extends StaticEntity {
     }
 
     public abstract void interact();
-
-
 }

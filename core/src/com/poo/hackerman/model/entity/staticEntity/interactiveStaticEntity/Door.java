@@ -11,6 +11,19 @@ public class Door extends InteractiveStaticEntity{
     private boolean isOpen = false;
     private boolean passed = false;
 
+    /**
+     * All doors are closed by default. isOpen gets set to true when the
+     * hacker hacks all the computers in the game.
+     * A door is passed when the hacker presses the space bar in front of it after it
+     * has been opened
+     */
+
+    public void interact() {
+        if(isOpen) {
+            passed = true;
+        }
+    }
+
     public Door(Position position, Direction direction) {
         super(position,direction);
     }
@@ -26,15 +39,5 @@ public class Door extends InteractiveStaticEntity{
     public boolean hasBeenPassed() {
         return passed;
     }
-
-    public void interact() {
-        if(isOpen) {
-            passed = true;
-        }
-    }
-
-
-
-
 
 }

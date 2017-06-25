@@ -31,16 +31,16 @@ public class EntityManager {
     }
 
     public void tick() {
-        player.tick();                  //chequear si no esta en pausa
+        player.tick();
         for(EnemyCharacter enemy: enemies) {
             enemy.tick();
         }
     }
 
     /**
-     *
      * @return True if the player was caught by an enemy
      */
+
     public boolean playerCaught() {
         for(EnemyCharacter enemy: enemies) {
             if(enemy.hackerDetected()) {
@@ -51,9 +51,9 @@ public class EntityManager {
     }
 
     /**
-     *
      * @param grid The grid that is set to each of the entities
      */
+
     public void setGrid(Grid grid) {
         if(enemies != null) {
             for (EnemyCharacter enemy : enemies) {
@@ -61,6 +61,30 @@ public class EntityManager {
             }
         }
         player.setGrid(grid);
+    }
+
+    /**
+     * @return A list that contains all the entities
+     */
+
+    public List<Entity> getEntities() {
+        List<Entity> entities = new ArrayList<Entity>();
+        if(player!=null) {
+            entities.add(player);
+        }
+        if(door != null) {
+            entities.add(door);
+        }
+        if(enemies != null) {
+            entities.addAll(enemies);
+        }
+        if(computers != null) {
+            entities.addAll(computers);
+        }
+        if(obstacles != null) {
+            entities.addAll(obstacles);
+        }
+        return entities;
     }
 
     public PlayerCharacter getPlayer() {
@@ -95,28 +119,5 @@ public class EntityManager {
         obstacles.add(obstacle);
     }
 
-    /**
-     *
-     * @return A list that contains all the entities
-     */
-    public List<Entity> getEntities() {
-        List<Entity> entities = new ArrayList<Entity>();
-        if(player!=null) {
-            entities.add(player);
-        }
-        if(door != null) {
-            entities.add(door);
-        }
-        if(enemies != null) {
-            entities.addAll(enemies);
-        }
-        if(computers != null) {
-            entities.addAll(computers);
-        }
-        if(obstacles != null) {
-            entities.addAll(obstacles);
-        }
-        return entities;
-    }
 }
 

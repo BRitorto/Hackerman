@@ -15,14 +15,9 @@ public abstract class GameCharacter extends DynamicEntity {
 
     private static final long TIME_ROTATING = 40;
 
-
     protected GameCharacter(Position position, Direction direction, int velocity) {
         super(position, direction, velocity);
         timer = new Timer(velocity);
-    }
-
-    public boolean isPassable() {
-        return !PASSABLE;
     }
 
     protected Timer getTimer() {
@@ -30,9 +25,11 @@ public abstract class GameCharacter extends DynamicEntity {
     }
 
     /**
-     *
-     * @param direction Direction to move. Tries to move the character in that direction.
+     * @param direction Direction to move
+     * Checks whether or not the character can move in the direction specified
+     * If the character needs to head in another direction, it is rotated
      */
+
     public void tryToMove(Direction direction) {
         if (state != IDLE || direction == null) {
             return;
@@ -44,7 +41,6 @@ public abstract class GameCharacter extends DynamicEntity {
             return;
         }
         int[] dir = direction.getDir();
-                                                                                //dividido 4
         Position destination = new Position(getPosition().getX() + dir[0] * (GameMap.CELL_SIZE/4), getPosition().getY() + dir[1] * (GameMap.CELL_SIZE/4));
 
         if (goodDestination(destination)) {
@@ -61,6 +57,7 @@ public abstract class GameCharacter extends DynamicEntity {
     /**
      * Moves the game character a cell unit
      */
+
     protected void move() {
         if (movesRemaining <= 0) {
             updateStatus();
@@ -73,7 +70,6 @@ public abstract class GameCharacter extends DynamicEntity {
             timer.updateLastMoveTime(nowTime);
 
             movesRemaining--;
-
             int[] dir = direction.getDir();
             Position aux = new Position(getPosition().getX(), getPosition().getY());               //prueba
             getPosition().incrementPosition(dir[0], dir[1]);
@@ -89,8 +85,17 @@ public abstract class GameCharacter extends DynamicEntity {
         }
     }
 
-    // Check destination is within the borders of the map, and its a valid destination.
+    /**
+     * @param destination
+     * @return if the destination can be reached
+     * Checks if the destination is valid and if it is empty in the grid
+     */
+
     private boolean goodDestination(Position destination) {
         return grid.getCell(destination).getEntity() == this || (destination.withinBoundaries() && grid.isPossibleAdd(destination));
+    }
+
+    public boolean isPassable() {
+        return !PASSABLE;
     }
 }

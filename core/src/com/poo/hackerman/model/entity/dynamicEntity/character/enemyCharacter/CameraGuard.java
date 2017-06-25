@@ -10,7 +10,9 @@ import static com.poo.hackerman.model.entity.Entity.IDLE;
 
 /**
  * An Enemy that can´t move
+ * Same functionalities of a guard but without changing position on the grid
  */
+
 public class CameraGuard extends EnemyCharacter {
 
     private List<Direction> instructions;
@@ -18,13 +20,12 @@ public class CameraGuard extends EnemyCharacter {
     private int currentDirection;
 
     private int orientation;
-    private static final int NORMAL_ORIENTATION = 1;        //recorre en el sentido en que se guardan las direccions
+    private static final int NORMAL_ORIENTATION = 1;
     private static final int INVERSE_ORIENTATION = -1;
 
     private boolean playerDetected;
 
     private static final int CAMERA_TIME_ROTATING = 2000;
-
 
     public CameraGuard(Position position, Direction direction, int range) {
         super(position, direction, 1, range);
@@ -40,18 +41,6 @@ public class CameraGuard extends EnemyCharacter {
     public CameraGuard(Position position, Direction direction, int range, List<Direction> instructions) {
         this(position,direction,range);
         this.instructions.addAll(instructions);
-    }
-
-    public void addInstruction(Direction direction) {
-        instructions.add(direction);
-    }
-
-    public void addInstruction(Direction direction, int index) {
-        instructions.add(index, direction);
-    }
-
-    public boolean hackerDetected() {
-        return playerDetected;
     }
 
     public void tick() {
@@ -78,16 +67,28 @@ public class CameraGuard extends EnemyCharacter {
     }
 
     private void updateOrientation() {
-        if(currentDirection == 0) {               //si estoy en la primer direccion
+        if(currentDirection == 0) {
             orientation = NORMAL_ORIENTATION;
         }
-        else if(currentDirection == (instructions.size() - 1)) {          //si estoy en la ultima direccion
+        else if(currentDirection == (instructions.size() - 1)) {
             orientation = INVERSE_ORIENTATION;
         }
     }
 
     private boolean isCycle() {
         return instructions.get(0).equals(instructions.get(instructions.size() - 1));
+    }
+
+    public void addInstruction(Direction direction) {
+        instructions.add(direction);
+    }
+
+    public void addInstruction(Direction direction, int index) {
+        instructions.add(index, direction);
+    }
+
+    public boolean hackerDetected() {
+        return playerDetected;
     }
 }
 

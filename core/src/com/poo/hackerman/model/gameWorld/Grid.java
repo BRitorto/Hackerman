@@ -9,8 +9,13 @@ import java.util.Collection;
  * Created by franciscosanguineti on 31/5/17.
  */
 public class Grid {
+
     private Cell[][] matrix;
     private int rows, cols;
+
+    /**
+     * Creates the game's matrix
+     */
 
     public Grid() {
         this.rows = GameMap.HEIGHT / GameMap.CELL_SIZE;
@@ -18,6 +23,12 @@ public class Grid {
         matrix = new Cell[cols][rows];
         initializeMatrix();
     }
+
+    /**
+     * @param destination
+     * @param entity
+     * Adds the entity to its destination n the matrix
+     */
 
     public void add(Entity entity, Position destination) throws OccupiedCellException {
         int i = destination.getX() / GameMap.CELL_SIZE;            //para entidades que estan moviendose a esta posicion
@@ -37,6 +48,12 @@ public class Grid {
         }
     }
 
+    /**
+     * @param position
+     * @return Cell
+     * Recieves a position and returns its corresponding position on the grid
+     */
+
     public Cell getCell(Position position) {
         if(position.withinBoundaries()) {
             Position positionGrid = position.toGridIndexes();
@@ -45,12 +62,23 @@ public class Grid {
         return null;
     }
 
+    /**
+     * @param position
+     * Frees the position on the matrix
+     */
+
     public void freePosition(Position position) {
         if(position.withinBoundaries()) {
             Position positionGrid = position.toGridIndexes();
             matrix[positionGrid.getX()][positionGrid.getY()].free();
         }
     }
+
+    /**
+     * @param position
+     * @return booleam
+     * Checks if an entity can be added to the specified position (checks if it is not yet occupied)
+     */
 
     public boolean isPossibleAdd(Position position) {
         if(position.withinBoundaries()) {

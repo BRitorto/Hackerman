@@ -26,12 +26,12 @@ public class Light {
     }
 
     /**
-     *
      * @param guardPosition
      * @param guardDirection
      * @param grid The entities game matrix
      * @return True if detects the player
      */
+
     public boolean collision(Position guardPosition, Direction guardDirection, Grid grid) {
 
         int[] guardDir = guardDirection.getDir(); //Me devuelve vector [-1 0 1, -1 0 1] dependiendo de a donde se dirija el guardia
@@ -56,6 +56,15 @@ public class Light {
         return false;
     }
 
+    /**
+     * @return true if the hacker is detected inside the light's range, false otherwise or if the light
+     * is touching an obstacle other than the player
+     * @param currentDirection
+     * @param currentPosition
+     * @param currentRange
+     * @param grid
+     */
+
     private boolean checkDirection(Position currentPosition, Direction currentDirection, int currentRange, Grid grid) {
         int[] dir = currentDirection.getDir();
 
@@ -76,6 +85,12 @@ public class Light {
         }
         return false;
     }
+
+    /**
+     * @return true if the player is found in the specified position on the grid
+     * @param grid
+     * @param position
+     */
 
     private boolean checkPlayer(Position position, Grid grid) {
         Entity entity = grid.getCell(position).getEntity();

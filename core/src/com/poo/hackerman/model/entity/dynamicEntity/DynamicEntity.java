@@ -6,18 +6,16 @@ import com.poo.hackerman.model.entity.Position;
 import com.poo.hackerman.model.gameWorld.Grid;
 
 /**
- * It´s an entity that can rotate
+ * An entity that can move in any way (i.e. rotate, walk)
  */
 public abstract class DynamicEntity extends Entity {
 
     private static final long serialVersionUID = 1L;
 
-    // State fields
     public int state = IDLE;
     public static final int MOVING = 1;
     public static final int ROTATING = 2;
 
-    // Movement fields
     private int velocity;
     protected Grid grid;
 

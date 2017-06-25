@@ -40,6 +40,7 @@ public class Timer implements Serializable {
      * Gets the time for the last movement
      * @return the time for the last movement
      */
+
     public long getLastMoveTime() {
         return lastMoveTime;
     }
@@ -49,6 +50,7 @@ public class Timer implements Serializable {
      * @param nowTime time to update the last movemnt's time
      * @param direction update the state for diagonal or not diagonal direction
      */
+
     public void updateLastMoveTime(long nowTime, Direction direction) {
         this.lastMoveTime = nowTime;
         if(direction.isDiagonal()){
@@ -67,12 +69,12 @@ public class Timer implements Serializable {
      * Compares movement time elapsed with the default cooldown or a cooldown for diagonal direcction
      * A cooldown for diagonal direction is 14 / 10 times bigger than default cooldown
      * @param nowTime time to compare
-     * @return true if elapsed time overpass the cooldown. false otherwise.
+     * @return true if elapsed time overpass the cooldown and false otherwise.
      */
+
     public boolean moveTimePassed(long nowTime) {
         return (nowTime - this.getLastMoveTime() >= moveCooldown + ((float)(state * moveCooldown * 4) / (float)10));
     }
-
 
     public long getLastRotateTime() {
         return lastRotateTime;
@@ -86,7 +88,6 @@ public class Timer implements Serializable {
     public void updateLastRotateTime(long nowTime) {
         this.lastRotateTime = nowTime;
     }
-
 
     public boolean rotateTimePassed(long nowTime) {
         return (nowTime - this.getLastRotateTime() >= rotateCooldown);

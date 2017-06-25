@@ -47,7 +47,6 @@ public class ModelManager implements Runnable{
     }
 
     /**
-     *
      * Reads and processes the user's input
      */
 
@@ -108,6 +107,7 @@ public class ModelManager implements Runnable{
      * If he has, it sets the state to "Game Over"
      *
      */
+
     public void run() {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
