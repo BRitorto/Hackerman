@@ -1,5 +1,7 @@
 The level.txt files are read as follows:
+
   The keywords GUARDS, CAMERAGUARDS, COMPUTERS, DOOR, HACKER and MAP divide the text into data chunks. What is left between keywords is data of an element of the collection that the keyword in the right represents. For all keywords but the MAP, this data is Integers and they represent the following values (by order of appearance):
+  
     in GUARDS: Direction, velocity, sets of (x,y) values called instructions (they define the guard's path).
     in CAMERAGUARDS: Direction, velocity, sets of x values called instructions (they define the camera's rotation).
     in COMPUTERS: Direction, consecutiveHacks (time it takes to hack it)
