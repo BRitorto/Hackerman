@@ -30,9 +30,9 @@ public class HackerGame extends Game {
 
     /**
      *
-     * creates a new instance that extends from an ApplicationListener
+     * Creates a new instance that extends from ApplicationListener
      * HackerGame creates a new ModelManager which is going to initialize the model
-     * this class manages the Game's screens according to the state and initializes and saves the batch
+     * This class manages the Game's screens according to the state and initializes and saves the batch
      */
 
     public HackerGame () {
@@ -56,7 +56,7 @@ public class HackerGame extends Game {
 
     /**
      * @param state sets the game's state according to this variable
-     * According to the user input, it tells the Model what to to with the game
+     * Calls the different Screens in-game
      *
      */
 

@@ -8,7 +8,7 @@ import com.poo.hackerman.model.entity.Position;
  */
 public class Obstacle extends StaticEntity {
 
-    public enum obstacleType {DESK, WALL, FAKE_COMPUTER};
+    public enum obstacleType {DESK, WALL}
     private obstacleType type;
 
     public Obstacle(Position position, Direction direction, obstacleType type) {
