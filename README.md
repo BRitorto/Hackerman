@@ -10,5 +10,5 @@ To exit press ESC.
 To run go to desktop --> DesktopLauncher --> main
 
 IMPORTANT: To run you may have to specify the assets folder. 
-  To do this you must go to Run --> Edit configurations --> Application --> DesktopLauncher --> Working directory: 'path to game\assets'
+  To do this you must go to Run --> Edit configurations --> Application --> Main class: DesktopLauncher , Working directory: 'path to game\assets'
 
