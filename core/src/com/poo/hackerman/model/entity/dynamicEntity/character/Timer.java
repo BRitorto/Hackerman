@@ -47,7 +47,7 @@ public class Timer implements Serializable {
 
     /**
      * Sets the time for last movement
-     * @param nowTime time to update the last movemnt's time
+     * @param nowTime time to update the last movement's time
      * @param direction update the state for diagonal or not diagonal direction
      */
 

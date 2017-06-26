@@ -96,10 +96,6 @@ public class Guard extends EnemyCharacter {
         return instructions.get(0).sameGridIndex(instructions.get(instructions.size() - 1));
     }
 
-    public boolean hackerDetected() {
-        return playerDetected;
-    }
-
     /**
      * @param position position to add to the instructions
      */
@@ -122,6 +118,10 @@ public class Guard extends EnemyCharacter {
      * Checks if each individual guard has detected the player or not
      * If the guard is idle, it sets it moving
      */
+
+    public boolean hackerDetected() {
+        return playerDetected;
+    }
 
 }
 
