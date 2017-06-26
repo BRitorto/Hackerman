@@ -9,7 +9,7 @@ import com.poo.hackerman.model.gameWorld.GameMap;
 import com.poo.hackerman.model.gameWorld.Grid;
 
 /**
- * Created by franciscosanguineti on 31/5/17.
+ * The guard's light.
  */
 public class Light {
 

@@ -26,8 +26,7 @@ public class LevelTest {
     }
 
     @Test
-    public void readsDoor()
-    {
+    public void readsDoor() {
         assertEquals(new Position(736,32),level.getEntityManager().getDoor().getPosition());
         assertEquals(0,level.getEntityManager().getDoor().getDirection().getCode());
     }
