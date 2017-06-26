@@ -22,8 +22,8 @@ import java.util.List;
 
 public class TestLight {
 
-    /*public static void main(String[] args) {
-        PlayerCharacter player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
+    public static void main(String[] args) {
+        /*PlayerCharacter player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
         Guard guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);
 
         List<EnemyCharacter> enemies = new ArrayList<EnemyCharacter>();
@@ -39,11 +39,11 @@ public class TestLight {
         EntityManager entityManager = new EntityManager(player, door, enemies, computers, null);
         GameMap gameMap = new GameMap(entityManager);
 
-        System.out.println(guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
-    }*/
+        System.out.println(guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));*/
+    }
 }
-/*
-para meter dentro del gamemodel
+
+/*para meter dentro del gamemodel
     Door doorO = new Door(new Position(100,200),new Direction(Direction.DOWN));
 
     PlayerCharacter player = new PlayerCharacter(new Position(80,16), new Direction(Direction.UP), 10);
@@ -61,5 +61,4 @@ para meter dentro del gamemodel
         obstaclesO.add(new Obstacle(new Position(150,60), new Direction(Direction.RIGHT), Obstacle.obstacleType.DESK));
 
         EntityManager entityManager = new EntityManager(player, doorO, enemiesO, computersO, obstaclesO);
-        gameMap = new GameMap(entityManager);
-*/
+        gameMap = new GameMap(entityManager);*/

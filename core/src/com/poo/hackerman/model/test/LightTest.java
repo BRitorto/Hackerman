@@ -10,7 +10,12 @@ import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Gua
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
 import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
-//import org.junit.Test;
+import org.junit.Before;
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +27,7 @@ import java.util.List;
 //import static org.junit.Assert.assertTrue;
 
 public class LightTest {
-    /*PlayerCharacter player;
+    PlayerCharacter player;
     Guard guard;
     List<EnemyCharacter> enemies;
     Door door;
@@ -31,7 +36,7 @@ public class LightTest {
     EntityManager entityManager;
     GameMap gameMap;
 
-    //@Before
+    @Before
     public void createEntities() {
         player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
         guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);
@@ -50,8 +55,20 @@ public class LightTest {
     }
 
     @Test
-    public void shouldCollision() throws Exception {
-        assertTrue("There was a collision", guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
+    public void shouldntCollision() throws Exception {
+        player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
+        guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);
+
+        assertFalse("The guard's light didn't find the player",guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
     }
-*/
+
+
+    @Test
+    public void shouldCollision() throws Exception {
+        player = new PlayerCharacter(new Position(16,100), new Direction(Direction.UP), 10);
+        guard = new Guard(new Position(16,60), new Direction(Direction.UP), 10, 4);
+
+        assertTrue("The guard's light found the player",guard.getMylight().collision(guard.getPosition(), guard.getDirection(), gameMap.getGrid()));
+    }
+
 }

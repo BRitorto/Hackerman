@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.poo.hackerman.view.*;
 
 /**
- * Created by Bianca on 07/06/2017.
+ *
  */
 public class HackerGame extends Game {
 

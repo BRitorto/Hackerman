@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by franciscosanguineti on 4/6/17.
+ * Class in the controller that communicates with de Model
  */
 public class ModelManager implements Runnable{
 
