@@ -10,14 +10,14 @@ import static junit.framework.TestCase.assertEquals;
 //import static org.junit.Assert.assertEquals;
 
 /**
- * Created by brothers on 08/06/2017.
+ * Created by aatar on 08/06/2017.
  */
 public class DirectionTest {
-    Direction dir;
+    private Direction dir;
 
 
     @Test
-    public void testDirectionBetween() throws Exception {
+    public void testDirectionBetween() {
         assertEquals("Direction: [0,-1]", Direction.directionBetween(new Position(3,4), new Position(3,2)).toString());
         assertEquals("Direction: [0,1]", Direction.directionBetween(new Position(3,4), new Position(3,8)).toString());
         assertEquals("Direction: [1,0]", Direction.directionBetween(new Position(3,4), new Position(6,4)).toString());

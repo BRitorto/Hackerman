@@ -23,18 +23,19 @@ import java.util.List;
 //import static org.junit.Assert.assertTrue;
 
 
-//import static org.junit.Assert.*;
-//import static org.junit.Assert.assertTrue;
+/**
+ * Created by aatar on 08/06/2017.
+ */
 
 public class LightTest {
-    PlayerCharacter player;
-    Guard guard;
-    List<EnemyCharacter> enemies;
-    Door door;
-    Computer computer;
-    List<Computer> computers;
-    EntityManager entityManager;
-    GameMap gameMap;
+    private PlayerCharacter player;
+    private Guard guard;
+    private List<EnemyCharacter> enemies;
+    private Door door;
+    private Computer computer;
+    private List<Computer> computers;
+    private EntityManager entityManager;
+    private GameMap gameMap;
 
     @Before
     public void createEntities() {
@@ -55,7 +56,7 @@ public class LightTest {
     }
 
     @Test
-    public void shouldntCollision() throws Exception {
+    public void shouldntCollision() {
         player = new PlayerCharacter(new Position(112,80), new Direction(Direction.UP), 10);
         guard = new Guard(new Position(16,48), new Direction(Direction.DOWN_RIGHT), 10, 4);
 
@@ -64,7 +65,7 @@ public class LightTest {
 
 
     @Test
-    public void shouldCollision() throws Exception {
+    public void shouldCollision() {
         player = new PlayerCharacter(new Position(16,100), new Direction(Direction.UP), 10);
         guard = new Guard(new Position(16,60), new Direction(Direction.UP), 10, 4);
 
