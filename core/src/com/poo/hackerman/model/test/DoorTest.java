@@ -19,22 +19,34 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class DoorTest {
     private Door door;
-    private ComputerManager computerManager;
-    private List<Computer> computers;
 
     @Before
-    public void createEntities() {
+    public void createEntity() {
         door = new Door(new Position(0,0), new Direction(0));
-        computers = new ArrayList<>();
-        computers.add(new Computer(new Position(0,0),new Direction(0),0));
-        computerManager = new ComputerManager(door, computers);
-    }
+     }
 
     @Test
-    public void isNotOpen()
-    {
+    public void isNotOpen() {
         assertFalse(door.isOpen());
     }
 
+    @Test
+    public void isOpen() {
+        door.setOpen();
+        assertTrue(door.isOpen());
+    }
+
+    @Test
+    public void hasntBeenPassed() {
+        door.interact();
+        assertFalse(door.hasBeenPassed());
+    }
+
+    @Test
+    public void hasBeenPassed() {
+        door.setOpen();
+        door.interact();
+        assertTrue(door.hasBeenPassed());
+    }
 
 }
