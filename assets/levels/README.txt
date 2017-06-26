@@ -7,5 +7,4 @@ The level.txt files are read as follows:
     in COMPUTERS: Direction, consecutiveHacks (time it takes to hack it)
     in DOORS: Direction
     in HACKER: Direction, velocity
-    in MAP: there is a 17x23 matrix represented. "/\n" separates each row, "," separated the elements in each row.
-            Each keyword declares that an object of that kind must be put in that (x,y) position, with 0 representing the floor.
+    in MAP: there is a 17x23 matrix represented. "/\n" separates each row, "," separated the elements in each row. Each keyword declares that an object of that kind must be put in that (x,y) position, with 0 representing the floor.
