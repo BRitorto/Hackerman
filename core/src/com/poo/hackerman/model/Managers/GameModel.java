@@ -1,18 +1,9 @@
 package com.poo.hackerman.model.Managers;
 
-import com.poo.hackerman.model.entity.Direction;
-import com.poo.hackerman.model.entity.Position;
-import com.poo.hackerman.model.entity.dynamicEntity.character.PlayerCharacter;
-import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.EnemyCharacter;
-import com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter.Guard;
-import com.poo.hackerman.model.entity.staticEntity.Obstacle;
-import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Computer;
-import com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity.Door;
 import com.poo.hackerman.model.gameWorld.GameMap;
 import com.poo.hackerman.model.gameWorld.Level;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
