@@ -1,0 +1,12 @@
+com.poo.hackerman.controller
+com.poo.hackerman.desktop
+com.poo.hackerman.model.Managers
+com.poo.hackerman.model.entity
+com.poo.hackerman.model.entity.dynamicEntity
+com.poo.hackerman.model.entity.dynamicEntity.character
+com.poo.hackerman.model.entity.dynamicEntity.character.enemyCharacter
+com.poo.hackerman.model.entity.staticEntity
+com.poo.hackerman.model.entity.staticEntity.interactiveStaticEntity
+com.poo.hackerman.model.gameWorld
+com.poo.hackerman.model.test
+com.poo.hackerman.view
